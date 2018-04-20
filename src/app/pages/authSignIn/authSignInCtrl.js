@@ -5,7 +5,7 @@
     .controller('authSignInCtrl', authSignInCtrl);
 
   /** @ngInject */
-  function authSignInCtrl($scope, localStorage, $state) {
+  function authSignInCtrl($scope,$http,localStorage, $state,jwtHelper) {
     var vm = this;
 
     vm.logar = logar;
@@ -17,14 +17,30 @@
     }
 
     function logar() {
-      var dadosUser = {
-        user: vm.user,
-        passWord: vm.passWord
-      };
-      localStorage.setObject('dataUser', dadosUser);
-      $state.go('main.dashboard');
-    }
+      vm.loading = true;
 
+      $http.post('/login',{ username: vm.user, password: vm.passWord })
+      .then(function(response){
+        vm.loading = false;
+
+        if(response.data.code==200){
+          var token = response.data.data;
+
+          var tokenPayload = jwtHelper.decodeToken(token);
+          localStorage.setObject('dataUser', tokenPayload);
+          localStorage.setObject('JWT', token);
+          $state.go('main.dashboard');
+        }else{
+          alert(response.data.message)
+        }
+        
+      },function(response){
+          vm.loading = false;
+          console.info(response)
+      });
+
+      
+    }
 
   }
 

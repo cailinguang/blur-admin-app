@@ -12,14 +12,14 @@
     /** @ngInject */
     function routeConfig($stateProvider) {
       $stateProvider
-          .state('main.system', {
+        .state('main.system', {
             url: '/system',
-            template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
+            template: '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
             abstract: true,
             title: '系统管理',
             sidebarMeta: {
-              icon: 'ion-ios-gear',
-              order: 10
+              icon: 'ion-gear-a',
+              order: 10,
             },
             authenticate: true
           });

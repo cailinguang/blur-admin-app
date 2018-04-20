@@ -13,17 +13,24 @@
     $stateProvider
       .state('main.system.user', {
         url: '/user',
-        template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
         abstract: true,
+        template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
         title: '用户管理',
+        sidebarMeta: {
+          order: 0,
+        },
         authenticate: true
-      }).state('main.system.user.list', {
+      })
+      .state('main.system.user.list', {
         url: '/list',
-        templateUrl: 'app/pages/system/user/list.html',
+        templateUrl: 'app/pages/system/user/userList.html',
         title:'用户管理',
+        controller:'UserListCtrl',
+        controllerAs: "userListCtrl",
         authenticate: true
       });
     $urlRouterProvider.when('/main/system/user', '/main/system/user/list');
+
   }
 
 })();
