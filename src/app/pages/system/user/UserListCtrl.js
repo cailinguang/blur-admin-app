@@ -7,46 +7,38 @@
     /** @ngInject */
     function UserListCtrl($http,composeModal, mailMessages) {
         var vm = this;
-        var nameList = ['Pierre', 'Pol', 'Jacques', 'Robert', 'Elisa'],
-          familyName = ['Dupont', 'Germain', 'Delcourt', 'bjip', 'Menez'];
-
-        function createRandomItem() {
-            var
-                firstName = nameList[Math.floor(Math.random() * 4)],
-                lastName = familyName[Math.floor(Math.random() * 4)],
-                age = Math.floor(Math.random() * 100),
-                email = firstName + lastName + '@whatever.com',
-                balance = Math.random() * 3000;
-
-            return{
-                firstName: firstName,
-                lastName: lastName,
-                age: age,
-                email: email,
-                balance: balance
-            };
-        }
-
-        $http.post('/user/list').then(function(response){
-            console.info(response);
-        });
-
-
+    
         vm.displayed = [];
-        for (var j = 0; j < 500; j++) {
-            vm.displayed.push(createRandomItem());
-        }
+        
+        vm.callServer = function callServer(tableState) {
+
+            vm.isLoading = true;
+        
+            var pagination = tableState.pagination;
+
+            $http.post('/user/list',{page:pagination.currentPage,size:pagination.number}).then(function(response){
+                if(response.data.code==200){
+                    vm.displayed = response.data.data.list;
+                }else{
+                    vm.displayed = [];
+                }
+                vm.isLoading = false;
+            });
+
+          };
+
+        
     }
 
     function stRatio(){
-        return {
-          link:function(scope, element, attr){
-            var ratio=+(attr.stRatio);
-            
-            element.css('width',ratio+'%');
-            
-          }
-        };
-    }
+            return {
+              link:function(scope, element, attr){
+                var ratio=+(attr.stRatio);
+                
+                element.css('width',ratio+'%');
+                
+              }
+            };
+        }
   
 })();

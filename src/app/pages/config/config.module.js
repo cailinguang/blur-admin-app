@@ -28,7 +28,6 @@
           }
 
           config.url = API_URL + config.url;
-          console.info(config)
           return config || $q.when(config);
         }
       }
