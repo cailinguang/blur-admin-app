@@ -26,7 +26,6 @@
         templateUrl: 'app/pages/system/user/userList.html',
         title:'用户管理',
         controller:'UserListCtrl',
-        controllerAs: "userListCtrl",
         authenticate: true
       });
     $urlRouterProvider.when('/main/system/user', '/main/system/user/list');

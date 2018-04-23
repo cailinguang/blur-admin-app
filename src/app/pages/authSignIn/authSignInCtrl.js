@@ -5,7 +5,7 @@
     .controller('authSignInCtrl', authSignInCtrl);
 
   /** @ngInject */
-  function authSignInCtrl($scope,$http,localStorage, $state,jwtHelper) {
+  function authSignInCtrl($scope,$http,localStorage, $state,jwtHelper,toastr) {
     var vm = this;
 
     vm.logar = logar;
@@ -31,12 +31,11 @@
           localStorage.setObject('JWT', token);
           $state.go('main.dashboard');
         }else{
-          alert(response.data.message)
+          toastr.warning(response.data.message, '登录异常');
         }
         
       },function(response){
           vm.loading = false;
-          console.info(response)
       });
 
       

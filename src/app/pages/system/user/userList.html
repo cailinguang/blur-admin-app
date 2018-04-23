@@ -1,51 +1,51 @@
 <div class="widgets">
      
-    <div class="row">
-      <div class="col-md-12">
-        <div ba-panel   ba-panel-class="light-text" st-table="userListCtrl.displayed" st-pipe="userListCtrl.callServer">
-            <button type="button" class="btn btn-info btn-with-icon"><i class="ion-plus"></i>新增</button>
-              <hr/>
-              <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
-              <hr/>
+  <div class="row">
+    <div class="col-md-12">
+      <div ba-panel ba-panel-class="light-text" st-table="userListCtrl.displayed">
+          <button type="button" class="btn btn-info btn-with-icon"><i class="ion-plus"></i>新增</button>
+            <hr/>
+            <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
+            <hr/>
 
-            <table class="table table-bordered">
-                <thead>
+          <table class="table">
+              <thead>
+              <tr class="sortable">
+                <th st-sort="username">登录名</th>
+                <th st-sort="nickName">用户名称</th>
+                <th st-sort="phone">电话</th>
+                <th st-sort="email">邮箱</th>
+                <th st-sort="registerDate">创建时间</th>
+                <th st-sort="status">状态</th>
+              </tr>
+              </thead>
+              <tbody ng-show="userListCtrl.isLoading">
                 <tr>
-                  <th st-ratio="20" st-sort="username">登录名</th>
-                  <th st-ratio="10" st-sort="nickName">用户名称</th>
-                  <th st-ratio="20" st-sort="phone">电话</th>
-                  <th st-ratio="20" st-sort="email">邮箱</th>
-                  <th st-ratio="20" st-sort="registerDate">创建时间</th>
-                  <th st-ratio="10" st-sort="status">状态</th>
+                  <td colspan="6" class="text-center">Loading ... </td>
                 </tr>
-                </thead>
-                <tbody ng-show="userListCtrl.isLoading">
-                  <tr>
-                    <td colspan="6" class="text-center">Loading ... </td>
-                  </tr>
-                </tbody>
-                <tbody ng-show="!userListCtrl.isLoading">
-                <tr ng-repeat="row in userListCtrl.displayed">
-                    <td st-ratio="20">{{row.username}}</td>
-                    <td st-ratio="10">{{row.nickName}}</td>
-                    <td st-ratio="20">{{row.phone}}</td>
-                    <td st-ratio="20">{{row.email}}</td>
-                    <td st-ratio="20">{{row.registerDate}}</td>
-                    <td st-ratio="10">{{row.status}}</td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <td colspan="6" class="text-right">
-                    <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
-                  </td>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-        </div>
+              </tbody>
+              <tbody ng-show="!userListCtrl.isLoading">
+              <tr ng-repeat="row in userListCtrl.displayed">
+                  <td>{{row.username}}</td>
+                  <td>{{row.nickName}}</td>
+                  <td>{{row.phone}}</td>
+                  <td>{{row.email}}</td>
+                  <td>{{row.registerDate}}</td>
+                  <td>{{row.status}}</td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="6" class="text-right">
+                  <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
       </div>
     </div>
+  </div>
 
   
-  </div>
+</div>
