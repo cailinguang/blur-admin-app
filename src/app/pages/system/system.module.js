@@ -6,7 +6,8 @@
     'use strict';
   
     angular.module('BlurAdmin.pages.system', [
-      'BlurAdmin.pages.system.user'
+      'BlurAdmin.pages.system.user',
+      'BlurAdmin.pages.system.dept'
     ]).config(routeConfig);
   
     /** @ngInject */

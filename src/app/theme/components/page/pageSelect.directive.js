@@ -4,7 +4,8 @@
   'use strict';
 
   angular.module('BlurAdmin.theme.components')
-    .directive('pageSelect',pageSelect);
+    .directive('pageSelect',pageSelect)
+    .directive('stRatio',ratio);
 
   /** @ngInject */
   function pageSelect() {
@@ -17,6 +18,16 @@
         });
       }
     }
+  }
+  function ratio(){
+    return {
+      link:function(scope, element, attr){
+        var ratio=+(attr.stRatio);
+        
+        element.css('width',ratio+'%');
+        
+      }
+    };
   }
 
 })();

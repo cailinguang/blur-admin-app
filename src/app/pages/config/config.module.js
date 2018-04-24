@@ -24,7 +24,7 @@
           var url = config.url;
 
           // ignore template requests
-          if (url.substr(url.length - 5) == '.html') {
+          if (url.substr(url.length - 5) == '.html' || url.startsWith('http')) {
             return config || $q.when(config);
           }
 

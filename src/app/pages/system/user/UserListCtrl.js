@@ -5,18 +5,15 @@
         .controller('UserListCtrl', UserListCtrl);
 
     /** @ngInject */
-    function UserListCtrl($http) {
-        var vm = this;
-        
-        vm.isLoading = true;
-        vm.displayed = [];
-        
-        $http.get('/user').then(function(response){
-            vm.isLoading = false;
-            vm.displayed = response.data.data.list;
-        },function(){
-            vm.isLoading = false;
+    function UserListCtrl($scope,$http) {
+        $scope.isLoading = true;
+        $http.get('/user').then(function(response) {
+            $scope.isLoading = false;
+	        $scope.rowCollection = response.data.data.list;
+	    },function(response){
+            $scope.isLoading = false;
         });
+        $scope.displayedCollection = [].concat($scope.rowCollection);
         
         
         
