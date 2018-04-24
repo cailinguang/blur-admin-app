@@ -48,7 +48,15 @@
           },
           //success -> don't intercept
           'response': function(response) {
+              var toastr = $injector.get('toastr');
               // console.log('response:' + response);
+              if(response.data.code === 500){
+                  toastr.error(response.data.message, '系统异常');
+              }
+              else if (response.data.code === 403) {
+                  
+              }
+
               return  response || $q.when(response);
           },
           //error -> if 401 save the request and broadcast an event
@@ -57,19 +65,6 @@
               console.log('responseError:' + response);
               if(response.status < 0){
                 toastr.error("请稍后重试或者联系管理员", '网络异常');
-              }
-              else if(response.data.code === 500){
-                toastr.error(response.data.message, '系统异常');
-              }
-              else if (response.data.code === 403) {
-                  var deferred = $q.defer(),
-                          req = {
-                              config: response.config,
-                              deferred: deferred
-                          };
-                  $rootScope.requests401.push(req);
-                  $rootScope.$broadcast('event:loginRequired');
-                  return deferred.promise;
               }
               return $q.reject(response);
           }
