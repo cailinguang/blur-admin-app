@@ -5,7 +5,7 @@
         .controller('DeptListCtrl', DeptListCtrl);
 
     /** @ngInject */
-    function DeptListCtrl($scope,$http,$uibModal) {
+    function DeptListCtrl($scope,$http,$uibModal,$timeout) {
         var vm = this;
         //配置树
         $scope.deptData =  [];
@@ -22,7 +22,12 @@
             version : 1
         };
         $scope.deptTreeEvents = {
-            //'ready': ,
+            'ready': function(){
+                if($scope.rootDept){
+                    vm.deptTree.jstree(true).open_node($scope.rootDept.id);
+                    vm.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
+                }
+             },
             //'create_node': ,
             'select_node': onSelectDept   // on node selected callback
         };
@@ -40,9 +45,7 @@
                 $scope.deptData = list;
                 $scope.deptTreeConfig.version++;
 
-                if($scope.rootDept){
-                    vm.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
-                }
+                
             });
         };
         loadDeptTree();
@@ -79,7 +82,6 @@
 
             uibModalInstance.result.then(function (dept) {
                 loadDeptTree();
-
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
