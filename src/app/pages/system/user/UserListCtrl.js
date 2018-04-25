@@ -13,7 +13,6 @@
 	    },function(response){
             $scope.isLoading = false;
         });
-        $scope.displayedCollection = [].concat($scope.rowCollection);
         
         
         

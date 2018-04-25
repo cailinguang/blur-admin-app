@@ -17,7 +17,7 @@
         template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
         title: '用户管理',
         sidebarMeta: {
-          order: 0,
+          order: 1,
         },
         authenticate: true
       })

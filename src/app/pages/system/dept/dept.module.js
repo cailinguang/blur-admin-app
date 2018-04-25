@@ -29,8 +29,6 @@
         url: '/list',
         templateUrl: 'app/pages/system/dept/deptList.html',
         title:'部门管理',
-        controller:'DeptListCtrl',
-        controllerAs:'deptCtrl',
         authenticate: true
       });
     $urlRouterProvider.when('/main/system/dept', '/main/system/dept/list');

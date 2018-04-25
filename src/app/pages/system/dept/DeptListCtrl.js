@@ -5,7 +5,9 @@
         .controller('DeptListCtrl', DeptListCtrl);
 
     /** @ngInject */
-    function DeptListCtrl($scope,$http) {  
+    function DeptListCtrl($scope,$http,$uibModal) {
+        var vm = this;
+        //配置树
         $scope.deptData =  [];
         $scope.deptTreeConfig = {
             core : {
@@ -22,38 +24,83 @@
         $scope.deptTreeEvents = {
             //'ready': ,
             //'create_node': ,
-            'select_node': onDeptSelect   // on node selected callback
+            'select_node': onSelectDept   // on node selected callback
         };
 
-        $http.get('/dept').then(function(response){
-            var list = response.data.data.list;
-            angular.forEach(list,function(o){
-                o.text=o.name;
-                if(o.parent=='#'){
-                    o.state = {opened:true};
+        //加载树
+        function loadDeptTree(){
+            $http.get('/dept').then(function(response){
+                var list = response.data.data.list;
+                angular.forEach(list,function(o){
+                    o.text=o.name;
+                    if(o.parent=='#'){
+                        o.state = {opened:true};
+                    }
+                });
+                $scope.deptData = list;
+                $scope.deptTreeConfig.version++;
+
+                if($scope.rootDept){
+                    vm.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
                 }
             });
-            $scope.deptData = list;
-            $scope.deptTreeConfig.version++;
-        });
+        };
+        loadDeptTree();
         
+        //选择树节点,显示子部门列表
         $scope.isSelectNode = false;
-        function onDeptSelect(e, data){
+        function onSelectDept(e, data){
             $scope.isSelectNode = true;
+            $scope.rootDept = data.node;
             //list view
             $scope.isLoading = true;
-            $http.post('/dept/childrens',{parent:data.node.id}).then(function(response) {
+            $http.post('/dept/custom/childrens',angular.toJson(data.node.id)).then(function(response) {
                 $scope.isLoading = false;
-                $scope.rowCollection = response.data;
+                $scope.rowCollection = response.data.data;
             },function(response){
                 $scope.isLoading = false;
             });
-            $scope.displayedCollection = [].concat($scope.rowCollection);
         }
         
+        //新增弹出
+        $scope.openSave = function(){
+            var uibModalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/system/dept/deptSaveModal.html',
+                size: 'md',
+                controller: DeptModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                  rootDept: function () {
+                    return $scope.rootDept;
+                  }
+                }
+            });
 
-        
+            uibModalInstance.result.then(function (dept) {
+                loadDeptTree();
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
 
     }; 
     
+    //部门弹框页面控制
+    /** @ngInject */
+    var DeptModalInstanceCtrl = function ($scope,$http, $uibModalInstance, rootDept) {
+        $scope.dept = {parent:rootDept.id||'#'};
+        $scope.deptSubmit = function () {
+            if ($scope.deptForm.$valid) {
+                $http.post('/dept',$scope.dept).then(function(response){
+                    if(response.data.code==200){
+                        $uibModalInstance.close($scope.dept);
+                    }
+                    
+                });
+            }
+        };
+    };
 })();
