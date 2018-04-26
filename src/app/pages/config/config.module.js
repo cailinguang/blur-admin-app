@@ -13,6 +13,7 @@
     $httpProvider.interceptors.push(apiInterceptor);
     $httpProvider.interceptors.push(requestErrorHandler);
     $httpProvider.defaults.headers.post={'Content-Type':undefined};
+    $httpProvider.defaults.headers.put={'Content-Type':undefined};
   }
 
    // api url prefix

@@ -393,7 +393,7 @@ label.custom-input-danger {
     color: $default-text;
   }
   .form-control {
-    border: 1px solid $color;
+    border: 1px solid $color !important;
     &:focus {
       box-shadow: none;
       border-color: $focusColor;

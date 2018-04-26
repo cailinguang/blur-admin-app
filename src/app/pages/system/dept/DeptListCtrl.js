@@ -19,8 +19,43 @@
                 check_callback : true,
                 worker : true
             },
+            "plugins" : [ "contextmenu"],
+            "contextmenu": {
+                "items": function (node) {
+                    return createContextMenu(node);
+                }
+            },
             version : 1
         };
+        //tree contextMenu
+        function createContextMenu(node){
+            var temp = {
+                "create":{"separator_before":false,"separator_after":true,"_disabled":false,"label":"新增","action": function (data) {
+                    var inst = $.jstree.reference(data.reference);
+                    $scope.openDept();
+                }},
+                "rename":{"separator_before":false,"separator_after":false,"_disabled":false,"label":"修改","action": function (data) {
+                    var inst = $.jstree.reference(data.reference),
+                        obj = inst.get_node(data.reference);
+                    $scope.openDept(obj);
+                }},
+                "remove":{"separator_before":false,"icon":false,"separator_after":false,"_disabled":false,"label":"删除","action": function (data) {
+                    var inst = $.jstree.reference(data.reference),
+                        obj = inst.get_node(data.reference);
+                    if(inst.is_selected(obj)) {
+                        $scope.deleteDept(inst.get_selected());
+                    }
+                    else {
+                        $scope.deleteDept(obj);
+                    }
+                }}
+            };
+            if(node.parent=='#'){
+                delete temp.delete;
+            }
+            return temp;
+        }
+        //tree event
         $scope.deptTreeEvents = {
             'ready': function(){
                 if($scope.rootDept){
@@ -66,7 +101,7 @@
         }
         
         //新增弹出
-        $scope.openSave = function(){
+        $scope.openDept = function(row){
             var uibModalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/pages/system/dept/deptSaveModal.html',
@@ -74,8 +109,11 @@
                 controller: DeptModalInstanceCtrl,
                 scope: $scope,
                 resolve: {
-                  rootDept: function () {
-                    return $scope.rootDept;
+                  dept: function () {
+                    if(row){
+                        return angular.copy(row);
+                    }
+                    return {parent:$scope.rootDept.id || '#'};
                   }
                 }
             });
@@ -83,24 +121,36 @@
             uibModalInstance.result.then(function (dept) {
                 loadDeptTree();
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                //close modal
             });
         }
 
+        //delete
+        $scope.deleteDept = function(row){
+            if(!confirm('确认删除？')) return false;
 
+            $http.delete('/dept/'+row.id).then(function(response){
+                if(response.code=200){
+                    loadDeptTree();
+                }
+            });
+        }
     }; 
     
     //部门弹框页面控制
     /** @ngInject */
-    var DeptModalInstanceCtrl = function ($scope,$http, $uibModalInstance, rootDept) {
-        $scope.dept = {parent:rootDept.id||'#'};
+    var DeptModalInstanceCtrl = function ($scope,$http, $uibModalInstance, dept) {
+        $scope.dept = dept;
         $scope.deptSubmit = function () {
             if ($scope.deptForm.$valid) {
-                $http.post('/dept',$scope.dept).then(function(response){
+                $http({
+                    url:$scope.dept.id?'/dept/'+$scope.dept.id:'/dept',
+                    data:$scope.dept,
+                    method:$scope.dept.id?'PUT':'POST'
+                }).then(function(response){
                     if(response.data.code==200){
                         $uibModalInstance.close($scope.dept);
                     }
-                    
                 });
             }
         };

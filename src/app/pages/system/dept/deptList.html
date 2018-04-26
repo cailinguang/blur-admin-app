@@ -1,21 +1,22 @@
 <div class="row" ng-controller="DeptListCtrl as vm">
     <div class="col-md-3">
-        <div ba-panel ba-panel-title="部门树" ba-panel-class="tree-panel">
+        <div ba-panel ba-panel-title="部门树" ba-panel-class="with-scroll light-text">
             <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="vm.deptTree"></div>
         </div>
     </div>
     <div class="col-md-9">
-        <div ba-panel ba-panel-title="部门列表" ba-panel-class="tree-panel">
+        <div ba-panel ba-panel-title="部门列表" ba-panel-class="with-scroll light-text">
             <p ng-show="!isSelectNode">请在左侧选择一个部门节点查看子节点</p>
             <div ng-show="isSelectNode" st-table="displayedCollection" st-safe-src="rowCollection">
                 <ul class="btn-list clearfix">
-                    <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openSave()"><i class="ion-plus"></i>新增</button></li>
+                    <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openDept()"><i class="ion-plus"></i>新增</button></li>
                 </ul>
                 <table class="table table-hover">
                         <thead>
                         <tr class="sortable">
-                            <th st-sort="username">部门编码</th>
                             <th st-sort="nickName">部门名称</th>
+                            <th st-sort="username">部门编码</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody ng-show="isLoading">
@@ -25,8 +26,13 @@
                     </tbody>
                     <tbody ng-show="!isLoading" >
                         <tr ng-repeat="row in displayedCollection">
-                            <td>{{row.code}}</td>
                             <td>{{row.name}}</td>
+                            <td>{{row.code}}</td>
+                            <td>
+                                <a href="javascript:void(0);" ng-click="openDept(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                                &nbsp;&nbsp;
+                                <a href="javascript:void(0);" ng-click="deleteDept(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                            </td>
                         </tr>
                         
                         
