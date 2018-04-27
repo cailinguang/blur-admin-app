@@ -37,21 +37,19 @@
                 "rename":{"separator_before":false,"separator_after":false,"_disabled":false,"label":"修改","action": function (data) {
                     var inst = $.jstree.reference(data.reference),
                         obj = inst.get_node(data.reference);
-                    $scope.openDept(obj);
+                    $scope.openDept(obj.original);
                 }},
                 "remove":{"separator_before":false,"icon":false,"separator_after":false,"_disabled":false,"label":"删除","action": function (data) {
                     var inst = $.jstree.reference(data.reference),
                         obj = inst.get_node(data.reference);
-                    if(inst.is_selected(obj)) {
-                        $scope.deleteDept(inst.get_selected());
-                    }
-                    else {
-                        $scope.deleteDept(obj);
-                    }
+                    
+                    $scope.deleteDept(obj.original);
+                    
                 }}
             };
             if(node.parent=='#'){
-                delete temp.delete;
+                delete temp.remove;
+                delete temp.rename;
             }
             return temp;
         }

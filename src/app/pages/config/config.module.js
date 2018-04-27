@@ -12,8 +12,9 @@
     $httpProvider.interceptors.push('jwtInterceptor');
     $httpProvider.interceptors.push(apiInterceptor);
     $httpProvider.interceptors.push(requestErrorHandler);
-    $httpProvider.defaults.headers.post={'Content-Type':undefined};
-    $httpProvider.defaults.headers.put={'Content-Type':undefined};
+    // $httpProvider.defaults.headers.post={'Content-Type':undefined};
+    // $httpProvider.defaults.headers.put={'Content-Type':undefined};
+    // $httpProvider.defaults.headers.get={'Content-Type':undefined};
   }
 
    // api url prefix
@@ -22,6 +23,7 @@
     function apiInterceptor ($q) {
       return {
         request: function (config) { 
+          console.info(config);
           var url = config.url;
 
           // ignore template requests
@@ -55,7 +57,7 @@
                   toastr.error(response.data.message, '系统异常');
               }
               else if (response.data.code === 403) {
-                  
+                toastr.warning(response.data.message, '禁止访问');
               }
 
               return  response || $q.when(response);
