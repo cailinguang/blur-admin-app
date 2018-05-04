@@ -19,7 +19,7 @@
     function logar() {
       vm.loading = true;
 
-      $http.post('/login',{ username: vm.user, password: vm.passWord })
+      $http.post('/api/login',{ username: vm.user, password: vm.passWord })
       .then(function(response){
         vm.loading = false;
 

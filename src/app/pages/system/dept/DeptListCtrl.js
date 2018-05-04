@@ -67,7 +67,7 @@
 
         //加载树
         function loadDeptTree(){
-            $http.get('/dept').then(function(response){
+            $http.get('/api/dept').then(function(response){
                 var list = response.data.data.list;
                 angular.forEach(list,function(o){
                     o.text=o.name;
@@ -90,7 +90,7 @@
             $scope.rootDept = data.node;
             //list view
             $scope.isLoading = true;
-            $http.post('/dept/custom/childrens',angular.toJson(data.node.id)).then(function(response) {
+            $http.post('/api/dept/custom/childrens',angular.toJson(data.node.id)).then(function(response) {
                 $scope.isLoading = false;
                 $scope.rowCollection = response.data.data;
             },function(response){
@@ -127,7 +127,7 @@
         $scope.deleteDept = function(row){
             if(!confirm('确认删除？')) return false;
 
-            $http.delete('/dept/'+row.id).then(function(response){
+            $http.delete('/api/dept/'+row.id).then(function(response){
                 if(response.code=200){
                     loadDeptTree();
                 }
@@ -142,7 +142,7 @@
         $scope.deptSubmit = function () {
             if ($scope.deptForm.$valid) {
                 $http({
-                    url:$scope.dept.id?'/dept/'+$scope.dept.id:'/dept',
+                    url:$scope.dept.id?'/api/dept/'+$scope.dept.id:'/api/dept',
                     data:$scope.dept,
                     method:$scope.dept.id?'PUT':'POST'
                 }).then(function(response){

@@ -10,7 +10,7 @@
       return localStorage.getItem('JWT');
     }
     $httpProvider.interceptors.push('jwtInterceptor');
-    $httpProvider.interceptors.push(apiInterceptor);
+    //$httpProvider.interceptors.push(apiInterceptor);
     $httpProvider.interceptors.push(requestErrorHandler);
     // $httpProvider.defaults.headers.post={'Content-Type':undefined};
     // $httpProvider.defaults.headers.put={'Content-Type':undefined};
