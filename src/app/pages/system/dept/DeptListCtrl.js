@@ -56,6 +56,7 @@
         //tree event
         $scope.deptTreeEvents = {
             'ready': function(){
+                //selected node
                 if($scope.rootDept){
                     vm.deptTree.jstree(true).open_node($scope.rootDept.id);
                     vm.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
@@ -73,6 +74,8 @@
                     o.text=o.name;
                     if(o.parent=='#'){
                         o.state = {opened:true};
+                        //first select root
+                        $scope.rootDept = $scope.rootDept || o;
                     }
                 });
                 $scope.deptData = list;
