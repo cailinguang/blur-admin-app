@@ -54,7 +54,7 @@
               var toastr = $injector.get('toastr');
               // console.log('response:' + response);
               if(response.data.code === 500){
-                  toastr.error(response.data.message, '系统异常');
+                  toastr.error(response.data.message, '错误');
               }
               else if (response.data.code === 403) {
                 toastr.warning(response.data.message, '禁止访问');

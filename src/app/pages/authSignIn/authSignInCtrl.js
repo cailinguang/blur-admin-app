@@ -30,8 +30,6 @@
           localStorage.setObject('dataUser', tokenPayload);
           localStorage.setObject('JWT', token);
           $state.go('main.dashboard');
-        }else{
-          toastr.warning(response.data.message, '登录异常');
         }
         
       },function(response){

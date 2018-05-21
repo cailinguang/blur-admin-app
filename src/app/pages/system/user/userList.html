@@ -1,22 +1,28 @@
 <div class="widgets">
      
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
+        <div ba-panel ba-panel-title="部门树" ba-panel-class="with-scroll light-text">
+            <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="deptTree"></div>
+        </div>
+    </div>
+    <div class="col-md-9">
       <div ba-panel ba-panel-title="用户列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
             <li><button type="button" class="btn btn-default btn-with-icon"><i class="ion-plus"></i>新增</button></li>
           </ul>
-
+          
           <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
+          
           <br/>
-          <table  class="table table-hover">
+          <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="20" st-sort="username">登录名</th>
+                    <th st-ratio="10" st-sort="username">登录名</th>
                     <th st-ratio="20" st-sort="nickName">用户名称</th>
                     <th st-ratio="20" st-sort="phone">电话</th>
                     <th st-ratio="20" st-sort="email">邮箱</th>
-                    <th st-ratio="10" st-sort="registerDate">创建时间</th>
+                    <th st-ratio="20" st-sort="registerDate">创建时间</th>
                     <th st-ratio="10" st-sort="status">状态</th>
                 </tr>
             </thead>
