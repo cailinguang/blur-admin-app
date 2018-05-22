@@ -1,7 +1,7 @@
-<div class="row" ng-controller="DeptListCtrl as vm">
+<div class="row" ng-controller="DeptListCtrl">
     <div class="col-md-3">
         <div ba-panel ba-panel-title="部门树" ba-panel-class="with-scroll light-text">
-            <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="vm.deptTree"></div>
+            <div js-tree="deptTreeConfig" should-apply="true" ng-model="deptData" tree="model.deptTree" tree-events-obj="deptTreeEvents"></div>
         </div>
     </div>
     <div class="col-md-9">
@@ -34,8 +34,9 @@
                                 <a href="javascript:void(0);" ng-click="deleteDept(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
                             </td>
                         </tr>
-                        
-                        
+                        <tr ng-if="displayedCollection.length==0">
+                            <td colspan="3">没有数据</td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>

@@ -5,12 +5,13 @@
         .controller('UserListCtrl', UserListCtrl);
 
     /** @ngInject */
-    function UserListCtrl($scope,$http) {
+    function UserListCtrl($scope,$http,$uibModal,$timeout,$log) {
         $scope.isLoading = true;
         var vm = this;
         
         //配置树
         $scope.deptData =  [];
+        $scope.model = {};
         $scope.deptTreeConfig = {
             core : {
                 multiple : false,
@@ -45,8 +46,8 @@
             'ready': function(){
                 //selected node
                 if($scope.rootDept){
-                    $scope.deptTree.jstree(true).open_node($scope.rootDept.id);
-                    $scope.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
+                    $scope.model.deptTree.jstree(true).open_node($scope.rootDept.id);
+                    $scope.model.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
                 }
              },
             //'create_node': ,
@@ -71,10 +72,65 @@
             });
         }
 
-        
+        //新增
+        $scope.openUser = row => {
+            var uibModalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/system/user/userSaveModal.html',
+                size: 'md',
+                controller: UserModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                  user: function () {
+                    if(row){
+                        return angular.copy(row);
+                    }
+                    return {deptId:$scope.rootDept.id};
+                  }
+                }
+            });
+
+            uibModalInstance.result.then(function (user) {
+                loadDeptTree();
+            }, function () {
+                //close modal
+            });
+        }
         
         
         
     }; 
     
+    //部门弹框页面控制
+    /** @ngInject */
+    var UserModalInstanceCtrl = function ($scope,$http,$uibModal, $uibModalInstance, user) {
+        $scope.user = user;
+        $scope.deptSubmit = function () {
+            if ($scope.form.$valid) {
+                $http({
+                    url:$scope.user.id?'/api/user/'+$scope.user.id:'/api/user',
+                    data:$scope.user,
+                    method:$scope.user.id?'PUT':'POST'
+                }).then(function(response){
+                    if(response.data.code==200){
+                        $uibModalInstance.close($scope.user);
+
+                        //展示密码
+                        $scope.user.password = response.data.data;
+                        $uibModal.open({
+                            animation: true,
+                            templateUrl: 'app/pages/system/user/showPassword.html',
+                            resolve: {
+                                puser: ()=> $scope.user
+                            },
+                            /** @ngInject */
+                            controller:function(puser){
+                                $scope.user=puser
+                            }
+                        });
+                    }
+                });
+            }
+        };
+    };
 })();

@@ -5,10 +5,10 @@
         .controller('DeptListCtrl', DeptListCtrl);
 
     /** @ngInject */
-    function DeptListCtrl($scope,$http,$uibModal,$timeout) {
-        var vm = this;
+    function DeptListCtrl($scope,$http,$uibModal,$timeout,$log) {
         //配置树
         $scope.deptData =  [];
+        $scope.model = {};
         $scope.deptTreeConfig = {
             core : {
                 multiple : false,
@@ -24,8 +24,7 @@
                 "items": function (node) {
                     return createContextMenu(node);
                 }
-            },
-            version : 1
+            }
         };
         //tree contextMenu
         function createContextMenu(node){
@@ -58,8 +57,8 @@
             'ready': function(){
                 //selected node
                 if($scope.rootDept){
-                    vm.deptTree.jstree(true).open_node($scope.rootDept.id);
-                    vm.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
+                    $scope.model.deptTree.jstree(true).open_node($scope.rootDept.id);
+                    $scope.model.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
                 }
              },
             //'create_node': ,
