@@ -1,4 +1,4 @@
-<nav ng-if="pages.length >= 2">
+<nav ng-if="pages.length >= 2" style="text-align: right;">
   <ul class="pagination">
     <li><a ng-click="selectPage(1)">First</a> </li>
     <li><a ng-click="selectPage(currentPage - 1)">&lt;</a></li>
@@ -17,6 +17,7 @@
   margin: -5px 0;
 }
 .pagination{
+  margin:15px 0px;
   margin-bottom: 4px !important;
 }
 

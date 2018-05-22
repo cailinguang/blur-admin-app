@@ -97,7 +97,16 @@
             });
         }
         
-        
+        //delete
+        $scope.deleteUser = function(row){
+            if(!confirm('确认删除？')) return false;
+
+            $http.delete('/api/user/'+row.id).then(function(response){
+                if(response.code=200){
+                    loadDeptTree();
+                }
+            });
+        }
         
     }; 
     
@@ -115,19 +124,21 @@
                     if(response.data.code==200){
                         $uibModalInstance.close($scope.user);
 
-                        //展示密码
-                        $scope.user.password = response.data.data;
-                        $uibModal.open({
-                            animation: true,
-                            templateUrl: 'app/pages/system/user/showPassword.html',
-                            resolve: {
-                                puser: ()=> $scope.user
-                            },
-                            /** @ngInject */
-                            controller:function(puser){
-                                $scope.user=puser
-                            }
-                        });
+                        if($scope.user.id==undefined){
+                            //展示密码
+                            $scope.user.password = response.data.data;
+                            $uibModal.open({
+                                animation: true,
+                                templateUrl: 'app/pages/system/user/showPassword.html',
+                                resolve: {
+                                    puser: ()=> $scope.user
+                                },
+                                /** @ngInject */
+                                controller:function(puser,$scope){
+                                    $scope.user=puser
+                                }
+                            });
+                        }
                     }
                 });
             }
