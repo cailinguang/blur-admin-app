@@ -1,13 +1,7 @@
 <div class="widgets">
      
   <div class="row">
-    <div class="col-md-3">
-        <div ba-panel ba-panel-title="部门树" ba-panel-class="with-scroll light-text">
-            <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="model.deptTree"></div>
-        </div>
-    </div>
-    <div class="col-md-9">
-      <div ba-panel ba-panel-title="用户列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+      <div ba-panel ba-panel-title="角色列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
             <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openUser()"><i class="ion-plus"></i>新增</button></li>
           </ul>
@@ -47,10 +41,9 @@
                   </td>
                 </tr>
             </tbody>
-        </table>
-        <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
+          </table>
+          <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
       </div>
-    </div>
   </div>
 
   

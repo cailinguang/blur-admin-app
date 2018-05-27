@@ -23,6 +23,8 @@
       {label: 'Option 4', value: 4}
     ];
 
+    vm.selectedItem = {selected:{label: 'Option 2', value: 2}};
+
     vm.withSearchItem = {};
 
     vm.selectWithSearchItems = [
