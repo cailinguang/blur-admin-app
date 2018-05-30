@@ -57,7 +57,7 @@
         }
 
         //分配用户
-        $scope.assignUser = (row) => {
+        $scope.assignUser = function(row) {
             var uibModalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/pages/system/role/roleAssignUser.html',
@@ -66,10 +66,7 @@
                 scope: $scope,
                 resolve: {
                   role: function () {
-                    if(row){
-                        return angular.copy(row);
-                    }
-                    return {};
+                    return angular.copy(row);
                   }
                 }
             });
