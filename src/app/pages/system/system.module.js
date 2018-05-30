@@ -7,7 +7,8 @@
   
     angular.module('BlurAdmin.pages.system', [
       'BlurAdmin.pages.system.user',
-      'BlurAdmin.pages.system.dept'
+      'BlurAdmin.pages.system.dept',
+      'BlurAdmin.pages.system.role'
     ]).config(routeConfig);
   
     /** @ngInject */

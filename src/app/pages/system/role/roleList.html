@@ -3,7 +3,7 @@
   <div class="row">
       <div ba-panel ba-panel-title="角色列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
-            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openUser()"><i class="ion-plus"></i>新增</button></li>
+            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openRole()"><i class="ion-plus"></i>新增</button></li>
           </ul>
           
           <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
@@ -12,13 +12,11 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="10" st-sort="username">登录名</th>
-                    <th st-ratio="10" st-sort="nickName">用户名称</th>
-                    <th st-ratio="20" st-sort="phone">电话</th>
-                    <th st-ratio="20" st-sort="email">邮箱</th>
-                    <th st-ratio="20" st-sort="registerDate">创建时间</th>
-                    <th st-ratio="10" st-sort="status">状态</th>
+                    <th st-ratio="20" st-sort="name">角色名称</th>
+                    <th st-ratio="20" st-sort="code">角色编码</th>
+                    <th st-ratio="30" st-sort="description">描述</th>
                     <th st-ratio="10" st-sort="status">操作</th>
+                    <th st-ratio="20">权限分配</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -28,18 +26,21 @@
             </tbody>
             <tbody ng-show="!isLoading" >
                 <tr ng-repeat="row in displayedCollection">
-                   <td>{{row.username}}</td>
-                   <td>{{row.nickName}}</td>
-                   <td>{{row.phone}}</td>
-                   <td>{{row.email}}</td>
-                   <td>{{row.registerDate}}</td>
-                   <td>{{row.statusLabel}}</td>
+                   <td>{{row.name}}</td>
+                   <td>{{row.code}}</td>
+                   <td>{{row.description}}</td>
                    <td>
-                      <a href="javascript:void(0);" ng-click="openUser(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="openRole(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="deleteUser(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                      <a href="javascript:void(0);" ng-click="deleteRole(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                  </td>
+                  <td>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignUser(row)"><i class="ion-person-stalker"></i>分配用户</button>
+                      &nbsp;&nbsp;
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm"><i class="ion-navicon-round"></i>分配权限</button>
                   </td>
                 </tr>
+                
             </tbody>
           </table>
           <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>

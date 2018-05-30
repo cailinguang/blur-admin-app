@@ -93,7 +93,6 @@
                 templateUrl: 'app/pages/system/user/userSaveModal.html',
                 size: 'md',
                 controller: UserModalInstanceCtrl,
-                controllerAs: 'userCtrl',
                 scope: $scope,
                 resolve: {
                   user: function () {

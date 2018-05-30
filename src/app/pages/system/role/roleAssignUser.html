@@ -1,0 +1,79 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel">分配用户</h4>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div ba-panel ba-panel-title="未分配<p>{{notAssignData.length}}</p>" ba-panel-class="with-scroll table-panel">
+                <div class="vertical-scroll" st-table="notAssignDataCollection" st-safe-src="notAssignData">
+                    <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
+
+                    <div class="btn-group" role="group" aria-label="Basic example" style="width: 100%;margin:10px 0;">
+                      <button type="button" class="btn btn-default" style="width: 50%;"><i class="ion-arrow-right-a" title="全部分配"></i></button>
+                      <button type="button" class="btn btn-default" style="width: 50%;"><i class="ion-arrow-right-c" title="分配选中"></i></button>
+                    </div>
+
+                    <table class="table table-hover">
+                      <thead>
+                      <tr class="sortable">
+                        <th class="table-id">#</th>
+                        <th st-sort="username">登录名</th>
+                        <th st-sort="nickName">用户名</th>
+                        <th></th>
+                      </tr>
+                      </thead>
+                      <tbody ng-show="isLoading">
+                        <tr>
+                          <td colspan="3" class="text-center">Loading ... </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr ng-repeat="item in notAssignDataCollection">
+                          <td class="table-id">{{$index+1}}</td>
+                          <td>{{item.username}}</td>
+                          <td>{{item.nickName}}</td>
+                          <td>
+                              <a href="javascript:void(0);" ng-click="assign(item)" style="font-size: 20px;"><i class="ion-arrow-right-a"></i></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div ba-panel ba-panel-title="已分配用户" ba-panel-class="with-scroll table-panel">
+                <div class="vertical-scroll">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                          <th class="table-id">#</th>
+                          <th>登录名</th>
+                          <th>用户名</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-show="isLoading">
+                          <tr>
+                            <td colspan="3" class="text-center">Loading ... </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                        <tr ng-repeat="item in assignData">
+                          <td class="table-id">{{$index+1}}</td>
+                          <td>{{item.username}}</td>
+                          <td>{{item.nickName}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+    
+  </div>
+  <div class="modal-footer">
+      <button type="submit" class="btn btn-warning">保存</button>
+      <button type="button" class="btn btn-primary" ng-click="$dismiss()">取消</button>
+  </div>
+</div>
