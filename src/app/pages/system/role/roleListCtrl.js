@@ -71,6 +71,22 @@
                 }
             });
         }
+
+        //分配菜单
+        $scope.assignModule = function(row) {
+            var uibModalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/system/role/roleAssignModule.html',
+                size: 'lg',
+                controller: 'roleAssignModuleCtrl',
+                scope: $scope,
+                resolve: {
+                  role: function () {
+                    return angular.copy(row);
+                  }
+                }
+            });
+        }
         
     }; 
     

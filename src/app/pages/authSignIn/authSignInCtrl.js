@@ -25,10 +25,23 @@
 
         if(response.data.code==200){
           var token = response.data.data;
+          localStorage.setObject('JWT', token);
 
           var tokenPayload = jwtHelper.decodeToken(token);
-          localStorage.setObject('dataUser', tokenPayload);
-          localStorage.setObject('JWT', token);
+
+          let roles = [] , modules=['main.dashboard'];
+          let authorities = tokenPayload.authorities.split(',');
+          authorities.forEach(element => {
+            if(element.startsWith('ROLE_')){
+              roles.push(element.substr(5));
+            }
+            if(element.startsWith('AUTH_')){
+              modules.push(element.substr(5));
+            }
+          });
+
+          localStorage.setObject('dataRoles', roles);
+          localStorage.setObject('dataModules', modules);
           $state.go('main.dashboard');
         }
         

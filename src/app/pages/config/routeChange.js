@@ -5,10 +5,10 @@
     .run(stateChangeStart);
 
   /** @ngInject */
-  function stateChangeStart($rootScope, $state, localStorage) {
+  function stateChangeStart($rootScope, $state, localStorage,jwtHelper) {
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
-      var login = localStorage.getObject('dataUser');
-      if (toState.authenticate && login==null) {
+      var token = localStorage.getObject('JWT');
+      if (toState.authenticate && (token==null || jwtHelper.isTokenExpired(token) ) ) {
         // User isn’t authenticated
         $state.transitionTo("authSignIn");
         event.preventDefault();
