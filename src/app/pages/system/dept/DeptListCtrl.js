@@ -24,7 +24,8 @@
                 "items": function (node) {
                     return createContextMenu(node);
                 }
-            }
+            },
+            version:0
         };
         //tree contextMenu
         function createContextMenu(node){
@@ -130,7 +131,9 @@
             if(!confirm('确认删除？')) return false;
 
             $http.delete('/api/dept/'+row.id).then(function(response){
-                if(response.code=200){
+                if(response.data.code==200){
+                    let jsTree = $scope.model.deptTree.jstree(true);
+                    $scope.rootDept = jsTree.get_node(jsTree.get_node(row.id).parent);
                     loadDeptTree();
                 }
             });
