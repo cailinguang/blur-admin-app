@@ -132,7 +132,7 @@
 
             $http.delete('/api/dept/'+row.id).then(function(response){
                 if(response.data.code==200){
-                    let jsTree = $scope.model.deptTree.jstree(true);
+                    var jsTree = $scope.model.deptTree.jstree(true);
                     $scope.rootDept = jsTree.get_node(jsTree.get_node(row.id).parent);
                     loadDeptTree();
                 }

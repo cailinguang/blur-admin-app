@@ -12,8 +12,8 @@
     $scope.notAssignData = [];
     $scope.assignData = [];
 
-    let notAssignDataOld;
-    let assignDataOld;
+    var notAssignDataOld;
+    var assignDataOld;
 
     //未分配用户
     $http.get('/api/permission/roleAssignUsers',{params:{roleId:role.id}}).then(function(response) {
@@ -37,7 +37,7 @@
     //未分配选中
     $scope.notAssignDataSelects = [];
     $scope.setNotAssignDataSelect = function(id){
-        let index = $scope.notAssignDataSelects.indexOf(id);
+        var index = $scope.notAssignDataSelects.indexOf(id);
         if(index>-1){
             $scope.notAssignDataSelects.splice(index,1);
         }else{
@@ -48,7 +48,7 @@
     //已分配选中
     $scope.assignDataSelects = [];
     $scope.setAssignDataSelect = function(id){
-        let index = $scope.assignDataSelects.indexOf(id);
+        var index = $scope.assignDataSelects.indexOf(id);
         if(index>-1){
             $scope.assignDataSelects.splice(index,1);
         }else{
@@ -63,9 +63,9 @@
             $scope.notAssignData = [];
             $scope.notAssignDataSelects = [];
         }else{
-            for(let i=$scope.notAssignData.length-1;i>=0;i--){
-                let element = $scope.notAssignData[i];
-                let index = $scope.notAssignDataSelects.indexOf(element.id);
+            for(var i=$scope.notAssignData.length-1;i>=0;i--){
+                var element = $scope.notAssignData[i];
+                var index = $scope.notAssignDataSelects.indexOf(element.id);
                 if(index>-1){
                     $scope.notAssignDataSelects.splice(index,1);
                     $scope.notAssignData.splice(i,1);
@@ -81,9 +81,9 @@
             $scope.assignData = [];
             $scope.assignDataSelects = [];
         }else{
-            for(let i=$scope.assignData.length-1;i>=0;i--){
-                let element = $scope.assignData[i];
-                let index = $scope.assignDataSelects.indexOf(element.id);
+            for(var i=$scope.assignData.length-1;i>=0;i--){
+                var element = $scope.assignData[i];
+                var index = $scope.assignDataSelects.indexOf(element.id);
                 if(index>-1){
                     $scope.assignDataSelects.splice(index,1);
                     $scope.assignData.splice(i,1);
@@ -97,13 +97,13 @@
     //save
     $scope.save = function(){
         $scope.isSubmit = true;
-        let assignUsers = [];
-        let removeUsers = [];
+        var assignUsers = [];
+        var removeUsers = [];
     
 
-        $scope.assignData.forEach(element => {
-            let isAdd = true;
-            for(let index in assignDataOld){
+        $scope.assignData.forEach(function(element){
+            var isAdd = true;
+            for(var index in assignDataOld){
                 if(assignDataOld[index].id==element.id){
                     isAdd=false;
                     break;
@@ -112,9 +112,9 @@
             isAdd && assignUsers.push(element.id);
         });
 
-        assignDataOld.forEach(element => {
-            let isAdd = true;
-            for(let index in $scope.assignData){
+        assignDataOld.forEach(function(element){
+            var isAdd = true;
+            for(var index in $scope.assignData){
                 if($scope.assignData[index].id==element.id){
                     isAdd=false;
                     break;

@@ -1,11 +1,11 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.system.role')
-        .controller('RoleListCtrl', RoleListCtrl);
+    angular.module('BlurAdmin.pages.standard')
+        .controller('StandardListCtrl', StandardListCtrl);
 
     /** @ngInject */
-    function RoleListCtrl($scope,$http,$uibModal,$timeout,$log) {
+    function StandardListCtrl($scope,$http,$uibModal,$timeout,$log) {
         $scope.isLoading = true;
 
         var loadRole = function() {

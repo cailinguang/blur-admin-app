@@ -69,11 +69,11 @@
             $scope.loadUsers();
         }
 
-        $scope.loadUsers = () => {
+        $scope.loadUsers = function() {
             $http.get('/api/user',{params:{deptId:$scope.rootDept.id}}).then(function(response) {
                 $scope.isLoading = false;
-                response.data.data.list.forEach(n=>{
-                    statusSelect.forEach(ns=>{
+                response.data.data.list.forEach(function(n){
+                    statusSelect.forEach(function(ns){
                         if(n.status==ns.value){
                             n.statusLabel = ns.label;
                             return;
@@ -87,7 +87,7 @@
         }
 
         //新增
-        $scope.openUser = row => {
+        $scope.openUser = function(row){
             var uibModalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/pages/system/user/userSaveModal.html',
@@ -146,7 +146,7 @@
                                 animation: true,
                                 templateUrl: 'app/pages/system/user/showPassword.html',
                                 resolve: {
-                                    puser: ()=> $scope.user
+                                    puser: function(){$scope.user}
                                 },
                                 /** @ngInject */
                                 controller:function(puser,$scope){

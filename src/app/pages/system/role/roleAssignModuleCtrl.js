@@ -22,7 +22,7 @@
         version:0
     };
     $http.get('/api/menu').then(function(response){
-        let list = response.data.data.list;
+        var list = response.data.data.list;
         angular.forEach(list,function(o){
             o.text=o.name;
             if(o.parent=='#'){
@@ -35,8 +35,8 @@
 
     //设置已分配菜单
     $http.get('/api/permission/roleAssignMenu',{params:{roleId:role.id}}).then(function(response){
-        let list = response.data.data;
-        list.forEach(e=>{
+        var list = response.data.data;
+        list.forEach(function(e){
             if(!$scope.model.moduleTree.jstree(true).is_parent(e.id)){
                 $scope.model.moduleTree.jstree(true).check_node(e.id);
             }else{
@@ -48,9 +48,9 @@
     $scope.save = function(){
         $scope.isSubmit = true;
         
-        let selectNodeIds = [];
-        let selectNodes = $scope.model.moduleTree.jstree(true).get_selected(true);
-        selectNodes.forEach(n => {
+        var selectNodeIds = [];
+        var selectNodes = $scope.model.moduleTree.jstree(true).get_selected(true);
+        selectNodes.forEach(function(n){
             selectNodeIds.push(n.id);
             selectNodeIds = selectNodeIds.concat(n.parents);
         });

@@ -11,15 +11,12 @@
       'BlurAdmin.pages.config',
       'BlurAdmin.pages.main',
       'BlurAdmin.pages.dashboard',
-      'BlurAdmin.pages.ui',
-      'BlurAdmin.pages.components',
-      'BlurAdmin.pages.form',
-      'BlurAdmin.pages.tables',
       'BlurAdmin.pages.charts',
       'BlurAdmin.pages.profile',
       'BlurAdmin.pages.authSignIn',
       'BlurAdmin.pages.authSignUp',
-      'BlurAdmin.pages.system'
+      'BlurAdmin.pages.system',
+      'BlurAdmin.pages.standard'
     ])
     .config(routeConfig);
 
@@ -27,7 +24,7 @@
   function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
     $urlRouterProvider.otherwise('/authSignIn');
 
-    baSidebarServiceProvider.addStaticItem({
+    /* baSidebarServiceProvider.addStaticItem({
       title: 'Pages',
       icon: 'ion-document',
       subMenu: [{
@@ -60,7 +57,7 @@
           disabled: true
         }]
       }]
-    });
+    }); */
   }
 
 })();

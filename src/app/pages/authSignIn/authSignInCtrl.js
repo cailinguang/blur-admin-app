@@ -29,9 +29,10 @@
 
           var tokenPayload = jwtHelper.decodeToken(token);
 
-          let roles = [] , modules=['main.dashboard'];
-          let authorities = tokenPayload.authorities.split(',');
-          authorities.forEach(element => {
+          var roles = [];
+          var modules=['main.dashboard'];
+          var authorities = tokenPayload.authorities.split(',');
+          authorities.forEach(function(element) {
             if(element.startsWith('ROLE_')){
               roles.push(element.substr(5));
             }
