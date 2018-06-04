@@ -9,7 +9,7 @@
         $scope.isLoading = true;
 
         var loadStandard = function() {
-            $http.get('/api/isms/standard').then(function(response) {
+            $http.get('/api/isms/standard',{params:{isEvaluation:'0'}}).then(function(response) {
                 $scope.isLoading = false;
                 
                 $scope.rowCollection = response.data.data.list;
