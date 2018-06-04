@@ -34,7 +34,27 @@
         })
         .state('main.standard.manage',{
           url:'/manage',
-          templateUrl: 'app/pages/standard/standard/standardManage.html'
+          templateUrl: 'app/pages/standard/standard/standardManage.html',
+          params:{'row':null},
+          controller: 'StandardManageCtrl',
+          title:'管理标准库'
+        });
+
+        $stateProvider.state('main.standard.applicability',{
+          url:'/applicability',
+          templateUrl: 'app/pages/standard/applicability/applicabilityList.html',
+          controller: 'ApplicabilityListCtrl',
+          title: '适用性VDA管理库',
+          sidebarMeta: {
+            order: 200,
+          },
+          authenticate: true
+        })
+        .state('main.standard.demo',{
+          url:'/demo',
+          templateUrl: 'app/pages/standard/applicability/demo.html',
+          params:{'row':null},
+          controller: 'DemoCtrl'
         });
     }
   

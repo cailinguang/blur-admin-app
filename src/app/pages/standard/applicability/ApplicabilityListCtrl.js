@@ -2,10 +2,10 @@
     'use strict';
   
     angular.module('BlurAdmin.pages.standard')
-        .controller('StandardListCtrl', StandardListCtrl);
+        .controller('ApplicabilityListCtrl', ApplicabilityListCtrl);
 
     /** @ngInject */
-    function StandardListCtrl($scope,$http,$uibModal,$timeout,$log,$state) {
+    function ApplicabilityListCtrl($scope,$http,$uibModal,$timeout,$log,$state) {
         $scope.isLoading = true;
 
         var loadStandard = function() {
@@ -21,7 +21,7 @@
         loadStandard();
 
         $scope.manageStandard = function(row){
-            $state.go("main.standard.manage",{row:row});
+            $state.go("main.standard.demo",{row:row});
         }
         
         

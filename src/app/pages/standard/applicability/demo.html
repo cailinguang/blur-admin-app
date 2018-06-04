@@ -1,0 +1,23 @@
+<table table-tree="tree" init-expand="true" expand-indent="10">
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tt-template>
+        <td tt-expand>{{ **.name }}</td>
+        <td>{{ **.age }}</td>
+        <td>{{ **.address }}</td>
+        <td>
+            {{ **.contact }}
+            <ng-md-icon icon="info" style="fill: #ccc; vertical-align: middle;" size="16">
+            <md-tooltip>please contact me with {{ **.contact }}</md-tooltip>
+            </ng-md-icon>
+        </td>
+        </tr>
+    </tbody>
+    </table>

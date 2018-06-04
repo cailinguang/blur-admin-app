@@ -1,1 +1,53 @@
-abc
+<style>
+    .jstree-default a {
+        white-space: normal !important;
+        height: auto;
+    }
+
+    .jstree-anchor {
+        height: auto !important;
+    }
+
+    .jstree-default li > ins {
+        vertical-align: top;
+    }
+
+    .jstree-leaf {
+        height: auto;
+    }
+
+    .jstree-leaf a {
+        height: auto !important;
+    }
+    .maturity-level-inline {
+        font-size: 8px;
+        color: dimgray;
+    }
+</style>
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-6">
+            <div ba-panel ba-panel-title="{{standard.name}}" ba-panel-class="light-text">
+                <div ng-show="loadingTree"><p>加载中 ...</p></div>
+                <div ng-show="!loadingTree" js-tree="standardTreeConfig" ng-model="standardData" tree="model.standardTree" tree-events-obj="standardTreeEvents"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div ba-panel ba-panel-class="light-text" ng-show="selectNode!=null">
+                <form>
+                    <div class="form-group">
+                        <label for="input01">Name</label>
+                        <textarea class="form-control" ng-model="selectNode.name" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea01">Description</label>
+                        <textarea class="form-control" ng-model="selectNode.description"></textarea>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-warning" ng-click="updateProperty()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> 更新</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="widgets">
+     
+  <div class="row">
+      <div ba-panel ba-panel-title="标准库" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+           
+          <table  class="table table-hover table-bordered">
+              <thead>
+                <tr class="sortable black-muted-bg">
+                    <th st-ratio="50" st-sort="name">标准</th>
+                    <th st-ratio="30" st-sort="code">类型</th>
+                    <th st-ratio="20" st-sort="status">操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="isLoading">
+                <tr>
+                  <td colspan="3" class="text-center">Loading ... </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="!isLoading" >
+                <tr ng-repeat="row in displayedCollection">
+                   <td>{{row.name}}</td>
+                   <td>{{row.standardType}}</td>
+                  <td>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="manageStandard(row)"><i class="ion-settings"></i>管理</button>
+                  </td>
+                </tr>
+                
+            </tbody>
+          </table>
+          <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
+      </div>
+  </div>
+
+  
+</div>
