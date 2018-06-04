@@ -6,32 +6,22 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="20" st-sort="name">角色名称</th>
-                    <th st-ratio="20" st-sort="code">角色编码</th>
-                    <th st-ratio="30" st-sort="description">描述</th>
-                    <th st-ratio="10" st-sort="status">操作</th>
-                    <th st-ratio="20">权限分配</th>
+                    <th st-ratio="50" st-sort="name">标准</th>
+                    <th st-ratio="30" st-sort="code">类型</th>
+                    <th st-ratio="20" st-sort="status">操作</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
                 <tr>
-                  <td colspan="7" class="text-center">Loading ... </td>
+                  <td colspan="3" class="text-center">Loading ... </td>
                 </tr>
             </tbody>
             <tbody ng-show="!isLoading" >
                 <tr ng-repeat="row in displayedCollection">
                    <td>{{row.name}}</td>
-                   <td>{{row.code}}</td>
-                   <td>{{row.description}}</td>
-                   <td>
-                      <a href="javascript:void(0);" ng-click="openRole(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
-                      &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="deleteRole(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
-                  </td>
+                   <td>{{row.standardType}}</td>
                   <td>
-                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignUser(row)"><i class="ion-person-stalker"></i>分配用户</button>
-                      &nbsp;&nbsp;
-                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignModule(row)"><i class="ion-navicon-round"></i>分配权限</button>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="manageStandard(row)"><i class="ion-settings"></i>管理</button>
                   </td>
                 </tr>
                 

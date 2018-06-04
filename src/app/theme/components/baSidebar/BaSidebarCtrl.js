@@ -11,6 +11,7 @@
   /** @ngInject */
   function BaSidebarCtrl($scope, baSidebarService,localStorage) {
 
+    //$scope.menuItems = baSidebarService.getMenuItems();
     $scope.menuItems = baSidebarService.getAuthorizedMenuItems(localStorage.getObject('dataModules'));
     $scope.defaultSidebarState = $scope.menuItems[0].stateRef;
 

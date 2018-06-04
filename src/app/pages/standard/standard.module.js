@@ -32,6 +32,10 @@
           },
           authenticate: true
         })
+        .state('main.standard.manage',{
+          url:'/manage',
+          templateUrl: 'app/pages/standard/standard/standardManage.html'
+        });
     }
   
   })();
