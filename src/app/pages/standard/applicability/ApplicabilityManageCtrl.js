@@ -14,23 +14,24 @@
             standardType: 'vda'
         };
 
+        var deferred = $q.defer();
+        //search vda libary
+        var vadLibary = null;
+        $http.get('/api/isms/standard',{params:{isEvaluation:'0'}}).then(function(response) {
+            vadLibary = response.data.data.list[0];
+
+            //query libary nodes
+            $http.get('/api/isms/standard/standardNodes',{params:{standardId:vadLibary.standardId}}).then(function(response){
+                var list = response.data.data;
+                setText(list);
+                
+                deferred.resolve(list);
+                
+            });
+        });
+        
         $scope.expanded_params = new ngTreetableParams({
             getNodes: function(parent) {
-                var deferred = $q.defer();
-                //search vda libary
-                var vadLibary = null;
-                $http.get('/api/isms/standard',{params:{isEvaluation:'0'}}).then(function(response) {
-                    vadLibary = response.data.data.list[0];
-
-                    //query libary nodes
-                    $http.get('/api/isms/standard/standardNodes',{params:{standardId:vadLibary.standardId}}).then(function(response){
-                        var list = response.data.data;
-                        setText(list);
-                        
-                        deferred.resolve(list);
-                        
-                    });
-                });
                 return deferred.promise;
             },
             getTemplate: function(node) {
