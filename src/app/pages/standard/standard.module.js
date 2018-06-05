@@ -5,8 +5,7 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.standard', [
-    ]).config(routeConfig);
+    angular.module('BlurAdmin.pages.standard',['ngTreetable']).config(routeConfig);
   
     /** @ngInject */
     function routeConfig($stateProvider) {
@@ -38,9 +37,9 @@
           params:{'row':null},
           controller: 'StandardManageCtrl',
           title:'管理标准库'
-        });
-
-        $stateProvider.state('main.standard.applicability',{
+        })
+        
+        .state('main.standard.applicability',{
           url:'/applicability',
           templateUrl: 'app/pages/standard/applicability/applicabilityList.html',
           controller: 'ApplicabilityListCtrl',
@@ -50,11 +49,11 @@
           },
           authenticate: true
         })
-        .state('main.standard.demo',{
-          url:'/demo',
-          templateUrl: 'app/pages/standard/applicability/demo.html',
-          params:{'row':null},
-          controller: 'DemoCtrl'
+        .state('main.standard.applicabilityManage',{
+          url:'/applicabilityManage',
+          templateUrl: 'app/pages/standard/applicability/applicabilityManage.html',
+          controller: 'ApplicabilityManageCtrl',
+          title:'适用性VDA管理库'
         });
     }
   

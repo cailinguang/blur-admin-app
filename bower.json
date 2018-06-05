@@ -50,7 +50,7 @@
     "angular-xeditable": "~0.5.0",
     "ng-js-tree": "0.0.10",
     "angular-ui-select": "^0.19.6",
-    "jquery-treegrid": "0.3.0"
+    "angular-treetable": "latest"
   },
   "resolutions": {
     "angular": "~1.5.9",
@@ -62,6 +62,14 @@
         "dist/css/bootstrap.css",
         "js/dropdown.js",
         "./dist/fonts/**.*"
+      ]
+    },
+    "angular-treetable":{
+      "main" : [
+        "dist/angular-treetable.min.js",
+        "example/lib/jquery.treetable.js",
+        "example/style/jquery.treetable.css",
+        "example/style/jquery.treetable.theme.default.css"
       ]
     },
     "slimScroll": {

@@ -1,0 +1,79 @@
+<style>
+    table.treetable{font-size: 1.2em}
+    table.treetable thead{
+        background-color: #deceed;
+    }
+    table.treetable thead tr th{
+        padding: .4em 2em .4em 1em;
+    }
+</style>
+<script type="text/ng-template" id="tree_node.html">
+    <tr tt-node is-branch="node.nodeType == 'vda_chapter'">
+        <td><span ng-bind="node.text"></span></td>
+        <td ng-bind="node.text"></td>
+        <td ng-bind="node.text"></td>
+        <td ng-bind="node.text"></td>
+    </tr>
+</script>
+
+<div class="widgets">
+    <div class="row">
+        <div ba-panel ba-panel-title="适用性库管理" ba-panel-class="light-text">
+            <form class="form-horizontal" name="form" ng-submit="userSubmit()" novalidate>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
+                        <label for="name" class="col-sm-2 control-label">适用性库名称</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="applicability.name" name="name" id="name" placeholder="适用性库名称" required ng-maxlength="64">
+                            <span ng-show="form.name.$error.required" class="help-block error-block basic-block">适用性库名称不能为空</span>
+                            <span ng-show="form.name.$error.maxlength" class="help-block error-block basic-block">登录名不能大于64位</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.description.$invalid && (form.description.$dirty || form.$submitted)}">
+                        <label for="description" class="col-sm-2 control-label">评审库描述</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" ng-model="applicability.description" name="description"  id="description" placeholder="评审库描述" required ng-maxlength="2000"></textarea>
+                            <span ng-show="form.description.$error.maxlength" class="help-block error-block basic-block">评审库描述不能大于2000位</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': form.standardType.$invalid && (form.standardType.$dirty || form.$submitted)}">
+                        <label for="standardType" class="col-sm-2 control-label">标准库类型</label>
+                        <div class="col-sm-8">
+                            <ui-select ng-model="$parent.applicability.standardType" id="standardType" name="standardType" required
+                                        class="btn-group bootstrap-select form-control"
+                                        search-enabled="false">
+                                <ui-select-match placeholder="标准库类型">
+                                    <span> {{$select.selected.label}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="item.value as item in typeSelect | filter: $select.search">
+                                    <span ng-bind-html="item.label"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <table tt-table tt-params="expanded_params">
+                            <thead>
+                            <tr>
+                                <th>Chapter</th>
+                                <th>Question</th>
+                                <th>applicability</th>
+                                <th>target value</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">{{description.id?'更新':'保存'}}</button>
+                    <button type="button" class="btn btn-primary" ng-click="$state.back()">取消</button>
+                </div>
+            </form>
+        </div>   
+    </div>
+</div>
+

@@ -9,7 +9,7 @@
         $scope.isLoading = true;
 
         var loadStandard = function() {
-            $http.get('/api/isms/standard',{params:{isEvaluation:'0'}}).then(function(response) {
+            $http.get('/api/isms/standard',{params:{isEvaluation:'1'}}).then(function(response) {
                 $scope.isLoading = false;
                 
                 $scope.rowCollection = response.data.data.list;
@@ -20,8 +20,8 @@
 
         loadStandard();
 
-        $scope.manageStandard = function(row){
-            $state.go("main.standard.demo",{row:row});
+        $scope.openApplicability = function(row){
+            $state.go("main.standard.applicabilityManage",{row:row});
         }
         
         
