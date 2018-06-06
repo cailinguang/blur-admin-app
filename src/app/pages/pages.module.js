@@ -8,6 +8,7 @@
   angular.module('BlurAdmin.pages', [
       'ui.router',
       'ui.select',
+      'blockUI',
       'BlurAdmin.pages.services',
       'BlurAdmin.pages.config',
       'BlurAdmin.pages.main',
@@ -22,7 +23,7 @@
     .config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($urlRouterProvider, baSidebarServiceProvider) {
+  function routeConfig($urlRouterProvider, baSidebarServiceProvider,blockUIConfig) {
     $urlRouterProvider.otherwise('/authSignIn');
 
     /* baSidebarServiceProvider.addStaticItem({
@@ -59,6 +60,9 @@
         }]
       }]
     }); */
+
+    // Disable automatically blocking of the user interface
+    blockUIConfig.autoBlock = false;
   }
 
 })();

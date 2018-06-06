@@ -6,20 +6,15 @@
     table.treetable thead tr th{
         padding: .4em 2em .4em 1em;
     }
+    table.treetable tbody tr td {
+        border: 1px solid rgb(189, 184, 184)
+    }
 </style>
-<script type="text/ng-template" id="tree_node.html">
-    <tr tt-node is-branch="node.nodeType == 'vda_chapter'">
-        <td><span ng-bind="node.text"></span></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-    </tr>
-</script>
 
 <div class="widgets">
     <div class="row">
         <div ba-panel ba-panel-title="适用性库管理" ba-panel-class="light-text">
-            <form class="form-horizontal" name="form" ng-submit="userSubmit()" novalidate>
+            <form class="form-horizontal" name="form" ng-submit="formSubmit()" novalidate>
                 <div class="modal-body">
                     <div class="form-group" ng-class="{'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
                         <label for="name" class="col-sm-2 control-label">适用性库名称</label>
@@ -39,7 +34,7 @@
                     <div class="form-group" ng-class="{'has-error': form.standardType.$invalid && (form.standardType.$dirty || form.$submitted)}">
                         <label for="standardType" class="col-sm-2 control-label">标准库类型</label>
                         <div class="col-sm-8">
-                            <ui-select ng-model="$parent.applicability.standardType" id="standardType" name="standardType" required
+                            <ui-select ng-model="$parent.applicability.standardType" id="standardType" name="standardType" required ng-disabled="true"
                                         class="btn-group bootstrap-select form-control"
                                         search-enabled="false">
                                 <ui-select-match placeholder="标准库类型">
@@ -54,13 +49,16 @@
 
                     <br>
                     <div class="row">
-                        <table tt-table tt-params="expanded_params">
+                        <table tt-table tt-params="expanded_params" id="treeTable">
                             <thead>
                             <tr>
                                 <th>Chapter</th>
                                 <th>Question</th>
                                 <th>applicability</th>
                                 <th>target value</th>
+                            </tr>
+                            <tr ng-hide="treeTableEnd==true">
+                                <th colspan="4">加载中...</th>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -69,7 +67,7 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">{{description.id?'更新':'保存'}}</button>
+                    <button type="submit" class="btn btn-warning">{{description.id?'发布':'保存'}}</button>
                     <button type="button" class="btn btn-primary" ng-click="$state.back()">取消</button>
                 </div>
             </form>
@@ -77,3 +75,18 @@
     </div>
 </div>
 
+<script type="text/ng-template" id="tree_node.html">
+    <tr tt-node is-branch="node.nodeType == 'vda_chapter'">
+        <td><span ng-bind="node.nodeType=='vda_chapter' ? node.text : ''"></span></td>
+        <td  ng-bind="node.nodeType=='vda_question' ? node.text : ''"></td>
+        <td >
+            <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability">
+                <span></span>
+            </label>
+        </td>
+        <td >
+            <input ng-show="node.nodeType=='vda_question'" type="text" ng-model="node.target" ng-disabled="node.applicability != true" ng-required="node.applicability != true">
+        </td>
+    </tr>
+</script>
