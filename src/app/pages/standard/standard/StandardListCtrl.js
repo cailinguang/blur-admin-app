@@ -9,7 +9,7 @@
         $scope.isLoading = true;
 
         var loadStandard = function() {
-            $http.get('/api/isms/standard',{params:{isEvaluation:'0'}}).then(function(response) {
+            $http.get('/api/standard/libary').then(function(response) {
                 $scope.isLoading = false;
                 
                 $scope.rowCollection = response.data.data.list;
@@ -21,7 +21,7 @@
         loadStandard();
 
         $scope.manageStandard = function(row){
-            $state.go("main.standard.manage",{row:row});
+            $state.go("main.standard.standardManage",{row:row});
         }
         
         

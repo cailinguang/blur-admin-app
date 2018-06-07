@@ -31,7 +31,7 @@
           },
           authenticate: true
         })
-        .state('main.standard.manage',{
+        .state('main.standard.standardManage',{
           url:'/manage',
           templateUrl: 'app/pages/standard/standard/standardManage.html',
           params:{'row':null},
@@ -52,8 +52,27 @@
         .state('main.standard.applicabilityManage',{
           url:'/applicabilityManage',
           templateUrl: 'app/pages/standard/applicability/applicabilityManage.html',
+          params:{'row':null},
           controller: 'ApplicabilityManageCtrl',
           title:'适用性VDA管理库'
+        });
+
+        $stateProvider.state('main.standard.evaluation',{
+          url:'/evaluation',
+          templateUrl: 'app/pages/standard/evaluation/evaluationList.html',
+          controller: 'EvaluationListCtrl',
+          title: '项目评审管理',
+          sidebarMeta: {
+            order: 200,
+          },
+          authenticate: true
+        })
+        .state('main.standard.evaluationManage',{
+          url:'/evaluationManage',
+          templateUrl: 'app/pages/standard/evaluation/evaluationManage.html',
+          params:{'row':null},
+          controller: 'EvaluationManageCtrl',
+          title:'项目评审管理'
         });
     }
   

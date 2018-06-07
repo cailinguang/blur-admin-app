@@ -2,14 +2,16 @@
     'use strict';
   
     angular.module('BlurAdmin.pages.standard')
-        .controller('ApplicabilityListCtrl', ApplicabilityListCtrl);
+        .controller('EvaluationListCtrl', EvaluationListCtrl);
 
     /** @ngInject */
-    function ApplicabilityListCtrl($scope,$http,$uibModal,toastr,$log,$state) {
+    function EvaluationListCtrl($scope,$http,$uibModal,toastr,$state,Constants) {
         $scope.isLoading = true;
 
+        $scope.evaluationType = Constants.evaluationType;
+
         var loadStandard = function() {
-            $http.get('/api/applicability/libary').then(function(response) {
+            $http.get('/api/evaluation').then(function(response) {
                 $scope.isLoading = false;
                 
                 $scope.rowCollection = response.data.data.list;
@@ -20,11 +22,11 @@
 
         loadStandard();
 
-        $scope.openApplicability = function(row){
-            $state.go("main.standard.applicabilityManage",{row:row});
+        $scope.openEvaluation = function(row){
+            $state.go("main.standard.evaluationManage",{row:row});
         }
         
-        $scope.deleteApplicability = function(row){
+        $scope.deleteEvaluation = function(row){
             if(!confirm('是否删除?')) return false;
             
             $http.delete('/api/applicability/libary/'+row.id).then(function(response){

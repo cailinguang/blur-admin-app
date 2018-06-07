@@ -2,10 +2,10 @@
     'use strict';
   
     angular.module('BlurAdmin.pages.standard')
-        .controller('ApplicabilityManageCtrl', ApplicabilityManageCtrl);
+        .controller('EvaluationManageCtrl', EvaluationManageCtrl);
 
     /** @ngInject */
-    function ApplicabilityManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants) {
+    function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants) {
 
         if($stateParams.row){
             $scope.applicability = $stateParams.row;
@@ -155,7 +155,7 @@
 
 
         $scope.goBack = function(){
-            $state.go('main.standard.applicability');
+            $state.go('main.standard.evaluation');
         }
         
     }; 

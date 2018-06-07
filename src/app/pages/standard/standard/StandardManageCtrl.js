@@ -37,8 +37,6 @@
         function onSelectstandard(e, data){
             var original = data.node.original;
             $scope.selectNode = original;
-            $scope.selectNode.name = original.properties['name'].value;
-            $scope.selectNode.description = original.properties['description'].value;
         }
 
         //加载树
@@ -46,11 +44,11 @@
         function setText(list){
             if(list&&list.length>0)
             angular.forEach(list,function(o){
-                o.text=o.properties['name'].value;
+                o.text=o.name;
                 setText(o.children);
             })
         }
-        $http.get('/api/isms/standard/standardNodes',{params:{standardId:$scope.standard.standardId}}).then(function(response){
+        $http.get('/api/standard/libary/standardNodes',{params:{standardId:$scope.standard.id}}).then(function(response){
             var list = response.data.data;
             setText(list);
             $scope.standardData = list;
@@ -61,9 +59,8 @@
         //更新属性
         $scope.updateProperty = function(){
             $scope.isSubmit = true;
-            $http.post('/api/isms/standard/nodeProperty',{type:'string',id:$scope.selectNode.properties['description'].id,value:$scope.selectNode.description}).then(function(response){
+            $http.put('/api/standard/libary/node',{id:$scope.selectNode.id,description:$scope.selectNode.description}).then(function(response){
                 if(response.data.code==200){
-                    $scope.selectNode.properties['description'].value = $scope.selectNode.description;
                     toastr.success('更新成功');
                 }
                 $scope.isSubmit = false;
