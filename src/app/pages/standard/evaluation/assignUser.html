@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">{{user.id?'更新用户':'新增用户'}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="widgets">
+            <div class="row">
+                <div class="col-md-5">
+                    <div ba-panel ba-panel-title="部门树" ba-panel-class="light-text">
+                        <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="model.deptTree"></div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                <div ba-panel ba-panel-title="用户列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+                    <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
+                    
+                    <br/>
+                    <table  class="table table-hover table-bordered">
+                        <thead>
+                            <tr class="sortable black-muted-bg">
+                                <th ></th>
+                                <th st-sort="username">登录名</th>
+                                <th st-sort="nickName">用户名称</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-show="isLoading">
+                            <tr>
+                            <td colspan="7" class="text-center">Loading ... </td>
+                            </tr>
+                        </tbody>
+                        <tbody ng-show="!isLoading" >
+                            <tr ng-repeat="row in displayedCollection" ng-click="rowClick($event,row)">
+                                <td>
+                                    <input type="radio" name="assignUser" value="{{row.id}}"/>
+                                </td>
+                                <td>{{row.username}}</td>
+                                <td>{{row.nickName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div st-items-by-page="5" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" ng-click="assign()">Assign</button>
+        <button type="button" class="btn btn-primary" ng-click="$dismiss()">Cancel</button>
+    </div>
+</div>
+

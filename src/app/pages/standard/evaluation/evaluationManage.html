@@ -19,7 +19,7 @@
                     <div class="form-group" ng-class="{'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
                         <label for="name" class="col-sm-2 control-label">项目名称</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" ng-model="applicability.name" name="name" id="name" placeholder="项目名称" required ng-maxlength="64">
+                            <input type="text" class="form-control" ng-model="evaluation.name" name="name" id="name" placeholder="项目名称" required ng-maxlength="64">
                             <span ng-show="form.name.$error.required" class="help-block error-block basic-block">项目名称不能为空</span>
                             <span ng-show="form.name.$error.maxlength" class="help-block error-block basic-block">项目名称不能大于64位</span>
                         </div>
@@ -27,36 +27,36 @@
                     <div class="form-group" ng-class="{'has-error': form.description.$invalid && (form.description.$dirty || form.$submitted)}">
                         <label for="description" class="col-sm-2 control-label">项目描述</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" ng-model="applicability.description" name="description"  id="description" placeholder="项目描述" required ng-maxlength="2000"></textarea>
+                            <textarea class="form-control" ng-model="evaluation.description" name="description"  id="description" placeholder="项目描述" required ng-maxlength="2000"></textarea>
                             <span ng-show="form.description.$error.maxlength" class="help-block error-block basic-block">项目描述不能大于2000位</span>
                         </div>
                     </div>
-                    <div class="form-group" ng-class="{'has-error': form.type.$invalid && (form.type.$dirty || form.$submitted)}">
-                        <label for="type" class="col-sm-2 control-label">适用性标准库</label>
+                    <div class="form-group" ng-class="{'has-error': form.applicabilityId.$invalid && (form.applicabilityId.$dirty || form.$submitted)}">
+                        <label for="applicabilityId" class="col-sm-2 control-label">适用性标准库</label>
                         <div class="col-sm-8">
-                            <ui-select ng-model="$parent.applicability.type" id="type" name="type" required
+                            <ui-select ng-model="$parent.evaluation.applicabilityId" id="applicabilityId" name="applicabilityId" required on-select="onTypeSelect($item,$model)"
                                         class="btn-group bootstrap-select form-control"
                                         search-enabled="false">
                                 <ui-select-match placeholder="适用性标准库">
-                                    <span> {{$select.selected.label}}</span>
+                                    <span> {{$select.selected.name}}</span>
                                 </ui-select-match>
-                                <ui-select-choices repeat="item.value as item in typeSelect | filter: $select.search">
-                                    <span ng-bind-html="item.label"></span>
+                                <ui-select-choices repeat="item.id as item in typeSelect | filter: $select.search">
+                                    <span ng-bind-html="item.name"></span>
                                 </ui-select-choices>
                             </ui-select>
                         </div>
                     </div>
 
-                    <div class="form-group" ng-class="{'has-error': form.type.$invalid && (form.type.$dirty || form.$submitted)}">
-                        <label for="type" class="col-sm-2 control-label">评审性质</label>
+                    <div class="form-group" ng-class="{'has-error': form.evaluationType.$invalid && (form.evaluationType.$dirty || form.$submitted)}">
+                        <label for="evaluationType" class="col-sm-2 control-label">评审性质</label>
                         <div class="col-sm-8">
-                            <ui-select ng-model="$parent.applicability.type" id="type" name="type" required
+                            <ui-select ng-model="$parent.evaluation.evaluationType" id="evaluationType" name="evaluationType" required
                                         class="btn-group bootstrap-select form-control"
                                         search-enabled="false">
                                 <ui-select-match placeholder="评审性质">
                                     <span> {{$select.selected.label}}</span>
                                 </ui-select-match>
-                                <ui-select-choices repeat="item.value as item in typeSelect | filter: $select.search">
+                                <ui-select-choices repeat="item.value as item in evaluationTypeSelect | filter: $select.search">
                                     <span ng-bind-html="item.label"></span>
                                 </ui-select-choices>
                             </ui-select>
@@ -97,12 +97,15 @@
         <td  ng-bind="node.type=='vda_question' ? node.text : ''"></td>
         <td >
             <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability" ng-disabled="applicability.id!=null">
+                <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability" ng-disabled="evaluation.id!=null">
                 <span></span>
             </label>
         </td>
         <td >
-            <input ng-show="node.type=='vda_question'" type="number" ng-model="node.targetValue" name="targetValue" ng-disabled="node.applicability != true">
+            <button type="button" class="btn btn-primary" ng-show="node.type=='vda_question' && node.assign ==null" ng-disabled="node.applicability != true" ng-click="openAssignUser(node)">assign</button>
+            <div ng-show="node.assign != null">
+                {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;"><i class="ion-close-round"></i></a>
+            </div>
         </td>
     </tr>
 </script>

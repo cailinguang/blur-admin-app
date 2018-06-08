@@ -8,55 +8,76 @@
     function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants) {
 
         if($stateParams.row){
-            $scope.applicability = $stateParams.row;
+            $scope.evaluation = $stateParams.row;
         }else{
-            $scope.applicability = {
-                type: 'vda'
+            $scope.evaluation = {
+                applicabilityId: undefined,
+                evaluationType: '1'
             };
         }
 
-        $scope.typeSelect = Constants.standardType;
+        $scope.typeSelect = [];
+        $scope.evaluationTypeSelect = Constants.evaluationType;
 
-        var deferred = $q.defer();
-        //search vda libary
-        var vadLibary = null;
+        var treeDeferred = $q.defer();
+        //search applicability libary
+        var applicabilityLibary = null;
         var nodesList = null;
-        $http.get('/api/standard/libary').then(function(response) {
-            vadLibary = response.data.data.list[0];
+        $http.get('/api/applicability/libary').then(function(response) {
+            $scope.typeSelect = response.data.data.list;
+
+            if(response.data.data.list.length>0){
+                $scope.evaluation.applicabilityId = response.data.data.list[0].id;
+                $scope.evaluation.type = response.data.data.list[0].type;
+                $scope.$broadcast('uis:select',response.data.data.list[0]);
+            }
+
+        });
+
+        $scope.onTypeSelect = function(item){
+
+            applicabilityLibary = item;
+
+            $("#treeTable").treetable('destroy');
+            $("#treeTable").treetable({initialState: 'expanded'});
+            //$("#treeTable").treetable($scope.expanded_params.getOptions());
+            //$$scope.expanded_params.addChildren(null, $scope.shouldExpand());
 
             //query libary nodes
-            $http.get('/api/standard/libary/standardNodes',{params:{standardId:vadLibary.id,level:'2'}}).then(function(response){
+            $http.get('/api/applicability/libary/standardNodes',{params:{applicabilityId:applicabilityLibary.id,level:'2'}}).then(function(response){
                 nodesList = response.data.data;
                 setText(nodesList);
                 
-                if($scope.applicability.id==null){
-                    deferred.resolve(nodesList);
+                if($scope.evaluation.id==null){
+                    treeDeferred.resolve(nodesList);
                     $scope.treeTableEnd = true;
                 }
                 //query applicability nodes
                 else{
-                    $http.get('/api/applicability/libary/standardNodes',{params:{applicabilityId:$scope.applicability.id,level:'2'}}).then(function(response){
+                    $http.get('/api/applicability/libary/standardNodes',{params:{applicabilityId:$scope.evaluation.id,level:'2'}}).then(function(response){
                         var aNodeList = response.data.data;
 
                         setV(aNodeList,nodesList);
-                        deferred.resolve(nodesList);
+                        treeDeferred.resolve(nodesList);
+
                         $scope.treeTableEnd = true;
                     });
                 }
                 
             });
-        });
+        }
         
         $scope.expanded_params = new ngTreetableParams({
             getNodes: function(parent) {
-                return  parent ? parent.children : deferred.promise;
+                return  parent ? parent.children : treeDeferred.promise;
             },
             getTemplate: function(node) {
                 return 'tree_node.html';
             },
             options: {
                 initialState: 'expanded'
-            }
+            },
+            version:1
         });
 
 
@@ -113,13 +134,12 @@
             if(angular.element($('form')).scope().form.$valid){
 
                 blockUI.start();
-                $scope.applicability.standardId = vadLibary.id;
                 var selectNodes = angular.copy(nodesList);
                 readNodes(selectNodes);
-                $scope.applicability.selectNodes = selectNodes;
+                $scope.evaluation.selectNodes = selectNodes;
 
-                if($scope.applicability.id == null){
-                    $http.post('/api/applicability/libary/applicability',$scope.applicability).then(function(response){
+                if($scope.evaluation.id == null){
+                    $http.post('/api/evaluation',$scope.evaluation).then(function(response){
                         blockUI.stop();
                         if(response.data.code==200){
                             toastr.success('发布成功');
@@ -130,7 +150,7 @@
                     });
                 }
                 else{
-                    $http.put('/api/applicability/libary/applicability',$scope.applicability).then(function(response){
+                    $http.put('/api/applicability/libary/applicability',$scope.evaluation).then(function(response){
                         blockUI.stop();
                         if(response.data.code==200){
                             toastr.success('发布成功');
@@ -157,8 +177,110 @@
         $scope.goBack = function(){
             $state.go('main.standard.evaluation');
         }
+
         
+        $scope.openAssignUser = function(node){
+            var uibModalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/standard/evaluation/assignUser.html',
+                size: 'lg',
+                controller: AssignUserCtrl,
+                backdrop: 'static',
+                keyboard  : false,
+                scope: $scope,
+                resolve: {
+                  node: function () {
+                    return node;
+                  }
+                }
+            });
+        }
     }; 
     
-    
+    var AssignUserCtrl = function ($scope,$http,$uibModal, $uibModalInstance,toastr, node) {
+        $scope.node = node;
+        $scope.isLoading = true;
+
+
+        //配置树
+        $scope.deptData =  [];
+        $scope.model = {};
+        $scope.deptTreeConfig = {
+            core : {
+                multiple : false,
+                animation: true,
+                check_callback : true,
+                worker : true
+            },
+            version : 1
+        };
+        //加载树
+        function loadDeptTree(){
+            $http.get('/api/dept').then(function(response){
+                var list = response.data.data.list;
+                angular.forEach(list,function(o){
+                    o.text=o.name;
+                    if(o.parent=='#'){
+                        o.state = {opened:true};
+                        //first select root
+                        $scope.rootDept = $scope.rootDept || o;
+                    }
+                });
+                $scope.deptData = list;
+                $scope.deptTreeConfig.version++;
+
+                
+            });
+        };
+        loadDeptTree();
+
+        //tree event
+        $scope.deptTreeEvents = {
+            'ready': function(){
+                //selected node
+                if($scope.rootDept){
+                    $scope.model.deptTree.jstree(true).open_node($scope.rootDept.id);
+                    $scope.model.deptTree.jstree(true).select_node($scope.rootDept.id,false,false);
+
+                    $scope.model.deptTree.jstree(true).open_all();
+                }
+             },
+            //'create_node': ,
+            'select_node': onSelectDept   // on node selected callback
+        };
+        //选择树节点,显示子部门列表
+        $scope.isSelectNode = false;
+        function onSelectDept(e, data){
+            $scope.isSelectNode = true;
+            $scope.rootDept = data.node;
+            //list view
+            $scope.isLoading = true;
+            $scope.loadUsers();
+        }
+
+        $scope.loadUsers = function() {
+            $http.get('/api/user',{params:{deptId:$scope.rootDept.id}}).then(function(response) {
+                $scope.isLoading = false;
+                $scope.rowCollection = response.data.data.list;
+            },function(response){
+                $scope.isLoading = false;
+            });
+        }
+
+        var assignUser = null;
+        $scope.rowClick = function($event,row){
+            assignUser = row;
+            $($event.target).closest('tr').find(":radio[value='"+row.id+"']")[0].checked = true;
+        }
+
+        $scope.assign = function(){
+            if(assignUser){
+                node.assign = assignUser
+                node.assignUser = assignUser.id;
+                $uibModalInstance.close();
+            }else{
+                toastr.error('请选择一个用户！');
+            }
+        }
+    };
 })();

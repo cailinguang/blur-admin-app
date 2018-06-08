@@ -29,7 +29,7 @@
         $scope.deleteEvaluation = function(row){
             if(!confirm('是否删除?')) return false;
             
-            $http.delete('/api/applicability/libary/'+row.id).then(function(response){
+            $http.delete('/api/evaluation/'+row.id).then(function(response){
                 if(response.data.code==200){
                     toastr.success('删除成功');
                     loadStandard();

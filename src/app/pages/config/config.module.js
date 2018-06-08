@@ -22,8 +22,7 @@
 
     function apiInterceptor ($q) {
       return {
-        request: function (config) { 
-          console.info(config);
+        request: function (config) {
           var url = config.url;
 
           // ignore template requests
