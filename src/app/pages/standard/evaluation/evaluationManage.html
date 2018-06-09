@@ -64,21 +64,8 @@
                     </div>
 
                     <br>
-                    <div class="row">
-                        <table tt-table tt-params="expanded_params" id="treeTable">
-                            <thead>
-                            <tr>
-                                <th>Chapter</th>
-                                <th>Question</th>
-                                <th>applicability</th>
-                                <th>assign department</th>
-                            </tr>
-                            <tr ng-hide="treeTableEnd==true">
-                                <th colspan="4">加载中...</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                    <div class="row" id="tableContent">
+                        
                     </div>
                     
                 </div>
@@ -103,9 +90,25 @@
         </td>
         <td >
             <button type="button" class="btn btn-primary" ng-show="node.type=='vda_question' && node.assign ==null" ng-disabled="node.applicability != true" ng-click="openAssignUser(node)">assign</button>
-            <div ng-show="node.assign != null">
-                {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;"><i class="ion-close-round"></i></a>
+            <div ng-show="node.assign != null" style="display: inline-block;white-space: nowrap;">
+                {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;" style="cursor:pointer;"><i class="ion-close-round"></i></a>
             </div>
         </td>
     </tr>
+</script>
+<script type="text/ng-template" id="tree_table.html">
+    <table tt-table tt-params="expanded_params" id="treeTable">
+        <thead>
+        <tr>
+            <th>Chapter</th>
+            <th>Question</th>
+            <th>applicability</th>
+            <th>assign department</th>
+        </tr>
+        <tr ng-hide="treeTableEnd==true">
+            <th colspan="4">加载中...</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 </script>

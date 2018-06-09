@@ -5,19 +5,29 @@
         .controller('EvaluationManageCtrl', EvaluationManageCtrl);
 
     /** @ngInject */
-    function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants) {
+    function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants,$compile,$templateCache) {
+        $scope.typeSelect = [];
+        $scope.evaluationTypeSelect = Constants.evaluationType;
+
+        var tableContent = null;
+
+        $scope.$on('$viewContentLoaded', function(){
+            $http.get('tree_table.html', {cache: $templateCache}).then(function(result) {
+                tableContent = result.data;
+            });
+        });
 
         if($stateParams.row){
             $scope.evaluation = $stateParams.row;
         }else{
             $scope.evaluation = {
-                applicabilityId: undefined,
-                evaluationType: '1'
+                applicabilityId : undefined,
+                evaluationType : "1"
             };
         }
 
-        $scope.typeSelect = [];
-        $scope.evaluationTypeSelect = Constants.evaluationType;
+        
+
 
         var treeDeferred = $q.defer();
         //search applicability libary
@@ -25,23 +35,41 @@
         var nodesList = null;
         $http.get('/api/applicability/libary').then(function(response) {
             $scope.typeSelect = response.data.data.list;
-
-            if(response.data.data.list.length>0){
+            if(response.data.data.list.length==0){
+                return;
+            }
+            if($scope.evaluation.id){
+                response.data.data.list.forEach(function(e){
+                    if(e.id==$scope.evaluation.applicabilityId){
+                        angular.element('#applicabilityId').scope().$broadcast('uis:select',e);
+                    }
+                });
+            }
+            else{
                 $scope.evaluation.applicabilityId = response.data.data.list[0].id;
                 $scope.evaluation.type = response.data.data.list[0].type;
-                $scope.$broadcast('uis:select',response.data.data.list[0]);
+                angular.element('#applicabilityId').scope().$broadcast('uis:select',response.data.data.list[0]);
             }
 
         });
 
-        $scope.onTypeSelect = function(item){
 
+        var childrenScope = $scope.$new();
+        var compiledDirective = $compile(tableContent);
+        var directiveElement = compiledDirective(childrenScope);
+        $('#tableContent').empty().append(directiveElement);
+
+
+        $scope.onTypeSelect = function(item){
             applicabilityLibary = item;
 
-            $("#treeTable").treetable('destroy');
-            $("#treeTable").treetable({initialState: 'expanded'});
-            //$("#treeTable").treetable($scope.expanded_params.getOptions());
-            //$$scope.expanded_params.addChildren(null, $scope.shouldExpand());
+            treeDeferred = $q.defer();
+            childrenScope.$destroy();
+            childrenScope = $scope.$new();
+            var compiledDirective = $compile(tableContent);
+            var directiveElement = compiledDirective(childrenScope);
+            $('#tableContent').empty().append(directiveElement);
+            
 
             //query libary nodes
             $http.get('/api/applicability/libary/standardNodes',{params:{applicabilityId:applicabilityLibary.id,level:'2'}}).then(function(response){
@@ -54,7 +82,7 @@
                 }
                 //query applicability nodes
                 else{
-                    $http.get('/api/applicability/libary/standardNodes',{params:{applicabilityId:$scope.evaluation.id,level:'2'}}).then(function(response){
+                    $http.get('/api/evaluation/standardNodes',{params:{evaluationId:$scope.evaluation.id,level:'2'}}).then(function(response){
                         var aNodeList = response.data.data;
 
                         setV(aNodeList,nodesList);
@@ -92,11 +120,13 @@
 
         function setV(aNodeList,nodesList){
             aNodeList.forEach(function(e){
-                var n = filterNodes(nodesList,e.standardNodeId);
+                var n = filterNodes(nodesList,e.applicabilityNodeId);
                 if(n && n.type=='vda_question'){
                     n.applicability = true;
                     n.targetValue = e.targetValue;
                     n.id=e.id;
+                    n.assign=e.assign;
+                    if(n.assign) n.assignUser=n.assign.id;
                 }
                 setV(e.children,nodesList);
             })
@@ -150,7 +180,7 @@
                     });
                 }
                 else{
-                    $http.put('/api/applicability/libary/applicability',$scope.evaluation).then(function(response){
+                    $http.put('/api/evaluation',$scope.evaluation).then(function(response){
                         blockUI.stop();
                         if(response.data.code==200){
                             toastr.success('发布成功');

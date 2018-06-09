@@ -67,7 +67,7 @@
     },
     "angular-treetable":{
       "main" : [
-        "dist/angular-treetable.min.js",
+        "src/angular-treetable.js",
         "example/lib/jquery.treetable.js",
         "example/style/jquery.treetable.css",
         "example/style/jquery.treetable.theme.default.css"

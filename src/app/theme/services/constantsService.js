@@ -13,6 +13,10 @@
                     {label:'自评性质',value:'1'},
                     {label:'内审性质',value:'2'}
                 ],
+                evaluationStatus:[
+                    {label:'评审中',value:'1'},
+                    {label:'已完成',value:'2'}
+                ],
                 standardType:[
                     {label:'VDA',value:'vda'}
                 ]
