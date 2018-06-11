@@ -1,0 +1,54 @@
+<div class="widgets">
+     
+  <div class="row">
+      <div ba-panel ba-panel-title="任务列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+          <ul class="btn-list clearfix">
+            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openTask()"><i class="ion-plus"></i>新增</button></li>
+          </ul>
+          
+          <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
+          
+          <br/>
+          <table  class="table table-hover table-bordered">
+              <thead>
+                <tr class="sortable black-muted-bg">
+                    <th st-ratio="10">序号</th>
+                    <th st-ratio="30" st-sort="name">项目评审名称</th>
+                    <th st-ratio="20" st-sort="type">标准库类型</th>
+                    <th st-ratio="20" st-sort="description">状态</th>
+                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
+                    <th st-ratio="10">操作</th>
+                </tr>
+            </thead>
+            <tbody ng-show="isLoading">
+                <tr>
+                  <td colspan="7" class="text-center">Loading ... </td>
+                </tr>
+            </tbody>
+            <tbody ng-show="!isLoading" >
+                <tr ng-repeat="row in displayedCollection">
+                   <td>{{$index+1}}</td>
+                   <td>{{row.name}}</td>
+                   <td>{{row.type}}</td>
+                   <td>{{row.status}}</td>
+                   <td>{{row.createTime}}</td>
+                   <td>
+                      <a href="javascript:void(0);" ng-click="openTask(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="javascript:void(0);" ng-click="deleteTask(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                  </td>
+                  <td>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignUser(row)"><i class="ion-person-stalker"></i>分配用户</button>
+                      &nbsp;&nbsp;
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignModule(row)"><i class="ion-navicon-round"></i>分配权限</button>
+                  </td>
+                </tr>
+                
+            </tbody>
+          </table>
+          <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
+      </div>
+  </div>
+
+  
+</div>
