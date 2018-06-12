@@ -18,7 +18,8 @@
       'BlurAdmin.pages.authSignIn',
       'BlurAdmin.pages.authSignUp',
       'BlurAdmin.pages.system',
-      'BlurAdmin.pages.standard'
+      'BlurAdmin.pages.standard',
+      'BlurAdmin.pages.task'
     ])
     .config(routeConfig);
 

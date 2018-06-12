@@ -17,9 +17,17 @@
             templateUrl: 'app/pages/task/taskList.html',
             controller: 'TaskListCtrl',
             sidebarMeta: {
-              icon: 'ion-ios-list',
+              icon: 'ion-android-menu',
               order: 11,
             },
+            authenticate: true
+          })
+          .state('main.taskDeal', {
+            url: '/deal',
+            title: '任务处理',
+            templateUrl: 'app/pages/task/taskDeal.html',
+            controller: 'TaskDealCtrl',
+            params:{'row':null},
             authenticate: true
           });
     }
