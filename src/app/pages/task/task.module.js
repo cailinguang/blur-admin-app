@@ -5,7 +5,7 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.task', [
+    angular.module('BlurAdmin.pages.task', ['angularFileUpload'
     ]).config(routeConfig);
   
     /** @ngInject */

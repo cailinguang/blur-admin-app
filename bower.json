@@ -51,7 +51,8 @@
     "ng-js-tree": "0.0.10",
     "angular-ui-select": "^0.19.6",
     "angular-treetable": "latest",
-    "angular-block-ui":"latest"
+    "angular-block-ui":"latest",
+    "angular-file-upload":"latest"
   },
   "resolutions": {
     "angular": "~1.5.9",

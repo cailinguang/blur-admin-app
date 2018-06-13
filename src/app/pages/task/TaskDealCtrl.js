@@ -5,7 +5,7 @@
         .controller('TaskDealCtrl', TaskDealCtrl);
 
     /** @ngInject */
-    function TaskDealCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state,$stateParams,$q,ngTreetableParams,$templateCache,$compile) {
+    function TaskDealCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state,$stateParams,$q,ngTreetableParams,$templateCache,$compile,toastr) {
         if($stateParams.row){
             $scope.evaluation = $stateParams.row;
         }else{
@@ -29,15 +29,14 @@
 
         var deferred = $q.defer();
         var nodesList = null;
-        //query libary nodes
+        //查询评审到question级别
         $http.get('/api/task/standardNodes',{params:{evaluationId:$scope.evaluation.id,level:'2'}}).then(function(response){
             nodesList = response.data.data;
-            setText(nodesList);
             
             deferred.resolve(nodesList);
             $scope.treeTableEnd = true;
         });
-        
+        //评审question treeTable配置
         $scope.expanded_params = new ngTreetableParams({
             getNodes: function(parent) {
                 return  parent ? parent.children : deferred.promise;
@@ -50,33 +49,17 @@
             }
         });
 
-
-        function setText(list,p){
-            if(list&&list.length>0)
-            angular.forEach(list,function(o){
-                o.text=o.name;
-                o.parent = p;
-                if(o.type=='vda_question'){
-                    o.statusCn = Constants.translate(Constants.evaluationQuestionNodeStatus,o.status);
-                }
-                setText(o.children,o);
-            });
-        }
-
-
-        function filterNodes(nodes,id){
-            for(var i in nodes){
-                if(nodes[i].id==id) return nodes[i];
-                var n = filterNodes(nodes[i].children,id);
-                if(n) return n;
-            }
-        }
-
+        //question点击事件，加载level和设置当前选中样式
         var currentTd = $('<i class="ion-arrow-left-b"></i>');
+        var lastNode = null;//set other node children is empty
         $scope.questionClick = function(event,node){
             if(node.type!='vda_question'){
                 return false;
             }
+            if(lastNode){
+                lastNode.children = [];
+            }
+            lastNode = node;
             var $tr = $(event.target).closest('tr');
             if(!$tr.hasClass('currentTr')){
                 $tr.addClass('currentTr').siblings().removeClass('currentTr');
@@ -85,7 +68,7 @@
                 buildLevel(node);
             }
         }
-
+        //触发第一个question点击
         $scope.$on('$viewContentLoaded', function(){
             function click(){
                 if(angular.element("#treeTable tbody tr").length==0){
@@ -100,6 +83,7 @@
 
         });
 
+        //level TreeTable配置
         var levelDeferred = $q.defer();
         $scope.level_table_params = new ngTreetableParams({
             getNodes: function(parent) {
@@ -112,6 +96,8 @@
                 initialState: 'expanded'
             }
         });
+
+        //重新加载level panel 和 treeTable
         var childrenScope = $scope.$new();
         var childrenTableScope = $scope.$new();
 
@@ -155,25 +141,48 @@
                 loadNodes(nodes);
             });
         }
-       
 
+        //附件
+        $scope.openEvidences = function(node){
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/task/uploadEvidences.html',
+                size:'lg',
+                controller:'UploadEvidencesCtrl',
+                resolve: {
+                    bizId: function(){return node.id}
+                }
+            });
+        }
+       
+        //保存
         $scope.save = function(){
-            $http.put('/api/task',$scope.node).then(function(response){
-                blockUI.stop();
+            operate('save');
+        }
+
+        //提交
+        $scope.commit = function(){
+            operate('commit');
+        }
+        //复核
+        $scope.reviewed = function(){
+            operate('review');
+        }
+
+        function operate(type){
+            $scope.evaluation.selectNodes = nodesList;
+            
+            $http.put('/api/task/'+type,$scope.evaluation).then(function(response){
                 if(response.data.code==200){
-                    toastr.success('发布成功');
+                    toastr.success('操作完成');
                     $scope.goBack();
                 }
             },function(response){
                 blockUI.stop();
             });
         }
-        $scope.commit = function(){
-            
-        }
-        $scope.reviewed = function(){
-            
-        }
+
+        //取消
         $scope.goBack = function(){
             $state.go('main.task');
         }

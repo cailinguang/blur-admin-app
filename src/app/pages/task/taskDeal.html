@@ -72,10 +72,10 @@
 
 <script type="text/ng-template" id="tree_node.html">
     <tr tt-node is-branch="node.type == 'vda_chapter'" ng-click="questionClick($event,node)" vdaType="{{node.type}}">
-        <td><span ng-bind="node.type=='vda_chapter' ? node.text : ''"></span></td>
-        <td  ng-bind="node.type=='vda_question' ? node.text : ''"></td>
+        <td><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
+        <td  ng-bind="node.type=='vda_question' ? node.name : ''"></td>
         <td >
-            <span ng-if="node.type=='vda_question'" ng-bind="node.statusCn"></span>
+            <span ng-if="node.type=='vda_question'" ng-bind="node.status | translate:'evaluationQuestionNodeStatus'"></span>
         </td>
         <td >
             <ui-select ng-model="$parent.node.severityLevel" id="severityLevel" name="severityLevel" required ng-if="node.type=='vda_question'"
@@ -134,7 +134,7 @@
             </ui-select>
         </td>
         <td >
-            <button type="button" ng-if="node.children.length==0">evidences</button>
+            <button type="button" ng-if="node.children.length==0" ng-click="openEvidences(node)">evidences</button>
         </td>
     </tr>
 </script>

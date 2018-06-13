@@ -11,9 +11,6 @@
         var loadTask = function() {
             $http.get('/api/task').then(function(response) {
                 $scope.isLoading = false;
-                response.data.data.list.forEach(function(element){
-                    element.statusCn = Constants.translate(Constants.evaluationStatus,element.status);
-                });
                 $scope.rowCollection = response.data.data.list;
             },function(response){
                 $scope.isLoading = false;

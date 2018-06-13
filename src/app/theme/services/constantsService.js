@@ -20,6 +20,7 @@
                     {label:'内审性质',value:'2'}
                 ],
                 evaluationStatus:[
+                    {label:'新任务',value:'0'},
                     {label:'评审中',value:'1'},
                     {label:'已完成',value:'2'}
                 ],
