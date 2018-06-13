@@ -21,20 +21,14 @@
 </style>
 <div class="modal-content">
     <div class="modal-body">
-            <div class="row">
-                <span class="btn btn-default btn-file" nv-file-drop uploader="uploader">
-                    选择文件 <input type="file" nv-file-select uploader="uploader">
-                </span>
-
-                <h3>Upload queue</h3>
-                <p>Queue length: {{ uploader.queue.length }}</p>
+            <div>
+                <p>队列数: {{ uploader.queue.length }}</p>
 
                 <table class="table">
                     <thead>
                         <tr>
                             <th width="50%">Name</th>
-                            <th ng-show="uploader.isHTML5">Size</th>
-                            <th ng-show="uploader.isHTML5">Progress</th>
+                            <th>Size</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -42,12 +36,7 @@
                     <tbody>
                         <tr ng-repeat="item in uploader.queue">
                             <td><strong>{{ item.file.name }}</strong></td>
-                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-                            <td ng-show="uploader.isHTML5">
-                                <div class="progress" style="margin-bottom: 0;">
-                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-                                </div>
-                            </td>
+                            <td nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
                             <td class="text-center">
                                 <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
                                 <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
@@ -67,14 +56,18 @@
                         </tr>
                     </tbody>
                 </table>
+                <hr/>
+                <div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
 
                 <div>
-                    <div>
-                        Queue progress:
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-                        </div>
-                    </div>
+                    
+                    <span class="btn btn-info btn-file btn-s">
+                        <span class="glyphicon glyphicon-plus-sign"></span> Select Files <input type="file" nv-file-select uploader="uploader" multiple>
+                    </span>
                     <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
                         <span class="glyphicon glyphicon-upload"></span> Upload all
                     </button>
@@ -89,10 +82,7 @@
                      
                 
     </div>
-    
-    </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-warning">{{user.id?'更新':'保存'}}</button>
         <button type="button" class="btn btn-primary" ng-click="$dismiss()">Cancel</button>
     </div> 
 </div>
