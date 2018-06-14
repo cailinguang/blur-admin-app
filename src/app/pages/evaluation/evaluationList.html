@@ -8,17 +8,19 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="10" st-sort="$index">序号</th>
-                    <th st-ratio="30" st-sort="name">项目评审名称</th>
+                    <th st-ratio="5" st-sort="$index">序号</th>
+                    <th st-ratio="20" st-sort="name">项目评审名称</th>
                     <th st-ratio="20" st-sort="type">标准库类型</th>
-                    <th st-ratio="20" st-sort="description">描述</th>
+                    <th st-ratio="10" st-sort="evaluationType">评审性质</th>
+                    <th st-ratio="10" st-sort="status">状态</th>
+                    <th st-ratio="15" st-sort="description">描述</th>
                     <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
                     <th st-ratio="10">操作</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
                 <tr>
-                  <td colspan="6" class="text-center">Loading ... </td>
+                  <td colspan="8" class="text-center">Loading ... </td>
                 </tr>
             </tbody>
             <tbody ng-show="!isLoading" >
@@ -26,6 +28,8 @@
                    <td>{{$index+1}}</td>
                    <td>{{row.name}}</td>
                    <td>{{row.type}}</td>
+                   <td>{{row.evaluationType|translate:'evaluationType'}}</td>
+                   <td>{{row.status|translate:'evaluationStatus'}}</td>
                    <td>{{row.description}}</td>
                    <td>{{row.createTime}}</td>
                   <td>

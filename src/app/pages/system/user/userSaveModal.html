@@ -46,7 +46,7 @@
               <ui-select ng-model="$parent.user.roles" id="roles" name="roles" required
                         class="btn-group bootstrap-select form-control"
                         search-enabled="false">
-                <ui-select-match placeholder="角色">
+                <ui-select-match placeholder="请选择角色">
                   <span> {{$select.selected.name}}</span>
                 </ui-select-match>
                 <ui-select-choices repeat="item in roleSelect | filter: $select.search">

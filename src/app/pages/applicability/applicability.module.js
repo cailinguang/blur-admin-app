@@ -16,7 +16,7 @@
           controller: 'ApplicabilityListCtrl',
           title: '适用性VDA管理库',
           sidebarMeta: {
-            icon: 'ion-navicon-round',
+            icon: 'ion-arrow-expand',
             order: 21
           },
           authenticate: true

@@ -5,9 +5,11 @@
         .controller('EvaluationManageCtrl', EvaluationManageCtrl);
 
     /** @ngInject */
-    function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants,$compile,$templateCache) {
+    function EvaluationManageCtrl($scope,$http,$uibModal,$stateParams,$state,$q, ngTreetableParams,blockUI,toastr,Constants,$compile,$templateCache,localStorage) {
         $scope.typeSelect = [];
         $scope.evaluationTypeSelect = Constants.evaluationType;
+
+        $scope.dataRoles = localStorage.getObject('dataRoles');
 
         var tableContent = null;
 
@@ -22,7 +24,7 @@
         }else{
             $scope.evaluation = {
                 applicabilityId : undefined,
-                evaluationType : "1"
+                evaluationType : $scope.dataRoles.indexOf("ciso")>-1?"2":"1"
             };
         }
 
@@ -126,6 +128,7 @@
                     n.targetValue = e.targetValue;
                     n.id=e.id;
                     n.assign=e.assign;
+                    n.status=e.status;
                     if(n.assign) n.assignUser=n.assign.id;
                 }
                 setV(e.children,nodesList);
@@ -212,7 +215,7 @@
         $scope.openAssignUser = function(node){
             var uibModalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/pages/standard/evaluation/assignUser.html',
+                templateUrl: 'app/pages/evaluation/assignUser.html',
                 size: 'lg',
                 controller: AssignUserCtrl,
                 backdrop: 'static',

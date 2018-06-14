@@ -133,6 +133,8 @@
     /** @ngInject */
     var UserModalInstanceCtrl = function ($scope,$http,$uibModal, $uibModalInstance, user,Constants) {
         $scope.user = user;
+        if(user.roles&&user.roles.length!=0)user.roles=user.roles[0];
+
         $scope.statusSelect = Constants.userStatus;
         $scope.roleSelect = [];
         $http.get('/api/role').then(function(response){

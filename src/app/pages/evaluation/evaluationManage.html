@@ -50,7 +50,7 @@
                     <div class="form-group" ng-class="{'has-error': form.evaluationType.$invalid && (form.evaluationType.$dirty || form.$submitted)}">
                         <label for="evaluationType" class="col-sm-2 control-label">评审性质</label>
                         <div class="col-sm-8">
-                            <ui-select ng-model="$parent.evaluation.evaluationType" id="evaluationType" name="evaluationType" required
+                            <ui-select ng-model="$parent.evaluation.evaluationType" id="evaluationType" name="evaluationType" required ng-disabled="dataRoles.indexOf('ciso')<0"
                                         class="btn-group bootstrap-select form-control"
                                         search-enabled="false">
                                 <ui-select-match placeholder="评审性质">
@@ -91,7 +91,7 @@
         <td >
             <button type="button" class="btn btn-primary" ng-show="node.type=='vda_question' && node.assign ==null" ng-disabled="node.applicability != true" ng-click="openAssignUser(node)">assign</button>
             <div ng-show="node.assign != null" style="display: inline-block;white-space: nowrap;">
-                {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;" style="cursor:pointer;"><i class="ion-close-round"></i></a>
+                {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;" style="cursor:pointer;" ng-if="node.status=='0' || node.status==null"><i class="ion-close-round"></i></a>
             </div>
         </td>
     </tr>
