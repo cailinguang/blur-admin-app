@@ -15,6 +15,10 @@
                     }
                     return null;
                 },
+                userStatus:[
+                    {label: '未锁定', value: '1'},
+                    {label: '锁定', value: '2'}
+                ],
                 evaluationType:[
                     {label:'自评性质',value:'1'},
                     {label:'内审性质',value:'2'}

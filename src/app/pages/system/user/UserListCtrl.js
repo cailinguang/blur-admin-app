@@ -4,17 +4,10 @@
     angular.module('BlurAdmin.pages.system.user')
         .controller('UserListCtrl', UserListCtrl);
 
-    var statusSelect = [
-        {label: '未锁定', value: '1'},
-        {label: '锁定', value: '2'}
-    ];
 
     /** @ngInject */
-    function UserListCtrl($scope,$http,$uibModal,$timeout,$log) {
+    function UserListCtrl($scope,$http,$uibModal,$timeout,$log,Constants) {
         $scope.isLoading = true;
-
-        $scope.statusSelect = statusSelect;
-
         //配置树
         $scope.deptData =  [];
         $scope.model = {};
@@ -72,14 +65,6 @@
         $scope.loadUsers = function() {
             $http.get('/api/user',{params:{deptId:$scope.rootDept.id}}).then(function(response) {
                 $scope.isLoading = false;
-                response.data.data.list.forEach(function(n){
-                    statusSelect.forEach(function(ns){
-                        if(n.status==ns.value){
-                            n.statusLabel = ns.label;
-                            return;
-                        }
-                    })
-                });
                 $scope.rowCollection = response.data.data.list;
             },function(response){
                 $scope.isLoading = false;
@@ -146,9 +131,14 @@
     
     //弹框页面控制
     /** @ngInject */
-    var UserModalInstanceCtrl = function ($scope,$http,$uibModal, $uibModalInstance, user) {
+    var UserModalInstanceCtrl = function ($scope,$http,$uibModal, $uibModalInstance, user,Constants) {
         $scope.user = user;
-        $scope.statusSelect = statusSelect;
+        $scope.statusSelect = Constants.userStatus;
+        $scope.roleSelect = [];
+        $http.get('/api/role').then(function(response){
+            $scope.roleSelect = response.data.data.list;
+        });
+
         $scope.userSubmit = function () {
             if ($scope.form.$valid) {
                 $http({

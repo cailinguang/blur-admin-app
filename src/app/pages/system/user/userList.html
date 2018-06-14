@@ -20,7 +20,8 @@
                 <tr class="sortable black-muted-bg">
                     <th st-ratio="10" st-sort="username">登录名</th>
                     <th st-ratio="10" st-sort="nickName">用户名称</th>
-                    <th st-ratio="20" st-sort="phone">电话</th>
+                    <th st-ratio="10" st-sort="nickName">角色</th>
+                    <th st-ratio="10" st-sort="phone">电话</th>
                     <th st-ratio="20" st-sort="email">邮箱</th>
                     <th st-ratio="20" st-sort="registerDate">创建时间</th>
                     <th st-ratio="10" st-sort="status">状态</th>
@@ -29,17 +30,20 @@
             </thead>
             <tbody ng-show="isLoading">
                 <tr>
-                  <td colspan="7" class="text-center">Loading ... </td>
+                  <td colspan="8" class="text-center">Loading ... </td>
                 </tr>
             </tbody>
             <tbody ng-show="!isLoading" >
                 <tr ng-repeat="row in displayedCollection">
                    <td>{{row.username}}</td>
                    <td>{{row.nickName}}</td>
+                   <td>
+                       <div ng-repeat="item in row.roles" style="white-space: nowrap;">{{item.name}}</div>
+                   </td>
                    <td>{{row.phone}}</td>
                    <td>{{row.email}}</td>
                    <td>{{row.registerDate}}</td>
-                   <td>{{row.statusLabel}}</td>
+                   <td>{{row.status|translate:'userStatus'}}</td>
                    <td>
                       <a href="javascript:void(0);" ng-click="openUser(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
