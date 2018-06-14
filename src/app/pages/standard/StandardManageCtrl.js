@@ -8,7 +8,7 @@
     function StandardManageCtrl($scope,$http,$uibModal,$stateParams,$state,toastr) {
         $scope.standard = $stateParams.row;
         if($scope.standard==null){
-            $state.go('main.standard.standard');
+            $state.go('main.standard');
             return;
         }
         

@@ -205,7 +205,7 @@
 
 
         $scope.goBack = function(){
-            $state.go('main.standard.evaluation');
+            $state.go('main.evaluation');
         }
 
         

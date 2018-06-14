@@ -5,12 +5,13 @@
         .controller('UploadEvidencesCtrl', UploadEvidencesCtrl);
 
     /** @ngInject */
-    function UploadEvidencesCtrl($scope,$http,$uibModal,FileUploader,bizId,localStorage,FileItem,FileLikeObject) {
+    function UploadEvidencesCtrl($scope,$http,$uibModal,FileUploader,bizId,localStorage,FileItem,FileLikeObject,RouteServcie,toastr) {
         
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost:8080/api/attachment',
+            url: RouteServcie.getUrl('/api/attachment'),
             headers:{Authorization:localStorage.getObject('JWT')},
-            formData:[{bizId:bizId}]
+            formData:[{bizId:bizId}],
+            autoUpload:true
         });
 
         // FILTERS
@@ -45,8 +46,10 @@
                 fileItem.isSuccess=false;
                 fileItem.isUploaded=false;
                 fileItem.progress=0;
+                toastr.error('上传失败');
             }else{
                 fileItem.id=response.data;
+                toastr.success('上传成功');
             }
         };
         uploader.onAfterAddingFile = function(fileItem, response, status, headers) {
@@ -61,7 +64,7 @@
             }
         }
         uploader.onErrorItem = function(fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
+            toastr.error('上传失败');
         };
        
 

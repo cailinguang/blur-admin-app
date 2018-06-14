@@ -19,6 +19,8 @@
       'BlurAdmin.pages.authSignUp',
       'BlurAdmin.pages.system',
       'BlurAdmin.pages.standard',
+      'BlurAdmin.pages.applicability',
+      'BlurAdmin.pages.evaluation',
       'BlurAdmin.pages.task'
     ])
     .config(routeConfig);

@@ -2,6 +2,19 @@
   'use strict';
 
   angular.module('BlurAdmin.pages.config',[])
+
+    .factory('RouteServcie',function(){
+      var API_URL = 'http://localhost:8080';
+      return {
+        api_url: API_URL,
+        getUrl: function(url){
+            return API_URL+url;
+        }
+      }
+    })
+
+    .directive('routeHref', routeHref)
+
     .config(routeConfig);
 
   /** @ngInject */
@@ -18,9 +31,7 @@
   }
 
    // api url prefix
-    var API_URL = 'http://localhost:8080';
-
-    function apiInterceptor ($q) {
+    function apiInterceptor ($q,RouteServcie) {
       return {
         request: function (config) {
           var url = config.url;
@@ -30,7 +41,7 @@
             return config || $q.when(config);
           }
 
-          config.url = API_URL + config.url;
+          config.url = RouteServcie.getUrl(config.url);
           return config || $q.when(config);
         }
       }
@@ -72,6 +83,21 @@
           }
 
       };
-  }
+  
+  
+  
+    }
 
+    /** @ngInject */
+    function routeHref(RouteServcie) {
+      var link =function($scope, $element, $attrs){
+        $attrs.$observe('routeHref', function(routeHref) {
+          $element.attr('href', RouteServcie.getUrl(routeHref));
+        });
+      }
+      return {
+        restrict: 'A',
+        link:link
+      };
+    }
 })();

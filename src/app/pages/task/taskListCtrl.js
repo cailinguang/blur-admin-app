@@ -26,7 +26,7 @@
         
         //to view
         $scope.viewTask = function(row){
-            $state.go('main.taskDeal',{row:row});
+            $state.go('main.taskView',{row:row});
         }
 
     }; 

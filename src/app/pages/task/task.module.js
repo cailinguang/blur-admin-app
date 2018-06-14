@@ -17,8 +17,8 @@
             templateUrl: 'app/pages/task/taskList.html',
             controller: 'TaskListCtrl',
             sidebarMeta: {
-              icon: 'ion-android-menu',
-              order: 11,
+              icon: 'ion-clipboard',
+              order: 30,
             },
             authenticate: true
           })
@@ -27,6 +27,14 @@
             title: '任务处理',
             templateUrl: 'app/pages/task/taskDeal.html',
             controller: 'TaskDealCtrl',
+            params:{'row':null},
+            authenticate: true
+          })
+          .state('main.taskView', {
+            url: '/view',
+            title: '任务查看',
+            templateUrl: 'app/pages/task/taskView.html',
+            controller: 'TaskViewCtrl',
             params:{'row':null},
             authenticate: true
           });

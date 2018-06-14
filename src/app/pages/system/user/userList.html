@@ -24,7 +24,7 @@
                     <th st-ratio="20" st-sort="email">邮箱</th>
                     <th st-ratio="20" st-sort="registerDate">创建时间</th>
                     <th st-ratio="10" st-sort="status">状态</th>
-                    <th st-ratio="10" st-sort="status">操作</th>
+                    <th style="min-width: 110px;" st-sort="status">操作</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -42,6 +42,8 @@
                    <td>{{row.statusLabel}}</td>
                    <td>
                       <a href="javascript:void(0);" ng-click="openUser(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="javascript:void(0);" ng-click="resetPass(row)" style="font-size: 20px;"><i class="ion-ios-refresh-outline"></i></a>
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="deleteUser(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
                   </td>

@@ -2,10 +2,10 @@
     'use strict';
   
     angular.module('BlurAdmin.pages.task')
-        .controller('TaskDealCtrl', TaskDealCtrl);
+        .controller('TaskViewCtrl', TaskViewCtrl);
 
     /** @ngInject */
-    function TaskDealCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state,$stateParams,$q,ngTreetableParams,$templateCache,$compile,toastr,localStorage,blockUI) {
+    function TaskViewCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state,$stateParams,$q,ngTreetableParams,$templateCache,$compile,toastr,localStorage,blockUI) {
         if($stateParams.row){
             $scope.evaluation = $stateParams.row;
         }else{

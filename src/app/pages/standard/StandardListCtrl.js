@@ -21,7 +21,7 @@
         loadStandard();
 
         $scope.manageStandard = function(row){
-            $state.go("main.standard.standardManage",{row:row});
+            $state.go("main.standardManage",{row:row});
         }
         
         

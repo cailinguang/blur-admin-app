@@ -155,7 +155,7 @@
 
 
         $scope.goBack = function(){
-            $state.go('main.standard.applicability');
+            $state.go('main.applicability');
         }
         
     }; 

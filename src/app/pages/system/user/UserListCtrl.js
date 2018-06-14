@@ -116,8 +116,28 @@
             if(!confirm('确认删除？')) return false;
 
             $http.delete('/api/user/'+row.id).then(function(response){
-                if(response.code=200){
+                if(response.data.code==200){
                     loadDeptTree();
+                }
+            });
+        }
+
+        $scope.resetPass = function(row){
+            $http.put('/api/user/resetpassword/'+row.id).then(function(response){
+                if(response.data.code==200){
+                    //展示密码
+                    row.password = response.data.data;
+                    $uibModal.open({
+                        animation: true,
+                        templateUrl: 'app/pages/system/user/showPassword.html',
+                        resolve: {
+                            puser: function(){return row}
+                        },
+                        /** @ngInject */
+                        controller:function(puser,$scope){
+                            $scope.user=puser
+                        }
+                    });
                 }
             });
         }
@@ -146,7 +166,7 @@
                                 animation: true,
                                 templateUrl: 'app/pages/system/user/showPassword.html',
                                 resolve: {
-                                    puser: function(){$scope.user}
+                                    puser: function(){return $scope.user}
                                 },
                                 /** @ngInject */
                                 controller:function(puser,$scope){
