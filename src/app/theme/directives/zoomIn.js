@@ -12,7 +12,7 @@
     return {
       restrict: 'A',
       link: function ($scope, elem) {
-        var delay = 1000;
+        var delay = 500;
 
         if ($rootScope.$pageFinishedLoading) {
           delay = 100;

@@ -39,7 +39,7 @@ a.al-logo {
   margin-right: 12px;
   transition: all .15s ease-in-out;
   padding: 0;
-  width: 36px;
+  //width: 36px;
   height: 36px;
   border: 0;
   opacity: 1;
@@ -47,10 +47,20 @@ a.al-logo {
   a {
     display: block;
   }
-  img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
+  // img {
+  //   width: 45px;
+  //   height: 45px;
+  //   border-radius: 50%;
+  // }
+  span {
+    white-space: nowrap;
+    font-size: 15px;
+    line-height: 45px;
+    color: white;
+    i{
+      position: relative;
+      top: 25px;
+    }
   }
 }
 

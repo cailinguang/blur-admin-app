@@ -43,6 +43,7 @@
 
           localStorage.setObject('dataRoles', roles);
           localStorage.setObject('dataModules', modules);
+          localStorage.setObject('nickName',tokenPayload.nickName);
           $state.go('main.dashboard');
         }
         

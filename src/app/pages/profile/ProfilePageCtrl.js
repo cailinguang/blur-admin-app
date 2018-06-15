@@ -9,81 +9,52 @@
     .controller('ProfilePageCtrl', ProfilePageCtrl);
 
   /** @ngInject */
-  function ProfilePageCtrl($scope, fileReader, $filter, $uibModal) {
-    $scope.picture = $filter('profilePicture')('Nasta');
+  function ProfilePageCtrl($scope, $uibModal,$http,localStorage,toastr,$state) {
+    $scope.forms = {};
 
-    $scope.removePicture = function () {
-      $scope.picture = $filter('appImage')('theme/no-photo.png');
-      $scope.noPicture = true;
-    };
+    $http.get('/api/user/currentUser').then(function(response){
+      $scope.user=response.data.data;
+    });
 
-    $scope.uploadPicture = function () {
-      var fileInput = document.getElementById('uploadFile');
-      fileInput.click();
+    $scope.editPassword = false;
+    function watchPass(){ 
+        $scope.editPassword = $scope.user.oldPassword  || $scope.user.password  || $scope.user.confirmPassword; 
+    }
+    $scope.$watch('user.oldPassword',watchPass);
+    $scope.$watch('user.password',watchPass);
+    $scope.$watch('user.confirmPassword',watchPass);
 
-    };
+    $scope.updateProfile=function(){
+      if($scope.editPassword){
+        if($scope.user.oldPassword == undefined){
+            alert('请输入原密码');
+            return;
+        }
+        if($scope.user.password==undefined){
+            alert('请输入新密码');
+            return;
+        }
+        if($scope.user.password!=$scope.user.confirmPassword){
+            alert('确认密码输入不一致');
+            return;
+        }
 
-    $scope.socialProfiles = [
-      {
-        name: 'Facebook',
-        href: 'https://www.facebook.com/akveo/',
-        icon: 'socicon-facebook'
-      },
-      {
-        name: 'Twitter',
-        href: 'https://twitter.com/akveo_inc',
-        icon: 'socicon-twitter'
-      },
-      {
-        name: 'Google',
-        icon: 'socicon-google'
-      },
-      {
-        name: 'LinkedIn',
-        href: 'https://www.linkedin.com/company/akveo',
-        icon: 'socicon-linkedin'
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/akveo',
-        icon: 'socicon-github'
-      },
-      {
-        name: 'StackOverflow',
-        icon: 'socicon-stackoverflow'
-      },
-      {
-        name: 'Dribbble',
-        icon: 'socicon-dribble'
-      },
-      {
-        name: 'Behance',
-        icon: 'socicon-behace'
+        $http.put('/api/user/updatePassword',{id:$scope.user.id,oldPassword:$scope.user.oldPassword,password:$scope.user.password}).then(function(response){
+          if(response.data.code==200){
+            toastr.success('密码修改成功!');
+          }
+        })
       }
-    ];
 
-    $scope.unconnect = function (item) {
-      item.href = undefined;
-    };
-
-    $scope.showModal = function (item) {
-      $uibModal.open({
-        animation: false,
-        controller: 'ProfileModalCtrl',
-        templateUrl: 'app/pages/profile/profileModal.html'
-      }).result.then(function (link) {
-          item.href = link;
+      if($scope.forms.form.$valid){
+        $http.put('/api/user/'+$scope.user.id,{nickName:$scope.user.nickName,phone:$scope.user.phone,email:$scope.user.email}).then(function(response){
+          localStorage.setObject('nickName',$scope.user.nickName);
+          $scope.$parent.$parent.nickName=$scope.user.nickName;
         });
-    };
+      }
 
-    $scope.getFile = function () {
-      fileReader.readAsDataUrl($scope.file, $scope)
-          .then(function (result) {
-            $scope.picture = result;
-          });
-    };
 
-    $scope.switches = [true, true, false, true, true, false];
+    }
   }
 
 })();

@@ -52,7 +52,6 @@
 
       return {
           'request': function(config) {
-              // console.log('request:' + config);
               return config || $q.when(config);
           },
           'requestError': function(rejection) {
@@ -68,6 +67,10 @@
               }
               else if (response.data.code === 403) {
                 toastr.warning(response.data.message, '禁止访问');
+              }
+              else if(response.data.code === 401){
+                toastr.warning(response.data.message, '用户认证失败');
+                $injector.get('$state').transitionTo('authSignIn');
               }
 
               return  response || $q.when(response);

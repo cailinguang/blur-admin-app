@@ -15,8 +15,8 @@
         url: '/main',
         templateUrl: 'app/pages/main/main.html',
         redirectTo: 'main.dashboard',
+        controller:'MainCtrl',
         authenticate: true
-
 
       });
   }
