@@ -115,7 +115,7 @@
 }
 
 .tab-content {
-  padding: 15px 15px 5px 15px;
+  // padding: 15px 15px 5px 15px;
   background: transparent;
   color: $default-text;
   .tab-pane p {
@@ -127,7 +127,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom: 1px solid transparent;
-  background-color: $primary-light;
+  background-color: #ccc;
   a {
     color: $label-text;
     &:hover {

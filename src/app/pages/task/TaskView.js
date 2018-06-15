@@ -45,7 +45,8 @@
                 return 'tree_node.html';
             },
             options: {
-                initialState: 'expanded'
+                initialState: 'expanded',
+                indent:30
             }
         });
 
@@ -93,7 +94,8 @@
                 return 'level_tree_node.html';
             },
             options: {
-                initialState: 'expanded'
+                initialState: 'expanded',
+                indent:30
             }
         });
 
@@ -104,6 +106,7 @@
         var cacheNode = {};
         //build level html
         function buildLevel(node){
+            $('#levelContent').empty().append('<p>Loading...</p>');
             function loadNodes(nodes){
                 childrenScope.$destroy();
                 childrenScope = $scope.$new();

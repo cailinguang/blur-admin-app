@@ -1,33 +1,5 @@
 <style>
-    table.treetable{font-size: 1.2em}
-    table.treetable thead{
-        background-color: #deceed;
-    }
-    table.treetable thead tr th{
-        padding: .4em 2em .4em 1em;
-    }
-    table.treetable tbody tr td {
-        border: 1px solid rgb(189, 184, 184);
-        position: relative;
-    }
-    .currentTr td{
-        background-color: #deceed;
-    }
-    .currentTr td:last-child i{
-        position: absolute;
-        right: -7px;
-        top: 15px;
-    }
-    .tab-content {
-        padding:0px;
-        background: transparent;
-        color: #666666;
-    }
-    .levelApprovled{
-        position: absolute;
-        top: 25px;
-        right: 10px;
-    }
+    .lo
 </style>
 
 <div class="widgets">
@@ -45,7 +17,7 @@
                                 <th style="width:150px;">Severity</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
-                                <th colspan="4">加载中...</th>
+                                <td colspan="4">加载中...</td>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -55,7 +27,6 @@
                 </div>
                 <div class="modal-body">
                 <div class="row" id="levelContent">
-                    
                 </div>
                 </div>
 

@@ -105,7 +105,8 @@
                 return 'tree_node.html';
             },
             options: {
-                initialState: 'expanded'
+                initialState: 'expanded',
+                indent:30
             },
             version:1
         });
