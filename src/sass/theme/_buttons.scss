@@ -33,7 +33,7 @@ $hover: 24;
   }
 
   &:hover, &:focus, &.focus, &:active, &.active {
-    @include styleButton($color, $borderColor - $hover);
+    @include styleButton($color+20, $borderColor - $hover);
   }
 }
 

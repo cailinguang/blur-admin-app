@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" ng-click="save()" ng-if="roles.indexOf('ciso')>-1 || roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">save</button>
-                    <button type="button" class="btn btn-warning" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">commit</button>
-                    <button type="button" class="btn btn-warning" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">reviewed</button>
+                    <button type="button" class="btn btn-success" ng-click="save()" ng-if="roles.indexOf('ciso')>-1 || roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">save</button>
+                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">commit</button>
+                    <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">reviewed</button>
                     <button type="button" class="btn btn-primary" ng-click="goBack()">返回</button>
                 </div>
             </form>
@@ -107,7 +107,7 @@
             </ui-select>
         </td>
         <td >
-            <button class="btn btn-default btn-with-icon" type="button" 
+            <button class="btn btn-info btn-with-icon" type="button" 
                 ng-disabled="lastNode.status!='0' && lastNode.status!='1'"
                 ng-if="node.children.length==0" ng-click="openEvidences(node)"><i class="ion-paperclip"></i> evidences</button>
         </td>
