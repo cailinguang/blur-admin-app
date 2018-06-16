@@ -70,9 +70,8 @@
     <uib-tabset active="$tabSetStatus.activeTab">
         <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
             <div class="levelApprovled">
-                Level Approvled :
-                <select ng-model="item.levelIsApproved" ng-options="x.value as x.label for x in levelApprovedSelect" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">
-                </select>
+                <div class="label">Level Approvled :</div>
+                <ba-switcher switcher-style="primary" switcher-value="item.levelIsApproved" switcherLabel="['Yes','No']"  switcher-disabled="lastNode.status!='0' && lastNode.status!='1'"></ba-switcher>
             </div>
             <div id="levelTable-{{item.id}}"></div>
         </uib-tab>

@@ -1,10 +1,10 @@
 <label class="switcher-container">
-  <input type="checkbox" ng-model="switcherValue">
-  <div class="switcher" ng-class="::switcherStyle">
+  <input type="checkbox" ng-model="checkboxValue" ng-disabled="switcherDisabled">
+  <div class="switcher" ng-class="::switcherStyle" ng-disabled="switcherDisabled">
     <div class="handle-container">
-      <span class="handle handle-on">ON</span>
+      <span class="handle handle-on">{{switcherLable?switcherLable[0]:'ON'}}</span>
       <span class="handle"></span>
-      <span class="handle handle-off">OFF</span>
+      <span class="handle handle-off">{{switcherLable?switcherLable[1]:'OFF'}}</span>
     </div>
   </div>
 </label>

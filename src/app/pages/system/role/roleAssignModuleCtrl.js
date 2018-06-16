@@ -31,19 +31,21 @@
         });
         $scope.moduleData = list;
         $scope.moduleTreeConfig.version++;
-    });
 
-    //设置已分配菜单
-    $http.get('/api/permission/roleAssignMenu',{params:{roleId:role.id}}).then(function(response){
-        var list = response.data.data;
-        list.forEach(function(e){
-            if(!$scope.model.moduleTree.jstree(true).is_parent(e.id)){
-                $scope.model.moduleTree.jstree(true).check_node(e.id);
-            }else{
-                $scope.model.moduleTree.jstree(true).open_node(e.id);
-            }
+        //设置已分配菜单
+        $http.get('/api/permission/roleAssignMenu',{params:{roleId:role.id}}).then(function(response){
+            var list = response.data.data;
+            list.forEach(function(e){
+                if(!$scope.model.moduleTree.jstree(true).is_parent(e.id)){
+                    $scope.model.moduleTree.jstree(true).check_node(e.id);
+                }else{
+                    $scope.model.moduleTree.jstree(true).open_node(e.id);
+                }
+            });
         });
     });
+
+    
 
     $scope.save = function(){
         $scope.isSubmit = true;

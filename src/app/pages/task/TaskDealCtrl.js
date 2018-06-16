@@ -124,7 +124,7 @@
 
                             levelDeferred.resolve(item.children);
                         }else{
-                            $("#levelTable-"+item.id).empty().append('没有找到记录！');
+                            $("#levelTable-"+item.id).empty().append('no control node found！');
                         }
                     },200)
                 }
