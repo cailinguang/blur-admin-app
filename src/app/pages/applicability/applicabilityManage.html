@@ -41,8 +41,8 @@
                             <tr>
                                 <th>Chapter</th>
                                 <th>Question</th>
-                                <th>applicability</th>
-                                <th>target value</th>
+                                <th>Applicability</th>
+                                <th>Target Value</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
                                 <th colspan="4">加载中...</th>
@@ -66,7 +66,7 @@
     <tr tt-node is-branch="node.type == 'vda_chapter'">
         <td><span ng-bind="node.type=='vda_chapter' ? node.text : ''"></span></td>
         <td  ng-bind="node.type=='vda_question' ? node.text : ''"></td>
-        <td >
+        <td style="text-align:center;">
             <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability" ng-disabled="applicability.id!=null">
                 <span></span>

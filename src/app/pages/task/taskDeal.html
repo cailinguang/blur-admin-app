@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="save()" ng-if="roles.indexOf('ciso')>-1 || roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">save</button>
-                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">commit</button>
-                    <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">reviewed</button>
+                    <button type="button" class="btn btn-success" ng-click="save()" ng-if="roles.indexOf('ciso')>-1 || roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">保存</button>
+                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">提交</button>
+                    <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">复核</button>
                     <button type="button" class="btn btn-primary" ng-click="goBack()">返回</button>
                 </div>
             </form>
@@ -71,7 +71,7 @@
         <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
             <div class="levelApprovled">
                 <div class="label">Level Approvled :</div>
-                <ba-switcher switcher-style="primary" switcher-value="item.levelIsApproved" switcherLabel="['Yes','No']"  switcher-disabled="lastNode.status!='0' && lastNode.status!='1'"></ba-switcher>
+                <ba-switcher switcher-style="primary" switcher-value="item.levelIsApproved" switcher-label="Yes,No"  switcher-disabled="{{lastNode.status!='0' && lastNode.status!='1'}}"></ba-switcher>
             </div>
             <div id="levelTable-{{item.id}}"></div>
         </uib-tab>
@@ -83,7 +83,7 @@
         <tr>
             <th>Control</th>
             <th style="width:200px;">Compliance Level</th>
-            <th>evidences</th>
+            <th >Evidences</th>
         </tr>
         </thead>
         <tbody></tbody>
@@ -105,8 +105,8 @@
                 </ui-select-choices>
             </ui-select>
         </td>
-        <td >
-            <button class="btn btn-info btn-with-icon" type="button" 
+        <td style="text-align:center;">
+            <button class="btn btn-with-icon" type="button" 
                 ng-disabled="lastNode.status!='0' && lastNode.status!='1'"
                 ng-if="node.children.length==0" ng-click="openEvidences(node)"><i class="ion-paperclip"></i> evidences</button>
         </td>

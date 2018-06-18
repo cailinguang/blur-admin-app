@@ -53,8 +53,7 @@
     <uib-tabset active="$tabSetStatus.activeTab">
         <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
             <div class="levelApprovled">
-                Level Approvled :
-                {{item.levelIsApproved | translate:'levelApproved'}}
+                <div class="label">Level Approvled : {{item.levelIsApproved | translate:'levelApproved'}}</div>
             </div>
             <div id="levelTable-{{item.id}}"></div>
         </uib-tab>
@@ -66,7 +65,7 @@
         <tr>
             <th>Control</th>
             <th style="width:200px;">Compliance Level</th>
-            <th>evidences</th>
+            <th>Evidences</th>
         </tr>
         </thead>
         <tbody></tbody>

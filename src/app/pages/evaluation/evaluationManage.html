@@ -69,14 +69,16 @@
     <tr tt-node is-branch="node.type == 'vda_chapter'">
         <td><span ng-bind="node.type=='vda_chapter' ? node.text : ''"></span></td>
         <td  ng-bind="node.type=='vda_question' ? node.text : ''"></td>
-        <td >
+        <td style="text-align:center;">
             <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability" ng-disabled="evaluation.id!=null">
                 <span></span>
             </label>
         </td>
         <td >
-            <button type="button" class="btn btn-primary" ng-show="node.type=='vda_question' && node.assign ==null" ng-disabled="node.applicability != true" ng-click="openAssignUser(node)">assign</button>
+            <button type="button" class="btn" ng-show="node.type=='vda_question' && node.assign ==null" ng-disabled="node.applicability != true" ng-click="openAssignUser(node)">
+                <i class="ion-link"></i>
+                assign</button>
             <div ng-show="node.assign != null" style="display: inline-block;white-space: nowrap;">
                 {{node.assign.nickName}} <a ng-click="node.assign=null;node.assignUser=null;" style="cursor:pointer;" ng-if="node.status=='0' || node.status==null"><i class="ion-close-round"></i></a>
             </div>
@@ -89,8 +91,8 @@
         <tr>
             <th>Chapter</th>
             <th>Question</th>
-            <th>applicability</th>
-            <th>assign department</th>
+            <th>Applicability</th>
+            <th>Assign User</th>
         </tr>
         <tr ng-hide="treeTableEnd==true">
             <td colspan="4">加载中...</td>

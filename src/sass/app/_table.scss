@@ -109,7 +109,12 @@ table.treetable tr.expanded.accept td span.indenter a {
     padding-left: 0px;
   }
   div.switcher[disabled]{
-    cursor: not-allowed;
-    
+    background-color: rgba(0, 0, 0, .075);
+    .handle{
+      cursor: not-allowed;
+    }
+    .handle.handle-on{
+      background-color: #ccc;
+    }
   }
 }
