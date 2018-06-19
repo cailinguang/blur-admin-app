@@ -1,7 +1,7 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.standard')
+    angular.module('BlurAdmin.pages.evaluation')
         .controller('EvaluationListCtrl', EvaluationListCtrl);
 
     /** @ngInject */
@@ -35,6 +35,10 @@
                     loadStandard();
                 }
             });
+        }
+
+        $scope.openChart = function(row){
+            $state.go("main.evaluationChart",{row:row});
         }
     }; 
     

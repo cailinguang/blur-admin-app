@@ -1,7 +1,7 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.standard')
+    angular.module('BlurAdmin.pages.evaluation')
         .controller('EvaluationManageCtrl', EvaluationManageCtrl);
 
     /** @ngInject */

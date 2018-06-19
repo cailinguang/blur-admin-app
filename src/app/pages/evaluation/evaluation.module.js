@@ -5,7 +5,7 @@
 (function () {
     'use strict';
   
-    angular.module('BlurAdmin.pages.evaluation',['ngTreetable']).config(routeConfig);
+    angular.module('BlurAdmin.pages.evaluation',['ngTreetable','BlurAdmin.pages.charts.chartJs']).config(routeConfig);
   
     /** @ngInject */
     function routeConfig($stateProvider) {
@@ -27,8 +27,16 @@
           params:{'row':null},
           controller: 'EvaluationManageCtrl',
           title:'项目评审管理'
+        })
+        .state('main.evaluationChart',{
+          url:'/evaluationChart',
+          templateUrl: 'app/pages/evaluation/evaluationChart.html',
+          params:{'row':null},
+          controller: 'EvaluationChartCtrl',
+          title:'项目评审管理'
         });
     }
+  
   
   })();
   
