@@ -106,7 +106,8 @@
         var cacheNode = {};
         //build level html
         function buildLevel(node){
-            $('#levelContent').empty().append('<p>Loading...</p>');
+            var height = $("#levelContent").height();
+            $('#levelContent').empty().append('<p style="height:'+height+'px">Loading...</p>');
             function loadNodes(nodes){
                 childrenScope.$destroy();
                 childrenScope = $scope.$new();

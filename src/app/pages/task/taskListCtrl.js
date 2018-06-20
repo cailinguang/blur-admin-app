@@ -29,5 +29,8 @@
             $state.go('main.taskView',{row:row});
         }
 
+        $scope.toLog = function(row){
+            $state.go("main.taskLog",{row:row});
+        }
     }; 
 })();

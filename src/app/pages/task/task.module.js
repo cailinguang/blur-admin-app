@@ -24,7 +24,7 @@
           })
           .state('main.taskDeal', {
             url: '/deal',
-            title: '任务处理',
+            title: '任务处理-处理',
             templateUrl: 'app/pages/task/taskDeal.html',
             controller: 'TaskDealCtrl',
             params:{'row':null},
@@ -32,11 +32,18 @@
           })
           .state('main.taskView', {
             url: '/view',
-            title: '任务查看',
+            title: '任务处理-查看任务',
             templateUrl: 'app/pages/task/taskView.html',
             controller: 'TaskViewCtrl',
             params:{'row':null},
             authenticate: true
+          })
+          .state('main.taskLog',{
+            url:'/log',
+            templateUrl: 'app/pages/task/taskLog.html',
+            params:{'row':null},
+            controller: 'TaskLogCtrl',
+            title:'任务处理-审计日志'
           });
     }
   

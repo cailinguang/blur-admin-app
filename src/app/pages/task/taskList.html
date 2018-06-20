@@ -14,7 +14,7 @@
                     <th st-ratio="20" st-sort="type">标准库类型</th>
                     <th st-ratio="20" st-sort="description">状态</th>
                     <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
-                    <th st-ratio="10">操作</th>
+                    <th st-ratio="10" style="min-width: 160px;">操作</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -33,6 +33,8 @@
                       <a href="javascript:void(0);" ng-click="toDeal(row)" style="font-size: 20px;"><i class="ion-android-create"></i></a>
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="viewTask(row)" style="font-size: 20px;"><i class="ion-eye"></i></a>
+                      &nbsp;&nbsp;
+                      <a href="javascript:void(0);" ng-click="toLog(row)" style="font-size: 20px;"><i class="ion-ios-list-outline"></i></a>
                   </td>
                 </tr>
                 
