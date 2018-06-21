@@ -1,184 +1,58 @@
+<style>
+    td.title{
+        text-align: right;
+        font-weight: bold;
+    }
+</style>
 <div class="row">
-    <div class="timeline timeline-line-dotted">
-        <span class="timeline-label">
-            <span class="label label-primary">17.03.2016</span>
+    <div class="timeline timeline-line-dotted" ng-init="times=[]">
+        
+        <span class="timeline-label" ng-repeat-start="log in logs" ng-if=":: log.showTime">
+            <span class="label label-primary">{{log.time.substring(0,11)}}</span>
         </span>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
+
+        <div class="timeline-item" ng-repeat-end>
+            <div class="timeline-point" ng-class="{'timeline-point-info':log.type=='save','timeline-point-warning':log.type=='submit','timeline-point-danger':log.type=='review'}">
+                <i class="fa" ng-class="{'fa-pencil':log.type=='save','fa-floppy-o':log.type=='submit','fa-check-square':log.type=='review'}"></i>
             </div>
-            <div class="timeline-event">
+            <div class="timeline-event " ng-class="{'timeline-event-info':log.type=='save','timeline-event-warning':log.type=='submit','timeline-event-danger':log.type=='review'}">
                 <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
+                    <h4>{{log.name}}</h4>
+                    <p>{{log.chapter}}</p>
                 </div>
                 <div class="timeline-body">
-                    <p>Money transfer. By Alex, Wallet ID: 1234567890, Amount: 10$</p>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="title">User:</td>
+                                <td>{{log.userName}}</td>
+                                <td class="title">Dept:</td>
+                                <td>{{log.deptName}}</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Question:</td>
+                                <td colspan="3">{{log.question}}</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Severity:</td>
+                                <td colspan="3">{{log.questionSeverity|translate:'severityLevel'}}</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Status:</td>
+                                <td colspan="3">{{log.questionStatus|translate:'evaluationQuestionNodeStatus'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="timeline-footer">
-                    <p class="text-right">17.03.2016 10:00</p>
+                    <p class="text-right">{{log.time}}</p>
                 </div>
             </div>
         </div>
-        <span class="timeline-label">
-            <span class="label label-primary">09.03.2016</span>
-        </span>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Alex, Wallet ID: 1234567890, Amount: 2220$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">09.03.2016 09:00</p>
-                </div>
-            </div>
-        </div>
-        <span class="timeline-label">
-            <span class="label label-primary">09.02.2016</span>
-        </span>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By John, Wallet ID: 1234567890, Amount: 261$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">09.02.2016 08:00</p>
-                </div>
-            </div>
-        </div>
-        <span class="timeline-label">
-            <span class="label label-primary">08.02.2016</span>
-        </span>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By John, Wallet ID: 1234567890, Amount: 100$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">08.02.2016 14:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Alex, Wallet ID: 1234567890, Amount: 250$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">08.02.2016 12:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-danger">
-                <i class="fa fa-times"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Tom, Wallet ID: 1234567890, Amount: 10$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">08.02.2016 11:30</p>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-danger">
-                <i class="fa fa-times"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Alex, Wallet ID: 1234567890, Amount: 3$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">08.02.2016 11:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-danger">
-                <i class="fa fa-times"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Alex, Wallet ID: 1234567890, Amount: 25$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">08.02.2016 10:00</p>
-                </div>
-            </div>
-        </div>
-        <span class="timeline-label">
-            <span class="label label-primary">13.01.2016</span>
-        </span>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By John, Wallet ID: 1234567890, Amount: 240$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">13.01.2016 15:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-point timeline-point-success">
-                <i class="fa fa-money"></i>
-            </div>
-            <div class="timeline-event">
-                <div class="timeline-heading">
-                    <h4>MoneyService Transfer</h4>
-                </div>
-                <div class="timeline-body">
-                    <p>Money transfer. By Steve, Wallet ID: 1234567890, Amount: 100'000'000$</p>
-                </div>
-                <div class="timeline-footer">
-                    <p class="text-right">13.01.2016 10:00</p>
-                </div>
-            </div>
-        </div>
-        <span class="timeline-label">
-            <a href="#" class="btn btn-default" title="More...">
-                <i class="fa fa-fw fa-history"></i>
-            </a>
+        
+
+        <span class="timeline-label" ng-show="logs.length==0">
+            <span class="label label-primary">Log not found</span>
         </span>
     </div>
 </div>
