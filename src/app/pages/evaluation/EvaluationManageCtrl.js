@@ -250,8 +250,8 @@
         };
         //加载树
         function loadDeptTree(){
-            $http.get('/api/dept').then(function(response){
-                var list = response.data.data.list;
+            $http.get('/api/dept/childrenDept').then(function(response){
+                var list = response.data.data;
                 angular.forEach(list,function(o){
                     o.text=o.name;
                     if(o.parent=='#'){

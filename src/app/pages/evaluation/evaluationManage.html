@@ -67,8 +67,8 @@
 
 <script type="text/ng-template" id="tree_node.html">
     <tr tt-node is-branch="node.type == 'vda_chapter'">
-        <td><span ng-bind="node.type=='vda_chapter' ? node.text : ''"></span></td>
-        <td  ng-bind="node.type=='vda_question' ? node.text : ''"></td>
+        <td title="{{node.description}}"><span ng-bind="node.type=='vda_chapter' ? node.text : ''"></span></td>
+        <td title="{{node.description}}" ng-bind="node.type=='vda_question' ? node.text : ''"></td>
         <td style="text-align:center;">
             <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" ng-click="applicabilityClick($event)" ng-model="node.applicability" ng-disabled="evaluation.id!=null">

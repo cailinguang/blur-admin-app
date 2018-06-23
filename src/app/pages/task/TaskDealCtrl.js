@@ -154,15 +154,16 @@
                 size:'lg',
                 controller:'UploadEvidencesCtrl',
                 resolve: {
-                    bizId: function(){return node.id}
+                    node: function(){return node}
                 }
             });
         }
        
+        var isCiso = $scope.roles.indexOf('ciso')>-1;
         //保存
         $scope.save = function(){
             operate('save',function(success){
-                if(success)$scope.lastNode.status='1';
+                if(success && !isCiso)$scope.lastNode.status='1';
             });
         }
 

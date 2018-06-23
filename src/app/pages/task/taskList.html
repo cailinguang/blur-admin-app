@@ -34,7 +34,7 @@
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="viewTask(row)" style="font-size: 20px;"><i class="ion-eye"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="toLog(row)" style="font-size: 20px;"><i class="ion-ios-list-outline"></i></a>
+                      <a  ng-if="roles.indexOf('ciso')>-1" href="javascript:void(0);" ng-click="toLog(row)" style="font-size: 20px;"><i class="ion-ios-list-outline"></i></a>
                   </td>
                 </tr>
                 

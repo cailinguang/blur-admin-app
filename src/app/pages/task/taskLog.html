@@ -6,32 +6,38 @@
 </style>
 <div class="row">
     <div class="timeline timeline-line-dotted" ng-init="times=[]">
-        
+        <span class="timeline-label">
+            <button class="btn btn-success" ng-click="refresh();"><i class="fa fa-refresh"></i></button>
+        </span>
+
         <span class="timeline-label" ng-repeat-start="log in logs" ng-if=":: log.showTime">
             <span class="label label-primary">{{log.time.substring(0,11)}}</span>
         </span>
 
         <div class="timeline-item" ng-repeat-end>
-            <div class="timeline-point" ng-class="{'timeline-point-info':log.type=='save','timeline-point-warning':log.type=='submit','timeline-point-danger':log.type=='review'}">
-                <i class="fa" ng-class="{'fa-pencil':log.type=='save','fa-floppy-o':log.type=='submit','fa-check-square':log.type=='review'}"></i>
+            <div class="timeline-point" title="{{log.type}}" ng-class="{'timeline-point-default':log.type=='save','timeline-point-primary':log.type=='commit','timeline-point-info':log.type=='review'}">
+                <i class="fa" ng-class="{'fa-floppy-o':log.type=='save','fa-hand-o-up':log.type=='commit','fa-check-square':log.type=='review'}"></i>
             </div>
-            <div class="timeline-event " ng-class="{'timeline-event-info':log.type=='save','timeline-event-warning':log.type=='submit','timeline-event-danger':log.type=='review'}">
+            <div class="timeline-event " ng-class="{'timeline-event-default':log.type=='save','timeline-event-primary':log.type=='commit','timeline-event-info':log.type=='review'}">
                 <div class="timeline-heading">
                     <h4>{{log.name}}</h4>
-                    <p>{{log.chapter}}</p>
                 </div>
                 <div class="timeline-body">
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td class="title">User:</td>
-                                <td>{{log.userName}}</td>
-                                <td class="title">Dept:</td>
-                                <td>{{log.deptName}}</td>
+                                <td class="title">Chapter:</td>
+                                <td colspan="3">{{log.chapter}}</td>
                             </tr>
                             <tr>
                                 <td class="title">Question:</td>
                                 <td colspan="3">{{log.question}}</td>
+                            </tr>
+                            <tr>
+                                <td class="title">User:</td>
+                                <td>{{log.userName}}</td>
+                                <td class="title">Dept:</td>
+                                <td>{{log.deptName}}</td>
                             </tr>
                             <tr>
                                 <td class="title">Severity:</td>
@@ -40,6 +46,10 @@
                             <tr>
                                 <td class="title">Status:</td>
                                 <td colspan="3">{{log.questionStatus|translate:'evaluationQuestionNodeStatus'}}</td>
+                            </tr>
+                            <tr>
+                                <td class="title">Control:</td>
+                                <td colspan="3"><a href="javascript:void(0);" ng-click="viewControl(log)">View</a></td>
                             </tr>
                         </tbody>
                     </table>

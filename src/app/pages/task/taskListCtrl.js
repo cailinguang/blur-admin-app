@@ -5,8 +5,10 @@
         .controller('TaskListCtrl', TaskListCtrl);
 
     /** @ngInject */
-    function TaskListCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state) {
+    function TaskListCtrl($scope,$http,$uibModal,$timeout,$log,Constants,$state,localStorage) {
         $scope.isLoading = true;
+        //role
+        $scope.roles = localStorage.getObject('dataRoles');
 
         var loadTask = function() {
             $http.get('/api/task').then(function(response) {

@@ -1,0 +1,46 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">View Control</h4>
+    </div>
+      <div class="modal-body">
+            <uib-tabset active="$tabSetStatus.activeTab">
+                <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
+                    <div class="levelApprovled">
+                        <div class="label">Level Approvled : {{item.levelIsApproved | translate:'levelApproved'}}</div>
+                    </div>
+                    <div id="levelTable-{{item.id}}"></div>
+                </uib-tab>
+            </uib-tabset>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="$dismiss()">Cancel</button>
+      </div>
+  </div>
+  
+<script type="text/ng-template" id="level_tree.html">
+    <table tt-table tt-params="level_table_params" id="levelTable{{item.id}}" style="margin-top:0px;">
+        <thead>
+        <tr>
+            <th>Control</th>
+            <th style="width:200px;">Compliance Level</th>
+            <th>Evidences</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</script>
+<script type="text/ng-template" id="level_tree_node.html">
+    <tr tt-node is-branch="node.children.length!=0">
+        <td><span ng-bind="node.name"></span></td>
+        <td >
+            <span ng-if="node.children.length==0">{{node.complianceLevel|translate:'complianceLevel'}}</span>
+        </td>
+        <td >
+            <div ng-if="node.children.length==0">
+                <p ng-repeat="item in node.attachments">
+                    <a ng-bind="item.name" route-href='/attachemnt/download/{{item.id}}'></a>
+                </p>
+            </div>
+        </td>
+    </tr>
+</script>

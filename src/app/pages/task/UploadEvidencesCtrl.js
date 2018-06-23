@@ -5,8 +5,8 @@
         .controller('UploadEvidencesCtrl', UploadEvidencesCtrl);
 
     /** @ngInject */
-    function UploadEvidencesCtrl($scope,$http,$uibModal,FileUploader,bizId,localStorage,FileItem,FileLikeObject,RouteServcie,toastr) {
-        
+    function UploadEvidencesCtrl($scope,$http,$uibModal,FileUploader,node,localStorage,FileItem,FileLikeObject,RouteServcie,toastr) {
+        var bizId = node.id;
         var uploader = $scope.uploader = new FileUploader({
             url: RouteServcie.getUrl('/api/attachment'),
             headers:{Authorization:localStorage.getObject('JWT')},
@@ -49,6 +49,7 @@
                 toastr.error('上传失败');
             }else{
                 fileItem.id=response.data;
+                node.attachments.push({});
                 toastr.success('上传成功');
             }
         };
@@ -60,6 +61,7 @@
         }
         uploader.onDeleteItem = function(item){
             if(item.id){
+                node.attachments.splice(0,1);
                 $http.delete('/api/attachment/'+item.id);
             }
         }

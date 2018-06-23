@@ -14,7 +14,7 @@
                                 <th>Chapter</th>
                                 <th>Question</th>
                                 <th style="min-width: 80px;">Status</th>
-                                <th style="width:150px;">Severity</th>
+                                <th style="width:150px;" ng-if="roles.indexOf('ciso')>-1">Severity</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
                                 <td colspan="4">加载中...</td>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="save()" ng-if="roles.indexOf('ciso')>-1 || roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">保存</button>
+                    <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0">保存</button>
                     <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">提交</button>
                     <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">复核</button>
                     <button type="button" class="btn btn-primary" ng-click="goBack()">返回</button>
@@ -43,14 +43,14 @@
 
 <script type="text/ng-template" id="tree_node.html">
     <tr tt-node is-branch="node.type == 'vda_chapter'" ng-click="questionClick($event,node)" vdaType="{{node.type}}">
-        <td><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
-        <td  ng-bind="node.type=='vda_question' ? node.name : ''"></td>
+        <td title="{{node.description}}"><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
+        <td title="{{node.description}}" ng-bind="node.type=='vda_question' ? node.name : ''"></td>
         <td >
             <span ng-if="node.type=='vda_question'" ng-bind="node.status | translate:'evaluationQuestionNodeStatus'"></span>
         </td>
-        <td >
+        <td ng-if="roles.indexOf('ciso')>-1">
             <ui-select ng-model="$parent.node.severityLevel" id="severityLevel" name="severityLevel" required ng-if="node.type=='vda_question'"
-                      ng-disabled="node.status!='0' && node.status!='1'"
+                      ng-disabled="node.status!='0' && node.status!='1' && roles.indexOf('ciso')<0"
                       class="btn-group bootstrap-select form-control"
                       search-enabled="false">
               <ui-select-match>
@@ -69,9 +69,9 @@
 
     <uib-tabset active="$tabSetStatus.activeTab">
         <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
-            <div class="levelApprovled">
+            <div class="levelApprovled" ng-if="roles.indexOf('ciso')>-1">
                 <div class="label">Level Approvled :</div>
-                <ba-switcher switcher-style="primary" switcher-value="item.levelIsApproved" switcher-label="Yes,No"  switcher-disabled="{{lastNode.status!='0' && lastNode.status!='1'}}"></ba-switcher>
+                <ba-switcher switcher-style="primary" switcher-value="item.levelIsApproved" switcher-label="Yes,No"  switcher-disabled="{{lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0}}"></ba-switcher>
             </div>
             <div id="levelTable-{{item.id}}"></div>
         </uib-tab>
@@ -94,7 +94,7 @@
         <td><span ng-bind="node.name"></span></td>
         <td >
             <ui-select ng-model="$parent.node.complianceLevel" ng-if="node.children.length==0"
-                        ng-disabled="lastNode.status!='0' && lastNode.status!='1'"
+                        ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0"
                         class="btn-group bootstrap-select form-control"
                         search-enabled="false">
                 <ui-select-match>
@@ -106,8 +106,8 @@
             </ui-select>
         </td>
         <td style="text-align:center;">
-            <button class="btn btn-with-icon" type="button" 
-                ng-disabled="lastNode.status!='0' && lastNode.status!='1'"
+            <button class="btn btn-with-icon" type="button" ng-class="{'btn-success':node.attachments.length>0}"
+                ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0"
                 ng-if="node.children.length==0" ng-click="openEvidences(node)"><i class="ion-paperclip"></i> evidences</button>
         </td>
     </tr>

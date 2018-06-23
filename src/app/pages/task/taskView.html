@@ -10,7 +10,7 @@
                                 <th>Chapter</th>
                                 <th>Question</th>
                                 <th  style="min-width: 80px;">Status</th>
-                                <th style="width:150px;">Severity</th>
+                                <th  ng-if="roles.indexOf('ciso')>-1" style="width:150px;">Severity</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
                                 <td colspan="4">加载中...</td>
@@ -37,12 +37,12 @@
 
 <script type="text/ng-template" id="tree_node.html">
     <tr tt-node is-branch="node.type == 'vda_chapter'" ng-click="questionClick($event,node)" vdaType="{{node.type}}">
-        <td><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
-        <td  ng-bind="node.type=='vda_question' ? node.name : ''"></td>
+        <td title="{{node.description}}"><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
+        <td title="{{node.description}}" ng-bind="node.type=='vda_question' ? node.name : ''"></td>
         <td >
             <span ng-if="node.type=='vda_question'" ng-bind="node.status | translate:'evaluationQuestionNodeStatus'"></span>
         </td>
-        <td >
+        <td  ng-if="roles.indexOf('ciso')>-1">
             {{node.severityLevel | translate:'severityLevel'}}
         </td>
     </tr>
@@ -52,7 +52,7 @@
 
     <uib-tabset active="$tabSetStatus.activeTab">
         <uib-tab heading="{{item.name}}" ng-repeat="item in levels" select="levelSelect(item)">
-            <div class="levelApprovled">
+            <div class="levelApprovled"  ng-if="roles.indexOf('ciso')>-1">
                 <div class="label">Level Approvled : {{item.levelIsApproved | translate:'levelApproved'}}</div>
             </div>
             <div id="levelTable-{{item.id}}"></div>
