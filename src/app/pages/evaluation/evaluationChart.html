@@ -16,12 +16,12 @@
             </thead>
             <tbody ng-repeat="item in nodes">
                 <tr>
-                    <td style="text-align: left;">{{item.name}}</td>
+                    <td title="{{item.description}}" style="text-align: left;">{{item.name}}</td>
                     <td>{{item.scope.toString().indexOf('.') >=0 ? item.scope.toFixed(2) : item.scope}}</td>
                     <td></td>
                 </tr>
                 <tr ng-repeat="i in item.children">
-                        <td style="text-align: left;padding-left: 40px;">{{i.name}}</td>
+                        <td title="{{i.description}}" style="text-align: left;padding-left: 40px;">{{i.name}}</td>
                         <td>{{i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope}}</td>
                         <td>{{i.severityLevel | translate:'severityLevel'}}</td>
                 </tr>
