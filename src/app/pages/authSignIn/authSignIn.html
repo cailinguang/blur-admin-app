@@ -1,12 +1,12 @@
 <div class="login" ng-controller="authSignInCtrl as signInVm">
   <main class="auth-main">
     <div class="auth-block">
-      <h1>Sign in to Blur Admin</h1>
-      <a ui-sref="authSignUp" class="auth-link">New to Blur Admin? Sign up!</a>
+      <h1>ISMS Platform</h1>
+      <!-- <a ui-sref="authSignUp" class="auth-link">New to Blur Admin? Sign up!</a> -->
 
       <form class="form-horizontal" ng-submit="signInVm.logar()">
         <div class="form-group">
-          <label for="inputUsername" class="col-sm-2 control-label">Email</label>
+          <label for="inputUsername" class="col-sm-2 control-label">Name</label>
 
           <div class="col-sm-10">
             <input type="text" ng-model="signInVm.user" class="form-control" id="inputUsername" placeholder="username">
@@ -28,7 +28,7 @@
         </div>
       </form>
 
-      <div class="auth-sep"><span><span>or Sign in with one click</span></span>
+      <!-- <div class="auth-sep"><span><span>or Sign in with one click</span></span>
       </div>
 
       <div class="al-share-auth">
@@ -37,7 +37,7 @@
           <li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>
           <li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </main>
 </div>
