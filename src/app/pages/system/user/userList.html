@@ -45,11 +45,11 @@
                    <td>{{row.registerDate}}</td>
                    <td>{{row.status|translate:'userStatus'}}</td>
                    <td>
-                      <a href="javascript:void(0);" ng-click="openUser(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="openUser(row)" style="font-size: 20px;" title="edit user"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="resetPass(row)" style="font-size: 20px;"><i class="ion-refresh"></i></a>
+                      <a href="javascript:void(0);" ng-click="resetPass(row)" style="font-size: 20px;" title="reset password"><i class="ion-refresh"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="deleteUser(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                      <a href="javascript:void(0);" ng-click="deleteUser(row)" style="font-size: 20px;" title="delete user"><i class="ion-trash-b"></i></a>
                   </td>
                 </tr>
                 <tr ng-if="displayedCollection.length==0">

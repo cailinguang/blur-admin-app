@@ -47,11 +47,11 @@
                    <td>{{row.createTime}}</td>
                   <td>
 
-                      <a href="javascript:void(0);" ng-click="openEvaluation(row)" style="font-size: 20px;"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="openEvaluation(row)" style="font-size: 20px;" title="edit"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="deleteEvaluation(row)" style="font-size: 20px;"><i class="ion-trash-b"></i></a>
+                      <a href="javascript:void(0);" ng-click="deleteEvaluation(row)" style="font-size: 20px;" title="delete"><i class="ion-trash-b"></i></a>
                       &nbsp;&nbsp;
-                      <a href="javascript:void(0);" ng-click="openChart(row)" style="font-size: 20px;"><i class="ion-stats-bars"></i></a>
+                      <a href="javascript:void(0);" ng-click="openChart(row)" style="font-size: 20px;" title="Project Statistics"><i class="ion-stats-bars"></i></a>
                   </td>
                 </tr>
                 <tr ng-if="displayedCollection.length==0">

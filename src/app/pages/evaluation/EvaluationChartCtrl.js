@@ -12,7 +12,7 @@
             $state.go('main.evaluation');
         }
 
-        $scope.options = { legend: { display: true } };
+        $scope.options = { legend: { display: true },scale:{display:true,ticks:{display:true}}};
         $scope.labels = [];
         $scope.datas = [];
         $scope.series = [$scope.evaluation.name];

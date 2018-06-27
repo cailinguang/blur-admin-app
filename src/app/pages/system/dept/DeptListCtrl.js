@@ -72,6 +72,7 @@
                 var list = response.data.data.list;
                 angular.forEach(list,function(o){
                     o.text=o.name;
+                    o.icon = 'fa fa-sitemap';
                     if(o.parent=='#'){
                         o.state = {opened:true};
                         //first select root
