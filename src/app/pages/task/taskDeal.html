@@ -91,7 +91,7 @@
 </script>
 <script type="text/ng-template" id="level_tree_node.html">
     <tr tt-node is-branch="node.children.length!=0">
-        <td><span ng-bind="node.name"></span></td>
+        <td title="{{node.description}}"><span ng-bind="node.name"></span></td>
         <td >
             <ui-select ng-model="$parent.node.complianceLevel" ng-if="node.children.length==0"
                         ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0"

@@ -23,7 +23,7 @@
                         <div class="col-sm-8">
                             <ui-select ng-model="$parent.evaluation.applicabilityId" id="applicabilityId" name="applicabilityId" required on-select="onTypeSelect($item,$model)"
                                         class="btn-group bootstrap-select form-control"
-                                        search-enabled="false">
+                                        search-enabled="true" ng-disabled="evaluation.id != null">
                                 <ui-select-match placeholder="适用性标准库">
                                     <span> {{$select.selected.name}}</span>
                                 </ui-select-match>
@@ -39,7 +39,7 @@
                         <div class="col-sm-8">
                             <ui-select ng-model="$parent.evaluation.evaluationType" id="evaluationType" name="evaluationType" required ng-disabled="dataRoles.indexOf('ciso')<0"
                                         class="btn-group bootstrap-select form-control"
-                                        search-enabled="false">
+                                        search-enabled="false" ng-disabled="evaluation.id != null">
                                 <ui-select-match placeholder="评审性质">
                                     <span> {{$select.selected.label}}</span>
                                 </ui-select-match>

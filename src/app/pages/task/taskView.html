@@ -73,7 +73,7 @@
 </script>
 <script type="text/ng-template" id="level_tree_node.html">
     <tr tt-node is-branch="node.children.length!=0">
-        <td><span ng-bind="node.name"></span></td>
+        <td title="{{node.description}}"><span ng-bind="node.name"></span></td>
         <td >
             <span ng-if="node.children.length==0">{{node.complianceLevel|translate:'complianceLevel'}}</span>
         </td>

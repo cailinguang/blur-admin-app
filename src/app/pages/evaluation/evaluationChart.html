@@ -1,3 +1,8 @@
+<style>
+    .failedTarget{
+        color:red;
+    }
+</style>
 <div class="row ">
     <div ba-panel ba-panel-title="Score Graph" ba-panel-class="col-eq-height">
         <div class="chartjs-canvas-holder-second-row">
@@ -11,18 +16,21 @@
         <table class="table table-hover table-bordered">
             <thead>
                 <th>Name</th>
+                <th>Target Value</th>
                 <th>Maturity Level</th>
                 <th>Severity Level</th>
             </thead>
             <tbody ng-repeat="item in nodes">
                 <tr>
                     <td title="{{item.description}}" style="text-align: left;">{{item.name}}</td>
+                    <td></td>
                     <td>{{item.scope.toString().indexOf('.') >=0 ? item.scope.toFixed(2) : item.scope}}</td>
                     <td></td>
                 </tr>
                 <tr ng-repeat="i in item.children">
                         <td title="{{i.description}}" style="text-align: left;padding-left: 40px;">{{i.name}}</td>
-                        <td>{{i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope}}</td>
+                        <td>{{i.targetValue}}</td>
+                        <td ng-class="{'failedTarget':(i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope) < i.targetValue}">{{i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope}}</td>
                         <td>{{i.severityLevel | translate:'severityLevel'}}</td>
                 </tr>
             </tbody>

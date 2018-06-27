@@ -9,6 +9,7 @@
         $scope.isLoading = true;
 
         $scope.evaluationType = Constants.evaluationType;
+        $scope.evaluationStatus = Constants.evaluationStatus;
 
         var loadStandard = function() {
             $http.get('/api/evaluation').then(function(response) {

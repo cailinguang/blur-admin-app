@@ -37,7 +37,9 @@
                       <a  ng-if="roles.indexOf('ciso')>-1" href="javascript:void(0);" ng-click="toLog(row)" style="font-size: 20px;"><i class="ion-ios-list-outline"></i></a>
                   </td>
                 </tr>
-                
+                <tr ng-if="displayedCollection.length==0">
+                    <td colspan="10">No data found</td>
+                </tr>
             </tbody>
           </table>
           <div st-items-by-page="10" st-pagination="" st-template="app/theme/components/page/pagination.custom.html"></div>
