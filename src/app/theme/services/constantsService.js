@@ -50,11 +50,9 @@
                     {label:'No',value:'0'}
                 ],
                 complianceLevel:[
-                    {label:'Compliant',value:'0'},
-                    {label:'Partial Compliant',value:'1'},
-                    {label:'Non Compliant',value:'2'},
-                    {label:'Inapplicable',value:'3'},
-                    {label:'Other',value:'4'}
+                    {label:'Yes',value:'0'},
+                    {label:'No',value:'1'},
+                    {label:'N/A',value:'2'}
                 ]
                 
             };
