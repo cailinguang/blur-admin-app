@@ -1,3 +1,9 @@
+<style>
+    a.disabledLink,a.disabledLink:hover{
+        color:#999;
+        cursor:not-allowed;
+    }
+</style>
 <div class="widgets">
      
   <div class="row">
@@ -47,7 +53,8 @@
                    <td>{{row.createTime}}</td>
                   <td>
 
-                      <a href="javascript:void(0);" ng-click="openEvaluation(row)" style="font-size: 20px;" title="edit"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="row.canEdit && openEvaluation(row)" style="font-size: 20px;" title="edit" ng-class="{'disabledLink':!row.canEdit}"><i class="ion-edit"></i></a>
+                      <!-- <span ng-if="!row.canEdit" style="margin-right: 21px;"></span> -->
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="deleteEvaluation(row)" style="font-size: 20px;" title="delete"><i class="ion-trash-b"></i></a>
                       &nbsp;&nbsp;
