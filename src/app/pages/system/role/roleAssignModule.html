@@ -5,16 +5,16 @@
 </style>
 <div class="modal-content">
   <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">分配菜单</h4>
+    <h4 class="modal-title" id="myModalLabel">Distribution Menu</h4>
   </div>
   <div class="modal-body">
-      <div ba-panel ba-panel-title="部门树" ba-panel-class="with-scroll light-text">
+      <div ba-panel ba-panel-title="Menu Tree" ba-panel-class="with-scroll light-text">
           <div js-tree="moduleTreeConfig" should-apply="true" ng-model="moduleData" tree="model.moduleTree"></div>
       </div>
     
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> 保存</button>
-      <button type="button" class="btn btn-primary" ng-click="$dismiss()">取消</button>
+      <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> Save</button>
+      <button type="button" class="btn btn-primary" ng-click="$dismiss()">Cancel</button>
   </div>
 </div>

@@ -12,26 +12,26 @@
 </style>
 <div class="modal-content">
   <div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">分配用户</h4>
+    <h4 class="modal-title" id="myModalLabel">Assign User</h4>
   </div>
   <div class="modal-body">
       <div class="row">
           <div class="col-lg-6 col-md-12">
-            <div ba-panel ba-panel-title="未分配用户<span>({{notAssignData.length}})</span>" ba-panel-class="with-scroll table-panel">
+            <div ba-panel ba-panel-title="Unassigned User<span>({{notAssignData.length}})</span>" ba-panel-class="with-scroll table-panel">
                 <div class="vertical-scroll" st-table="notAssignDataCollection" st-safe-src="notAssignData">
                     <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
 
                     <div class="btn-group" role="group" aria-label="Basic example" style="width: 100%;margin:10px 0;">
-                      <button type="button" class="btn btn-default" style="width: 50%;" title="全部分配" ng-click="notAssignDataAssignClick(true)"><i class="ion-arrow-right-a"></i> <i class="ion-arrow-right-a"></i></button>
-                      <button type="button" class="btn btn-default" style="width: 50%;" title="分配选中" ng-click="notAssignDataAssignClick(false)"><i class="ion-arrow-right-a"></i></button>
+                      <button type="button" class="btn btn-default" style="width: 50%;" title="Assign all" ng-click="notAssignDataAssignClick(true)"><i class="ion-arrow-right-a"></i> <i class="ion-arrow-right-a"></i></button>
+                      <button type="button" class="btn btn-default" style="width: 50%;" title="Assigned to selected" ng-click="notAssignDataAssignClick(false)"><i class="ion-arrow-right-a"></i></button>
                     </div>
 
                     <table class="table table-hover">
                       <thead>
                       <tr class="sortable">
                         <th class="table-id">#</th>
-                        <th st-sort="username">登录名</th>
-                        <th st-sort="nickName">用户名</th>
+                        <th st-sort="username">Login Name</th>
+                        <th st-sort="nickName">User Name</th>
                       </tr>
                       </thead>
                       <tbody ng-hide="notAssignLoding==false">
@@ -51,21 +51,21 @@
             </div>
           </div>
           <div class="col-lg-6 col-md-12">
-            <div ba-panel ba-panel-title="已分配用户<span>({{assignData.length}})</span>" ba-panel-class="with-scroll table-panel">
+            <div ba-panel ba-panel-title="Already Assigned User<span>({{assignData.length}})</span>" ba-panel-class="with-scroll table-panel">
                 <div class="vertical-scroll" st-table="assignDataCollection" st-safe-src="assignData">
                     <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
 
                     <div class="btn-group" role="group" aria-label="Basic example" style="width: 100%;margin:10px 0;">
-                      <button type="button" class="btn btn-default" style="width: 50%;" title="分配选中" ng-click="assignDataAssignClick(false)"><i class="ion-arrow-left-a"></i></button>
-                      <button type="button" class="btn btn-default" style="width: 50%;" title="全部分配" ng-click="assignDataAssignClick(true)"><i class="ion-arrow-left-a"></i> <i class="ion-arrow-left-a"></i></button>
+                      <button type="button" class="btn btn-default" style="width: 50%;" title="Unassign selected" ng-click="assignDataAssignClick(false)"><i class="ion-arrow-left-a"></i></button>
+                      <button type="button" class="btn btn-default" style="width: 50%;" title="Unassign all" ng-click="assignDataAssignClick(true)"><i class="ion-arrow-left-a"></i> <i class="ion-arrow-left-a"></i></button>
                     </div>
 
                     <table class="table table-hover">
                       <thead>
                       <tr class="sortable">
                         <th class="table-id">#</th>
-                        <th st-sort="username">登录名</th>
-                        <th st-sort="nickName">用户名</th>
+                        <th st-sort="username">Login Name</th>
+                        <th st-sort="nickName">User Name</th>
                       </tr>
                       </thead>
                       <tbody ng-hide="assignLoding==false">
@@ -88,7 +88,7 @@
     
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> 保存</button>
-      <button type="button" class="btn btn-primary" ng-click="$dismiss()">取消</button>
+      <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> Save</button>
+      <button type="button" class="btn btn-primary" ng-click="$dismiss()">Cancel</button>
   </div>
 </div>

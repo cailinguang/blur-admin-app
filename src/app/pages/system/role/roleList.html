@@ -1,9 +1,9 @@
 <div class="widgets">
      
   <div class="row">
-      <div ba-panel ba-panel-title="角色列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+      <div ba-panel ba-panel-title="Roe List" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
-            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openRole()"><i class="ion-plus"></i>新增</button></li>
+            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openRole()"><i class="ion-plus"></i>Add</button></li>
           </ul>
           
           <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
@@ -12,11 +12,11 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="20" st-sort="name">角色名称</th>
-                    <th st-ratio="20" st-sort="code">角色编码</th>
-                    <th st-ratio="30" st-sort="description">描述</th>
-                    <th st-ratio="10" st-sort="status">操作</th>
-                    <th st-ratio="20">权限分配</th>
+                    <th st-ratio="20" st-sort="name">Role Name</th>
+                    <th st-ratio="20" st-sort="code">Role Code</th>
+                    <th st-ratio="30" st-sort="description">Description</th>
+                    <th st-ratio="10" st-sort="status">Operation</th>
+                    <th st-ratio="20">Permission Assignment</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -30,14 +30,14 @@
                    <td>{{row.code}}</td>
                    <td>{{row.description}}</td>
                    <td>
-                      <a href="javascript:void(0);" ng-click="openRole(row)" style="font-size: 20px;" title="edit"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="openRole(row)" style="font-size: 20px;" title="update"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="deleteRole(row)" style="font-size: 20px;" title="delete"><i class="ion-trash-b"></i></a>
                   </td>
                   <td>
-                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignUser(row)"><i class="ion-person-stalker"></i>分配用户</button>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignUser(row)"><i class="ion-person-stalker"></i>Assign User</button>
                       &nbsp;&nbsp;
-                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignModule(row)"><i class="ion-navicon-round"></i>分配权限</button>
+                      <button type="button" class="btn btn-info  btn-with-icon btn-sm" ng-click="assignModule(row)"><i class="ion-navicon-round"></i>Assign Permission</button>
                   </td>
                 </tr>
                 <tr ng-if="displayedCollection.length==0">

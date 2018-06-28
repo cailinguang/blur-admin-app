@@ -15,7 +15,7 @@
         url: '/user',
         abstract: true,
         template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
-        title: '用户管理',
+        title: 'User Management',
         sidebarMeta: {
           order: 1,
         },
@@ -24,7 +24,7 @@
       .state('main.system.user.list', {
         url: '/list',
         templateUrl: 'app/pages/system/user/userList.html',
-        title:'用户管理',
+        title:'User Management',
         controller:'UserListCtrl',
         authenticate: true
       });

@@ -19,7 +19,7 @@
         url: '/dept',
         abstract: true,
         template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
-        title: '部门管理',
+        title: 'Dept. Management',
         sidebarMeta: {
           order: 0,
         },
@@ -28,7 +28,7 @@
       .state('main.system.dept.list', {
         url: '/list',
         templateUrl: 'app/pages/system/dept/deptList.html',
-        title:'部门管理',
+        title:'Dept. Management',
         authenticate: true
       });
     $urlRouterProvider.when('/main/system/dept', '/main/system/dept/list');

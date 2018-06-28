@@ -14,7 +14,7 @@
           url:'/evaluation',
           templateUrl: 'app/pages/evaluation/evaluationList.html',
           controller: 'EvaluationListCtrl',
-          title: '项目评审管理',
+          title: 'Project Review Management',
           sidebarMeta: {
             icon: 'ion-android-checkbox-outline',
             order: 22
@@ -26,14 +26,14 @@
           templateUrl: 'app/pages/evaluation/evaluationManage.html',
           params:{'row':null},
           controller: 'EvaluationManageCtrl',
-          title:'项目评审管理'
+          title:'Project Review Management'
         })
         .state('main.evaluationChart',{
           url:'/evaluationChart',
           templateUrl: 'app/pages/evaluation/evaluationChart.html',
           params:{'row':null},
           controller: 'EvaluationChartCtrl',
-          title:'项目评审管理'
+          title:'Project Review Management'
         });
     }
   

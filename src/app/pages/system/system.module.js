@@ -18,7 +18,7 @@
             url: '/system',
             template: '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
             abstract: true,
-            title: '系统管理',
+            title: 'System Management',
             sidebarMeta: {
               icon: 'ion-gear-a',
               order: 10,

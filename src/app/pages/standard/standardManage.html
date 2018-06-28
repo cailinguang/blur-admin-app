@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-6">
             <div ba-panel ba-panel-title="{{standard.name}}" ba-panel-class="light-text">
-                <div ng-show="loadingTree"><p>加载中 ...</p></div>
+                <div ng-show="loadingTree"><p>Loading ...</p></div>
                 <div ng-show="!loadingTree" js-tree="standardTreeConfig" ng-model="standardData" tree="model.standardTree" tree-events-obj="standardTreeEvents"></div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                         <textarea class="form-control" ng-model="selectNode.description"></textarea>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-success" ng-click="updateProperty()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> 更新</button>
+                        <button type="button" class="btn btn-success" ng-click="updateProperty()" ng-disabled="isSubmit==true"><i class="fa fa-refresh fa-spin" ng-show="isSubmit==true"></i> Update</button>
                     </div>
                 </form>
             </div>

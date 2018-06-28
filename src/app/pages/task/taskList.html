@@ -1,7 +1,7 @@
 <div class="widgets">
      
   <div class="row">
-      <div ba-panel ba-panel-title="任务列表" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+      <div ba-panel ba-panel-title="Task List" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
          
           <input st-search=""  type="text" class="form-control" placeholder="Search ..."/>
           
@@ -9,12 +9,12 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="10">序号</th>
-                    <th st-ratio="30" st-sort="name">项目评审名称</th>
-                    <th st-ratio="20" st-sort="type">标准库类型</th>
-                    <th st-ratio="20" st-sort="description">状态</th>
-                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
-                    <th st-ratio="10" style="min-width: 160px;">操作</th>
+                    <th st-ratio="10">No.</th>
+                    <th st-ratio="30" st-sort="name">Project Review Name</th>
+                    <th st-ratio="20" st-sort="type">Standard Library Type</th>
+                    <th st-ratio="20" st-sort="description">Status</th>
+                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">Creation Time</th>
+                    <th st-ratio="10" style="min-width: 160px;">Operation</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">

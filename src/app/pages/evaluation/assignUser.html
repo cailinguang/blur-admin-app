@@ -1,12 +1,12 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">{{user.id?'更新用户':'新增用户'}}</h4>
+        <h4 class="modal-title" id="myModalLabel">{{user.id?'Update User':'Add User'}}</h4>
     </div>
     <div class="modal-body">
         <div class="widgets">
             <div class="row">
                 <div class="col-md-5">
-                    <div ba-panel ba-panel-title="部门树" ba-panel-class="light-text">
+                    <div ba-panel ba-panel-title="Dept. Tree" ba-panel-class="light-text">
                         <div js-tree="deptTreeConfig" ng-model="deptData" tree-events-obj="deptTreeEvents" tree="model.deptTree"></div>
                     </div>
                 </div>

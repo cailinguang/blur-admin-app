@@ -14,7 +14,7 @@
           url:'/applicability',
           templateUrl: 'app/pages/applicability/applicabilityList.html',
           controller: 'ApplicabilityListCtrl',
-          title: '适用性VDA管理库',
+          title: 'Applicability Library Management',
           sidebarMeta: {
             icon: 'ion-arrow-expand',
             order: 21
@@ -26,7 +26,7 @@
           templateUrl: 'app/pages/applicability/applicabilityManage.html',
           params:{'row':null},
           controller: 'ApplicabilityManageCtrl',
-          title:'适用性VDA管理库'
+          title:'Applicability Library Management'
         });
 
         

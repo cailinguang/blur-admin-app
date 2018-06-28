@@ -13,7 +13,7 @@
       $stateProvider
         .state('main.task', {
             url: '/task',
-            title: '任务处理',
+            title: 'Task Processing',
             templateUrl: 'app/pages/task/taskList.html',
             controller: 'TaskListCtrl',
             sidebarMeta: {
@@ -24,7 +24,7 @@
           })
           .state('main.taskDeal', {
             url: '/deal',
-            title: '任务处理-处理',
+            title: 'Task Processing-Processing',
             templateUrl: 'app/pages/task/taskDeal.html',
             controller: 'TaskDealCtrl',
             params:{'row':null},
@@ -32,7 +32,7 @@
           })
           .state('main.taskView', {
             url: '/view',
-            title: '任务处理-查看任务',
+            title: 'Task Processing - Viewing Task',
             templateUrl: 'app/pages/task/taskView.html',
             controller: 'TaskViewCtrl',
             params:{'row':null},
@@ -43,7 +43,7 @@
             templateUrl: 'app/pages/task/taskLog.html',
             params:{'row':null},
             controller: 'TaskLogCtrl',
-            title:'任务处理-审计日志'
+            title:'Task Processing - Audit Log'
           });
     }
   

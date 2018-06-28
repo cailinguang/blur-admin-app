@@ -15,7 +15,7 @@
         url: '/role',
         abstract: true,
         template : '<ui-view  autoscroll="true" autoscroll-body-top></ui-view>',
-        title: '角色管理',
+        title: 'Role Management',
         sidebarMeta: {
           order: 1,
         },
@@ -24,7 +24,7 @@
       .state('main.system.role.list', {
         url: '/list',
         templateUrl: 'app/pages/system/role/roleList.html',
-        title:'角色管理',
+        title:'Role Management',
         controller:'RoleListCtrl',
         authenticate: true
       });

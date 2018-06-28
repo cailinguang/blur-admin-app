@@ -1,21 +1,21 @@
 <div class="widgets">
      
   <div class="row">
-      <div ba-panel ba-panel-title="适用性库管理" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+      <div ba-panel ba-panel-title="Applicability Library" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
-            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openApplicability()"><i class="ion-plus"></i>新增</button></li>
+            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openApplicability()"><i class="ion-plus"></i>Add</button></li>
           </ul>
           <input st-search="name"  type="text" class="form-control" placeholder="Search for name ..."/>
           <br/>
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="10" >序号</th>
-                    <th st-ratio="30" st-sort="name">适用性库名称</th>
-                    <th st-ratio="20" st-sort="type">标准库类型</th>
-                    <th st-ratio="20" st-sort="description">描述</th>
-                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
-                    <th st-ratio="10" >操作</th>
+                    <th st-ratio="10" >No.</th>
+                    <th st-ratio="30" st-sort="name">Applicability Library Name</th>
+                    <th st-ratio="20" st-sort="type">Standard Library Type</th>
+                    <th st-ratio="20" st-sort="description">Review Library Decription</th>
+                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">Creation Time</th>
+                    <th st-ratio="10" >Operation</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -32,7 +32,7 @@
                    <td>{{row.createTime}}</td>
                   <td>
 
-                      <a href="javascript:void(0);" ng-click="openApplicability(row)" style="font-size: 20px;" title="edit"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="openApplicability(row)" style="font-size: 20px;" title="update"><i class="ion-edit"></i></a>
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="deleteApplicability(row)" style="font-size: 20px;" title="delete"><i class="ion-trash-b"></i></a>
                   </td>

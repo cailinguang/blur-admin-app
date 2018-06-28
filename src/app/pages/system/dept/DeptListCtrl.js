@@ -30,16 +30,16 @@
         //tree contextMenu
         function createContextMenu(node){
             var temp = {
-                "create":{"separator_before":false,"separator_after":true,"_disabled":false,"label":"新增","action": function (data) {
+                "create":{"separator_before":false,"separator_after":true,"_disabled":false,"label":"Add","action": function (data) {
                     var inst = $.jstree.reference(data.reference);
                     $scope.openDept();
                 }},
-                "rename":{"separator_before":false,"separator_after":false,"_disabled":false,"label":"修改","action": function (data) {
+                "rename":{"separator_before":false,"separator_after":false,"_disabled":false,"label":"Update","action": function (data) {
                     var inst = $.jstree.reference(data.reference),
                         obj = inst.get_node(data.reference);
                     $scope.openDept(obj.original);
                 }},
-                "remove":{"separator_before":false,"icon":false,"separator_after":false,"_disabled":false,"label":"删除","action": function (data) {
+                "remove":{"separator_before":false,"icon":false,"separator_after":false,"_disabled":false,"label":"Delete","action": function (data) {
                     var inst = $.jstree.reference(data.reference),
                         obj = inst.get_node(data.reference);
                     

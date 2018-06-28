@@ -16,27 +16,27 @@
                     return null;
                 },
                 userStatus:[
-                    {label: '未锁定', value: '1'},
-                    {label: '锁定', value: '2'}
+                    {label: 'Unlock', value: '1'},
+                    {label: 'Lock', value: '2'}
                 ],
                 evaluationType:[
-                    {label:'自评性质',value:'1'},
-                    {label:'内审性质',value:'2'}
+                    {label:'Self Assessment',value:'1'},
+                    {label:'Internal Audit',value:'2'}
                 ],
                 evaluationStatus:[
-                    {label:'新任务',value:'0'},
-                    {label:'评审中',value:'1'},
-                    {label:'已完成',value:'2'}
+                    {label:'New',value:'0'},
+                    {label:'In review',value:'1'},
+                    {label:'Completed',value:'2'}
                 ],
                 standardType:[
                     {label:'VDA',value:'vda'}
                 ],
 
                 evaluationQuestionNodeStatus:[
-                    {label:'待处理',value:'0'},
-                    {label:'处理中',value:'1'},
-                    {label:'已提交',value:'2'},
-                    {label:'复核完成',value:'3'}
+                    {label:'Pending',value:'0'},
+                    {label:'Processing',value:'1'},
+                    {label:'Submitted',value:'2'},
+                    {label:'Review completed',value:'3'}
                 ],
                 severityLevel:[
                     {label:'High',value:'0'},

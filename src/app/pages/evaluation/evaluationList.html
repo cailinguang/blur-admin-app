@@ -7,9 +7,9 @@
 <div class="widgets">
      
   <div class="row">
-      <div ba-panel ba-panel-title="项目评审管理" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
+      <div ba-panel ba-panel-title="Project Review Management" ba-panel-class="light-text" st-table="displayedCollection" st-safe-src="rowCollection">
           <ul class="btn-list clearfix">
-            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openEvaluation()"><i class="ion-plus"></i>新增</button></li>
+            <li><button type="button" class="btn btn-default btn-with-icon" ng-click="openEvaluation()"><i class="ion-plus"></i>Add</button></li>
           </ul>
           <div class="row">
               <div class="col-md-9">
@@ -27,14 +27,14 @@
           <table  class="table table-hover table-bordered">
               <thead>
                 <tr class="sortable black-muted-bg">
-                    <th st-ratio="5">序号</th>
-                    <th st-ratio="20" st-sort="name">项目评审名称</th>
-                    <th st-ratio="20" st-sort="type">标准库类型</th>
-                    <th st-ratio="10" st-sort="evaluationType">评审性质</th>
-                    <th st-ratio="10" st-sort="status">状态</th>
-                    <th st-ratio="15" st-sort="description">描述</th>
-                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">创建时间</th>
-                    <th st-ratio="10">操作</th>
+                    <th st-ratio="5">No.</th>
+                    <th st-ratio="20" st-sort="name">Project Review Name</th>
+                    <th st-ratio="20" st-sort="type">Standard Library Type</th>
+                    <th st-ratio="10" st-sort="evaluationType">Review Property</th>
+                    <th st-ratio="10" st-sort="status">Status</th>
+                    <th st-ratio="15" st-sort="description">Description</th>
+                    <th st-ratio="10" st-sort="createTime" style="min-width: 160px;">Creation Time</th>
+                    <th st-ratio="10">Operation</th>
                 </tr>
             </thead>
             <tbody ng-show="isLoading">
@@ -53,7 +53,7 @@
                    <td>{{row.createTime}}</td>
                   <td>
 
-                      <a href="javascript:void(0);" ng-click="row.canEdit && openEvaluation(row)" style="font-size: 20px;" title="edit" ng-class="{'disabledLink':!row.canEdit}"><i class="ion-edit"></i></a>
+                      <a href="javascript:void(0);" ng-click="row.canEdit && openEvaluation(row)" style="font-size: 20px;" title="update" ng-class="{'disabledLink':!row.canEdit}"><i class="ion-edit"></i></a>
                       <!-- <span ng-if="!row.canEdit" style="margin-right: 21px;"></span> -->
                       &nbsp;&nbsp;
                       <a href="javascript:void(0);" ng-click="deleteEvaluation(row)" style="font-size: 20px;" title="delete"><i class="ion-trash-b"></i></a>

@@ -4,7 +4,7 @@
 
 <div class="widgets">
     <div class="row">
-        <div ba-panel ba-panel-title="任务处理" ba-panel-class="light-text">
+        <div ba-panel ba-panel-title="Task Processing" ba-panel-class="light-text">
             <form class="form-horizontal" name="form" novalidate>
                 <div class="modal-body">
                     <div class="row">
@@ -17,7 +17,7 @@
                                 <th style="width:150px;" ng-if="roles.indexOf('ciso')>-1">Severity</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
-                                <td colspan="4">加载中...</td>
+                                <td colspan="4">Loading...</td>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -31,10 +31,10 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0">保存</button>
-                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">提交</button>
-                    <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">复核</button>
-                    <button type="button" class="btn btn-primary" ng-click="goBack()">返回</button>
+                    <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0">Save</button>
+                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">Commit</button>
+                    <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">Review</button>
+                    <button type="button" class="btn btn-primary" ng-click="goBack()">Return</button>
                 </div>
             </form>
         </div>   

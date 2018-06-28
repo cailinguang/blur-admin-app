@@ -1,30 +1,30 @@
 <div class="widgets">
     <div class="row">
-        <div ba-panel ba-panel-title="适用性库管理" ba-panel-class="light-text">
+        <div ba-panel ba-panel-title="Applicability Library" ba-panel-class="light-text">
             <form class="form-horizontal" name="form" ng-submit="formSubmit()" novalidate>
                 <div class="modal-body">
                     <div class="form-group" ng-class="{'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
-                        <label for="name" class="col-sm-2 control-label">适用性库名称</label>
+                        <label for="name" class="col-sm-3 control-label">Applicability Library Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" ng-model="applicability.name" name="name" id="name" placeholder="适用性库名称" required ng-maxlength="64">
-                            <span ng-show="form.name.$error.required" class="help-block error-block basic-block">适用性库名称不能为空</span>
-                            <span ng-show="form.name.$error.maxlength" class="help-block error-block basic-block">登录名不能大于64位</span>
+                            <input type="text" class="form-control" ng-model="applicability.name" name="name" id="name" placeholder="Applicability Library Name" required ng-maxlength="64">
+                            <span ng-show="form.name.$error.required" class="help-block error-block basic-block">Applicability library name cannot be empty</span>
+                            <span ng-show="form.name.$error.maxlength" class="help-block error-block basic-block">Applicability library name cannot be greater than 64</span>
                         </div>
                     </div>
                     <div class="form-group" ng-class="{'has-error': form.description.$invalid && (form.description.$dirty || form.$submitted)}">
-                        <label for="description" class="col-sm-2 control-label">评审库描述</label>
+                        <label for="description" class="col-sm-3 control-label">Review Library Decription</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" ng-model="applicability.description" name="description"  id="description" placeholder="评审库描述" required ng-maxlength="2000"></textarea>
-                            <span ng-show="form.description.$error.maxlength" class="help-block error-block basic-block">评审库描述不能大于2000位</span>
+                            <textarea class="form-control" ng-model="applicability.description" name="description"  id="description" placeholder="Review Library Decription" required ng-maxlength="2000"></textarea>
+                            <span ng-show="form.description.$error.maxlength" class="help-block error-block basic-block">Review library description cannot be greater than 2000</span>
                         </div>
                     </div>
                     <div class="form-group" ng-class="{'has-error': form.type.$invalid && (form.type.$dirty || form.$submitted)}">
-                        <label for="type" class="col-sm-2 control-label">标准库类型</label>
+                        <label for="type" class="col-sm-3 control-label">Standard Library Type</label>
                         <div class="col-sm-8">
                             <ui-select ng-model="$parent.applicability.type" id="type" name="type" required ng-disabled="true"
                                         class="btn-group bootstrap-select form-control"
                                         search-enabled="false">
-                                <ui-select-match placeholder="标准库类型">
+                                <ui-select-match placeholder="Standard Library Type">
                                     <span> {{$select.selected.label}}</span>
                                 </ui-select-match>
                                 <ui-select-choices repeat="item.value as item in typeSelect | filter: $select.search">
@@ -45,7 +45,7 @@
                                 <th>Target Value</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
-                                <th colspan="4">加载中...</th>
+                                <th colspan="4">Loading...</th>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -54,8 +54,8 @@
                     
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">发布</button>
-                    <button type="button" class="btn btn-primary" ng-click="goBack()">取消</button>
+                    <button type="submit" class="btn btn-success">Publish</button>
+                    <button type="button" class="btn btn-primary" ng-click="goBack()">Cancel</button>
                 </div>
             </form>
         </div>   
