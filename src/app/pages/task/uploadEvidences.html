@@ -22,15 +22,15 @@
 <div class="modal-content">
     <div class="modal-body">
             <div>
-                <p>文件数: {{ uploader.queue.length }}</p>
+                <p>Number of files: {{ uploader.queue.length }}</p>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th width="50%">名称</th>
-                            <th>大小</th>
-                            <th>状态</th>
-                            <th>操作</th>
+                            <th width="50%">Name</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                            <th>Operation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,7 @@
                                     <span class="glyphicon glyphicon-upload"></span> 上传
                                 </button> -->
                                 <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                    <span class="glyphicon glyphicon-trash"></span> 删除
+                                    <span class="glyphicon glyphicon-trash"></span> Delete
                                 </button>
                             </td>
                         </tr>
@@ -63,10 +63,10 @@
                 <div>
                     
                     <span class="btn btn-primary btn-file btn-s">
-                        <span class="glyphicon glyphicon-plus-sign"></span> 选择文件 <input type="file" nv-file-select uploader="uploader" multiple>
+                        <span class="glyphicon glyphicon-plus-sign"></span> Select File <input type="file" nv-file-select uploader="uploader" multiple>
                     </span>
                     <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                        <span class="glyphicon glyphicon-trash"></span> 删除所有
+                        <span class="glyphicon glyphicon-trash"></span> Delete All
                     </button>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="$dismiss()">返回</button>
+        <button type="button" class="btn btn-primary" ng-click="$dismiss()">Back</button>
     </div> 
 </div>
   
