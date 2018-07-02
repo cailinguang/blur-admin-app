@@ -14,7 +14,7 @@
           url: '/standard',
           templateUrl: 'app/pages/standard/standardList.html',
           controller: 'StandardListCtrl',
-          title: 'Management Standard Library',
+          title: 'Standard Library Management',
           sidebarMeta: {
             icon: 'ion-briefcase',
             order: 20
@@ -26,7 +26,7 @@
           templateUrl: 'app/pages/standard/standardManage.html',
           params:{'row':null},
           controller: 'StandardManageCtrl',
-          title:'Management Standard Library'
+          title:'Standard Library Management'
         });
     }
   

@@ -61,8 +61,11 @@
         </div>
         
 
-        <span class="timeline-label" ng-show="logs.length==0">
+        <span class="timeline-label" ng-show="logs.length==0 && queryLog==false">
             <span class="label label-primary">Log not found</span>
+        </span>
+        <span class="timeline-label" ng-show="queryLog==true">
+            <span class="label label-primary"><i class="fa fa-spinner fa-spin"></i> Searching. Please wait </span>
         </span>
     </div>
 </div>

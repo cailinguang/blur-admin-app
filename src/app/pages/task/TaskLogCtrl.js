@@ -15,8 +15,11 @@
 
         $scope.logs = [];
         
+
+        $scope.queryLog = true;
         $scope.refresh = function(){
             $scope.logs = [];
+            $scope.queryLog = true;
             $http.get('/api/task/logs',{params:{evaluationId:$scope.evaluation.id}}).then(function(response){
                 if(response.data.code==200){
                     //show time
@@ -36,6 +39,9 @@
                     }
                     $scope.logs = logs;
                 }
+                $scope.queryLog = false;
+            },function(){
+                $scope.queryLog = false;
             });
         }
 
