@@ -41,15 +41,19 @@
 
         $http.put('/api/user/updatePassword',{id:$scope.user.id,oldPassword:$scope.user.oldPassword,password:$scope.user.password}).then(function(response){
           if(response.data.code==200){
-            toastr.success('密码修改成功!');
+            toastr.success('password has been updated!');
           }
         })
       }
 
       if($scope.forms.form.$valid){
         $http.put('/api/user/'+$scope.user.id,{nickName:$scope.user.nickName,phone:$scope.user.phone,email:$scope.user.email}).then(function(response){
-          localStorage.setObject('nickName',$scope.user.nickName);
-          $scope.$parent.$parent.nickName=$scope.user.nickName;
+          if(response.data.code==200){
+            toastr.success('User information was successfully modified!');
+            localStorage.setObject('nickName',$scope.user.nickName);
+            $scope.$parent.$parent.nickName=$scope.user.nickName;
+          }
+          
         });
       }
 

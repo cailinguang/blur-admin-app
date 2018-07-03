@@ -9,11 +9,12 @@
                             <tr>
                                 <th>Chapter</th>
                                 <th>Question</th>
+                                <th style="min-width:110px;">Target Value</th>
                                 <th  style="min-width: 80px;">Status</th>
                                 <th  ng-if="roles.indexOf('ciso')>-1" style="width:150px;">Severity</th>
                             </tr>
                             <tr ng-hide="treeTableEnd==true">
-                                <td colspan="4">加载中...</td>
+                                <td colspan="5">Loading...</td>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -39,6 +40,9 @@
     <tr tt-node is-branch="node.type == 'vda_chapter'" ng-click="questionClick($event,node)" vdaType="{{node.type}}">
         <td title="{{node.description}}"><span ng-bind="node.type=='vda_chapter' ? node.name : ''"></span></td>
         <td title="{{node.description}}" ng-bind="node.type=='vda_question' ? node.name : ''"></td>
+        <td>
+            <span ng-if="node.type=='vda_question'">{{node.targetValue}}</span>
+        </td>
         <td >
             <span ng-if="node.type=='vda_question'" ng-bind="node.status | translate:'evaluationQuestionNodeStatus'"></span>
         </td>

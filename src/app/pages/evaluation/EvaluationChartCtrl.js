@@ -26,13 +26,13 @@
                 response.data.data.forEach(function(e){
                     labels.push(e.name);
                     data.push(e.scope.toFixed(2));
-                    allScope = allScope+e.scope/2;
+                    allScope = allScope+e.scope;
                 });
                 $scope.labels = labels;
                 $scope.datas.push(data);
 
                 $scope.nodes = response.data.data;
-                $scope.allScope = allScope;
+                $scope.allScope = allScope/response.data.data.length;
             }
         });
     };
