@@ -83,6 +83,10 @@
             }else{
                 return [];
             }
+
+            if(node.children.length>0){
+                delete temp.remove;
+            }
             return temp;
         }
         
@@ -91,14 +95,61 @@
             //'create_node': ,
             'select_node': onSelectstandard,   // on node selected callback
 
-            'delete_node':function(event,node,parent){
-                console.info('delete',node);
+            'delete_node':function(event,params){
+                var node = params.node;
+                var parent = params.instance.get_node(params.parent);
+                $http.delete('/api/standard/libary/node/'+node.original.id).then(function(response){
+                    if(response.data.code==200){
+                    }else{
+                      params.instance.create_node(parent,node.original);
+                    }
+                  });
             },
-            'create_node':function(event,node,parent,position){
-                console.info('create',node);
+            'create_node':function(event,params){
+                var node = params.node;
+                var parent = params.instance.get_node(params.parent);
+
+                var saveNode = {};
+                saveNode.nodePosition = params.position;
+                saveNode.parentId = parent.original.id;
+                saveNode.standardId = parent.original.standardId;
+
+                if(parent.original.type=='vda_chapter'){
+                    saveNode.type='vda_question';
+                    node.text = 'New Question';
+                }
+                else if(parent.original.type=='vda_question'){
+                    saveNode.type='vda_level';
+                    node.text = 'New Level';
+                }
+                else if(parent.original.type=='vda_level'){
+                    saveNode.type='vda_control';
+                    node.text = 'New Control';
+                }
+                else if(parent.original.type=='vda_control'){
+                    saveNode.type='vda_control';
+                    node.text = 'New Control';
+                }
+                saveNode.name = node.text;
+                $http.post('/api/standard/libary/node',saveNode).then(function(response){
+                  if(response.data.code==200){
+                    node.original = response.data.data;
+                  }else{
+                    params.instance.delete_node(node);
+                  }
+                });
             },
-            'rename_node':function(event,node,text,old){
-                console.info('rename',node);
+            'rename_node':function(event,params){
+                var node = params.node;
+                var parent = params.instance.get_node(params.parent);
+
+                $http.put('/api/standard/libary/node',{id:node.original.id,description:node.original.description,name:params.text}).then(function(response){
+                    if(response.data.code==200){
+                        node.original.name=params.text;
+                    }else{
+                        node.text=params.old;
+                    }
+                });
             }
         };
 
@@ -114,6 +165,7 @@
             if(list&&list.length>0)
             angular.forEach(list,function(o){
                 o.text=o.name;
+                o.position=o.nodePosition;
                 setText(o.children);
             })
         }
@@ -128,9 +180,9 @@
         //更新属性
         $scope.updateProperty = function(){
             $scope.isSubmit = true;
-            $http.put('/api/standard/libary/node',{id:$scope.selectNode.id,description:$scope.selectNode.description}).then(function(response){
+            $http.put('/api/standard/libary/node',{id:$scope.selectNode.id,description:$scope.selectNode.description,name:$scope.selectNode.name}).then(function(response){
                 if(response.data.code==200){
-                    toastr.success('更新成功');
+                    toastr.success('Update Success');
                 }
                 $scope.isSubmit = false;
             },function(response){
