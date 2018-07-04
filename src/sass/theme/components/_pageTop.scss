@@ -1,5 +1,7 @@
 .page-top {
-  background-color: $sidebar;
+  //background-color: $sidebar;
+  background:$sidebar url(../assets/img/dazhongbiansu.png) no-repeat 250px;
+  background-size: 371px 40px ;
   position: fixed;
   z-index: 904;
   box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.5);

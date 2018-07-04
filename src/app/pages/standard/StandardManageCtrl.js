@@ -25,12 +25,81 @@
                 check_callback : true,
                 worker : true
             },
+            "plugins" : [ "contextmenu"],
+            "contextmenu": {
+                "items": function (node) {
+                    return createContextMenu(node);
+                }
+            },
             version:0
         };
+
+        //tree contextMenu
+        function createContextMenu(node){
+            var temp = {
+                "create":{"separator_before":false,"separator_after":true,"_disabled":false,"label":"Add","action": function (data) {
+                    var inst = $.jstree.reference(data.reference),
+                    obj = inst.get_node(data.reference);
+                    inst.create_node(obj, {}, "last", function (new_node) {
+                        try {
+                            inst.edit(new_node);
+                        } catch (ex) {
+                            setTimeout(function () { inst.edit(new_node); },0);
+                        }
+                    });
+                }},
+                "rename":{"separator_before":false,"separator_after":false,"_disabled":false,"label":"Update","action": function (data) {
+                    var inst = $.jstree.reference(data.reference),
+                        obj = inst.get_node(data.reference);
+                    inst.edit(obj);
+                }},
+                "remove":{"separator_before":false,"icon":false,"separator_after":false,"_disabled":false,"label":"Delete","action": function (data) {
+                    var inst = $.jstree.reference(data.reference),
+                        obj = inst.get_node(data.reference);
+                    
+                    var inst = $.jstree.reference(data.reference),
+                        obj = inst.get_node(data.reference);
+                    if(inst.is_selected(obj)) {
+                        inst.delete_node(inst.get_selected());
+                    }
+                    else {
+                        inst.delete_node(obj);
+                    }
+                    
+                }}
+            };
+
+            if(node.original.type=='vda_chapter'){
+                temp.create.label='Add Question';
+            }
+            else if(node.original.type=='vda_question'){
+                temp.create.label='Add Level';
+            }
+            else if(node.original.type=='vda_level'){
+                temp.create.label='Add Control';
+            }
+            else if(node.original.type=='vda_control'){
+                temp.create.label='Add Control';
+            }else{
+                return [];
+            }
+            return temp;
+        }
+        
         //tree event
         $scope.standardTreeEvents = {
             //'create_node': ,
-            'select_node': onSelectstandard   // on node selected callback
+            'select_node': onSelectstandard,   // on node selected callback
+
+            'delete_node':function(event,node,parent){
+                console.info('delete',node);
+            },
+            'create_node':function(event,node,parent,position){
+                console.info('create',node);
+            },
+            'rename_node':function(event,node,text,old){
+                console.info('rename',node);
+            }
         };
 
         //选择树节点

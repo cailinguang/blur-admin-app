@@ -20,14 +20,14 @@
                 <th>Maturity Level</th>
                 <th>Severity Level</th>
             </thead>
-            <tbody ng-repeat="item in nodes">
-                <tr>
+            <tbody>
+                <tr ng-repeat-start="item in nodes">
                     <td title="{{item.description}}" style="text-align: left;">{{item.name}}</td>
                     <td></td>
                     <td>{{item.scope.toString().indexOf('.') >=0 ? item.scope.toFixed(2) : item.scope}}</td>
                     <td></td>
                 </tr>
-                <tr ng-repeat="i in item.children">
+                <tr ng-repeat-end ng-repeat="i in item.children">
                         <td title="{{i.description}}" style="text-align: left;padding-left: 40px;">{{i.name}}</td>
                         <td>{{i.targetValue}}</td>
                         <td ng-class="{'failedTarget':(i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope) < i.targetValue}">{{i.scope.toString().indexOf('.') >=0 ? i.scope.toFixed(2) : i.scope}}</td>

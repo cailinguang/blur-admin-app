@@ -17,7 +17,7 @@
         $scope.datas = [];
         $scope.series = [$scope.evaluation.name];
 
-        $scope.nodes = [{name:'a'},{name:'b'}];
+        $scope.nodes = [];
         $http.get('/api/evaluation/standardNodesWithScope',{params:{evaluationId:$scope.evaluation.id}}).then(function(response){
             var labels = [];
             var data = [];

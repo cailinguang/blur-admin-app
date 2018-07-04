@@ -33,7 +33,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" ng-click="save()" ng-disabled="lastNode.status!='0' && lastNode.status!='1' && roles.indexOf('ciso')<0">Save</button>
-                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('liaison')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">Commit</button>
+                    <button type="button" class="btn btn-success" ng-click="commit()"  ng-if="roles.indexOf('Information Security Coordinator')>-1" ng-disabled="lastNode.status!='0' && lastNode.status!='1'">Commit</button>
                     <button type="button" class="btn btn-success" ng-click="reviewed()"  ng-if="roles.indexOf('ciso')>-1"  ng-disabled="lastNode.status=='3'">Review</button>
                     <button type="button" class="btn btn-primary" ng-click="goBack()">Return</button>
                 </div>
